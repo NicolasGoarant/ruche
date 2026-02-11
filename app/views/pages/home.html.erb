@@ -42,10 +42,19 @@
       font-weight: 800;
     }
 
+    .logo-separator {
+      width: 1px;
+      height: 28px;
+      background: #444;
+      margin: 0 0.3rem;
+    }
+
     .logo-baseline {
-      font-size: 0.75rem;
-      color: #999;
+      font-size: 0.95rem;
+      color: #ccc;
       font-weight: 400;
+      max-width: 200px;
+      line-height: 1.3;
     }
 
     .nav-links {
@@ -473,8 +482,8 @@
         display: flex;
       }
 
-      .logo-baseline {
-        font-size: 0.7rem;
+      .logo-baseline, .logo-separator {
+        display: none;
       }
 
       .hero {
@@ -514,10 +523,9 @@
 <nav class="navbar">
   <a href="/" class="logo">
     <span style="font-size: 1.8rem;">🐝</span>
-    <div>
-      <div class="logo-text">la Ruche</div>
-      <div class="logo-baseline">la plateforme pour les réfugiés en France</div>
-    </div>
+    <div class="logo-text">la Ruche</div>
+    <div class="logo-separator"></div>
+    <div class="logo-baseline">la plateforme pour les réfugiés en France</div>
   </a>
 
   <!-- Menu desktop -->
@@ -690,16 +698,6 @@
       .bindPopup(`<strong>${p.title}</strong><br>${p.desc}`)
       .addTo(layers[p.type]);
   });
-
-  const popupContent = `
-  <div style="min-width: 240px;">
-    ${c.image_url ? `<img src="${c.image_url}" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px;">` : ''}
-    <strong style="font-size:1.05rem;display:block;margin-bottom:6px;">${c.title}</strong>
-    <p style="font-size:0.9rem;color:#666;margin-bottom:8px;">${c.description.substring(0, 80)}...</p>
-    <small style="color:#999;">🐝 ${c.author}</small>
-    <a href="/contributions/${c.id}" style="display:inline-block;margin-top:10px;background:#F5A800;color:#0F0E0A;padding:0.4rem 0.9rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;">Voir détails →</a>
-  </div>
-`;
 
   fetch('/contributions/map_data')
     .then(r => r.json())
