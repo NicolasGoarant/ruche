@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Assistant juridique - la Ruche</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+
     body {
       font-family: 'DM Sans', sans-serif;
       background: #fafafa;
@@ -17,54 +17,31 @@
       flex-direction: column;
       min-height: 100vh;
     }
-    
-    .navbar {
-      background: #0F0E0A;
-      padding: 1.2rem 2rem;
-      border-bottom: 3px solid #F5A800;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      color: white;
-      text-decoration: none;
-    }
-    
-    .logo-text {
-      font-family: 'Fraunces', serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-    }
-    
+
     .container {
       max-width: 900px;
       margin: 2rem auto;
       padding: 0 2rem;
       flex: 1;
     }
-    
+
     .header {
       text-align: center;
       margin-bottom: 2rem;
     }
-    
+
     .header h1 {
       font-family: 'Fraunces', serif;
       font-size: 2.5rem;
       color: #0F0E0A;
       margin-bottom: 0.5rem;
     }
-    
+
     .header p {
       color: #666;
       font-size: 1.1rem;
     }
-    
+
     .disclaimer {
       background: #FFF8E7;
       border-left: 4px solid #F5A800;
@@ -74,7 +51,7 @@
       font-size: 0.95rem;
       line-height: 1.6;
     }
-    
+
     .chat-container {
       background: white;
       border-radius: 12px;
@@ -83,23 +60,23 @@
       flex-direction: column;
       height: 600px;
     }
-    
+
     .messages {
       flex: 1;
       padding: 2rem;
       overflow-y: auto;
     }
-    
+
     .message {
       margin-bottom: 1.5rem;
       display: flex;
       gap: 1rem;
     }
-    
+
     .message.user {
       flex-direction: row-reverse;
     }
-    
+
     .message-avatar {
       width: 40px;
       height: 40px;
@@ -110,49 +87,49 @@
       font-size: 1.3rem;
       flex-shrink: 0;
     }
-    
+
     .message.assistant .message-avatar {
       background: #F5A800;
     }
-    
+
     .message.user .message-avatar {
       background: #0F0E0A;
     }
-    
+
     .message-content {
       max-width: 70%;
       padding: 1rem 1.3rem;
       border-radius: 12px;
       line-height: 1.6;
     }
-    
+
     .message.assistant .message-content {
       background: #f8f8f8;
       color: #1a1814;
     }
-    
+
     .message.assistant .message-content h2 {
       font-size: 1.1rem;
       margin: 1rem 0 0.5rem 0;
       color: #0F0E0A;
     }
-    
+
     .message.assistant .message-content strong {
       color: #0F0E0A;
     }
-    
+
     .message.user .message-content {
       background: #F5A800;
       color: #0F0E0A;
     }
-    
+
     .file-attachments {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 0.5rem;
     }
-    
+
     .file-badge {
       background: #e0e0e0;
       padding: 0.3rem 0.7rem;
@@ -162,7 +139,7 @@
       align-items: center;
       gap: 0.3rem;
     }
-    
+
     .input-area {
       padding: 1.5rem;
       border-top: 1px solid #e0e0e0;
@@ -170,12 +147,12 @@
       flex-direction: column;
       gap: 1rem;
     }
-    
+
     .input-row {
       display: flex;
       gap: 1rem;
     }
-    
+
     .input-area textarea {
       flex: 1;
       padding: 1rem;
@@ -186,12 +163,12 @@
       resize: none;
       min-height: 60px;
     }
-    
+
     .input-area textarea:focus {
       outline: none;
       border-color: #F5A800;
     }
-    
+
     .file-input-label {
       padding: 1rem;
       background: #f8f8f8;
@@ -201,12 +178,12 @@
       text-align: center;
       transition: all 0.2s;
     }
-    
+
     .file-input-label:hover {
       border-color: #F5A800;
       background: #FFF8E7;
     }
-    
+
     .send-btn {
       padding: 1rem 2rem;
       background: #F5A800;
@@ -217,22 +194,22 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    
+
     .send-btn:hover {
       background: #E8920A;
     }
-    
+
     .send-btn:disabled {
       background: #ccc;
       cursor: not-allowed;
     }
-    
+
     .loading {
       display: flex;
       gap: 0.5rem;
       padding: 1rem;
     }
-    
+
     .loading-dot {
       width: 8px;
       height: 8px;
@@ -240,15 +217,15 @@
       background: #F5A800;
       animation: bounce 1.4s infinite ease-in-out both;
     }
-    
+
     .loading-dot:nth-child(1) { animation-delay: -0.32s; }
     .loading-dot:nth-child(2) { animation-delay: -0.16s; }
-    
+
     @keyframes bounce {
       0%, 80%, 100% { transform: scale(0); }
       40% { transform: scale(1); }
     }
-    
+
     footer {
       background: #0F0E0A;
       border-top: 3px solid #F5A800;
@@ -261,23 +238,18 @@
 </head>
 <body>
 
-<nav class="navbar">
-  <a href="/" class="logo">
-    <span style="font-size: 1.8rem;">🐝</span>
-    <span class="logo-text">la Ruche</span>
-  </a>
-</nav>
+<%= render 'shared/navbar', active: 'assistant' %>
 
 <div class="container">
   <div class="header">
     <h1>🤝 Assistant juridique</h1>
     <p>Posez vos questions sur votre situation administrative en France</p>
   </div>
-  
+
   <div class="disclaimer">
     <strong>⚠️ Information importante :</strong> Cet assistant vous donne des informations générales sur le droit des étrangers en France. Pour votre situation personnelle, consultez toujours une association juridique gratuite (France Terre d'Asile, La Cimade) ou un avocat spécialisé.
   </div>
-  
+
   <div class="chat-container">
     <div class="messages" id="messages">
       <div class="message assistant">
@@ -294,15 +266,15 @@
         </div>
       </div>
     </div>
-    
+
     <div class="input-area">
       <div id="fileList" style="display: none;" class="file-attachments"></div>
-      
+
       <div class="input-row">
         <textarea id="userInput" placeholder="Décrivez votre situation..."></textarea>
         <button class="send-btn" id="sendBtn">Envoyer</button>
       </div>
-      
+
       <label class="file-input-label" for="fileInput">
         📎 Joindre un document (PDF, image)
         <input type="file" id="fileInput" accept="image/*,application/pdf" multiple style="display: none;">
@@ -324,21 +296,21 @@
   const sendBtn = document.getElementById('sendBtn');
   const fileInput = document.getElementById('fileInput');
   const fileList = document.getElementById('fileList');
-  
+
   function addMessage(content, isUser, files = []) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
-    
+
     const avatar = document.createElement('div');
     avatar.className = 'message-avatar';
     avatar.textContent = isUser ? '👤' : '🤝';
-    
+
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
-    
+
     if (isUser) {
       contentDiv.innerHTML = content.replace(/\n/g, '<br>');
-      
+
       if (files.length > 0) {
         const filesDiv = document.createElement('div');
         filesDiv.className = 'file-attachments';
@@ -359,16 +331,16 @@
         .replace(/\n\n/g, '<br><br>') // Paragraphes
         .replace(/\n/g, '<br>') // Retours à la ligne
         .replace(/•/g, '&bull;'); // Puces
-      
+
       contentDiv.innerHTML = formatted;
     }
-    
+
     messageDiv.appendChild(avatar);
     messageDiv.appendChild(contentDiv);
     messagesDiv.appendChild(messageDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
   }
-  
+
   function showLoading() {
     const loadingDiv = document.createElement('div');
     loadingDiv.className = 'message assistant';
@@ -384,17 +356,17 @@
     messagesDiv.appendChild(loadingDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
   }
-  
+
   function hideLoading() {
     const loading = document.getElementById('loading');
     if (loading) loading.remove();
   }
-  
+
   fileInput.addEventListener('change', (e) => {
     attachedFiles = Array.from(e.target.files);
     updateFileList();
   });
-  
+
   function updateFileList() {
     if (attachedFiles.length > 0) {
       fileList.style.display = 'flex';
@@ -409,12 +381,12 @@
       fileList.style.display = 'none';
     }
   }
-  
+
   window.removeFile = function(index) {
     attachedFiles.splice(index, 1);
     updateFileList();
   }
-  
+
   async function fileToBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -423,17 +395,17 @@
       reader.readAsDataURL(file);
     });
   }
-  
+
   async function sendMessage() {
     const message = userInput.value.trim();
     if (!message && attachedFiles.length === 0) return;
-    
+
     const files = [...attachedFiles];
     addMessage(message || 'Documents joints', true, files);
     userInput.value = '';
     sendBtn.disabled = true;
     showLoading();
-    
+
     try {
       const fileContents = await Promise.all(
         files.map(async file => ({
@@ -442,7 +414,7 @@
           data: await fileToBase64(file)
         }))
       );
-      
+
       const response = await fetch('/assistant-juridique/chat', {
         method: 'POST',
         headers: {
@@ -454,10 +426,10 @@
           history: conversationHistory
         })
       });
-      
+
       const data = await response.json();
       hideLoading();
-      
+
       if (data.error) {
         addMessage('Désolé, une erreur est survenue. Réessayez.', false);
       } else {
@@ -468,14 +440,14 @@
       hideLoading();
       addMessage('Erreur de connexion. Vérifiez votre connexion internet.', false);
     }
-    
+
     attachedFiles = [];
     fileInput.value = '';
     updateFileList();
     sendBtn.disabled = false;
     userInput.focus();
   }
-  
+
   sendBtn.addEventListener('click', sendMessage);
   userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
