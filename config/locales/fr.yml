@@ -15,7 +15,7 @@ fr:
 
   hero:
     title_html: "La plateforme d'aide aux réfugiés <em>en France.</em>"
-    subtitle: "Droits, apprentissage, entrepreneuriat, culture. Ruche connecte les réfugiés et les citoyens — et donne à chacun la possibilité de contribuer."
+    subtitle: "Droits, apprentissage, entrepreneuriat, culture. La Ruche connecte les réfugiés et les citoyens — et donne à chacun la possibilité de contribuer."
     cta_map: "🗺 Explorer la carte"
     cta_contribute: "＋ Contribuer"
 
@@ -31,6 +31,7 @@ fr:
     filter_fle_mobile: "🟢 Cours de FLE"
     filter_entrepreneurship_mobile: "🟡 Entrepreneuriat"
     filter_community_mobile: "🔵 Convivialité"
+    view_details: "Voir détails"
 
   contributions_section:
     title: "🐝 Contributions récentes"
