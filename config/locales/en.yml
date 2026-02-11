@@ -1,31 +1,137 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  language_name: "EN"
+
+  navbar:
+    home: "Home"
+    principles: "Our principles"
+    contributions: "Contributions"
+    testimonials: "Stories"
+    legal_assistant: "Legal assistant"
+    contribute: "Contribute"
+    mobile_home: "🏠 Home"
+    mobile_principles: "💛 Our principles"
+    mobile_contributions: "🐝 Contributions"
+    mobile_testimonials: "✨ Stories"
+
+  hero:
+    title_html: "The platform helping refugees <em>in France.</em>"
+    subtitle: "Rights, education, entrepreneurship, culture. la Ruche connects refugees and citizens — and gives everyone the opportunity to contribute."
+    cta_map: "🗺 Explore the map"
+    cta_contribute: "＋ Contribute"
+
+  map:
+    title: "🗺 Explore resources"
+    subtitle: "Discover all opportunities near you"
+    filter_rights: "Rights & documents"
+    filter_fle: "French classes"
+    filter_entrepreneurship: "Entrepreneurship"
+    filter_community: "Community"
+    filter_all: "🗺 All resources"
+    filter_rights_mobile: "🟠 Rights & documents"
+    filter_fle_mobile: "🟢 French classes"
+    filter_entrepreneurship_mobile: "🟡 Entrepreneurship"
+    filter_community_mobile: "🔵 Community"
+
+  contributions_section:
+    title: "🐝 Recent contributions"
+    subtitle: "Resources shared by the community"
+
+  portraits:
+    title: "✨ Portraits & journeys"
+    subtitle: "Their words, their paths, their victories"
+    arrived_in: "Arrived in"
+
+  footer:
+    brand: "🐝 la Ruche"
+    tagline: "Civic platform for social impact · Open-source project"
+
+  contribution_form:
+    page_title: "Contribute — la Ruche"
+    back: "← Back to home"
+    title: "🐝 Contribute to la Ruche"
+    intro: "Share a useful resource for refugees in France: French classes, cultural event, entrepreneurial initiative or your own story."
+    type_title: "Type of contribution"
+    type_fle: "French classes"
+    type_event: "Event"
+    type_enterprise: "Enterprise"
+    type_portrait: "Story"
+    info_title: "Key information"
+    label_title: "Title"
+    placeholder_title: "E.g.: Free French class every Thursday"
+    label_description: "Description"
+    placeholder_description: "Describe your resource in detail..."
+    hint_description: "Be specific: schedule, target audience, access..."
+    label_address: "Full address"
+    placeholder_address: "E.g.: 3 impasse du canal, 54000 Nancy"
+    hint_address: "Street number, street name, postal code and city"
+    label_contact: "Contact (email, phone, website)"
+    placeholder_contact: "E.g.: contact@example.com or +33 6 12 34 56 78"
+    hint_contact: "Optional — so interested people can reach you"
+    photos_title: "Photos"
+    photos_upload: "Click or drag your photos here"
+    photos_hint: "You can add multiple photos (JPG, PNG, max 5MB each)"
+    signature_title: "Your signature"
+    label_name: "Your first name"
+    placeholder_name: "E.g.: Marie L."
+    hint_name: "Leave empty to stay anonymous"
+    label_flag: "Flag (emoji)"
+    hint_flag: "E.g.: 🇫🇷 🇺🇦 🇸🇾 🇲🇦 🇨🇩"
+    submit: "🐝 Send my contribution"
+    required: "*"
+
+  contribution_show:
+    back: "← Back to home"
+    contact: "📬 Contact"
+    added_on: "Added on"
+    by: "by"
+    photos: "📸 Photos"
+
+  assistant:
+    page_title: "Legal assistant - la Ruche"
+    title: "🤝 Legal assistant"
+    subtitle: "Ask your questions about your administrative situation in France"
+    disclaimer_html: "<strong>⚠️ Important notice:</strong> This assistant provides general information about immigration law in France. For your personal situation, always consult a free legal association (France Terre d'Asile, La Cimade) or a specialized lawyer."
+    welcome_html: "Hello! I'm here to help you understand your administrative situation in France.<br><br>You can ask me about:<br>• Asylum application and procedure<br>• Right to work and housing<br>• French naturalization<br>• Documents and procedures<br><br><strong>You can also attach documents (receipt, summons, etc.) for a more precise analysis.</strong><br><br>How can I help you today?"
+    placeholder: "Describe your situation..."
+    send: "Send"
+    attach: "📎 Attach a document (PDF, image)"
+    error: "Sorry, an error occurred. Please try again."
+    connection_error: "Connection error. Check your internet connection."
+    docs_attached: "Attached documents"
+
+  philosophie:
+    page_title: "Our principles — la Ruche"
+    hero_title: "Why la Ruche?"
+    hero_subtitle: "Understanding our approach, our beliefs, our way of building."
+    manifeste_title: "Manifesto"
+    constat_title: "The problem"
+    constat_text: "In France, refugees face an administrative maze. Information is scattered, often opaque, sometimes contradictory. Support initiatives exist but remain invisible."
+    reponse_title: "Our answer"
+    reponse_text: "la Ruche brings together on a living platform everything that can help: rights, French classes, entrepreneurship, cultural events, testimonials. One place, up to date, geolocated, accessible."
+    citoyenne_title: "Citizen-driven platform"
+    citoyenne_text: "Everyone can contribute. Organizations, supportive citizens, refugees themselves: la Ruche is built collectively, like a real beehive."
+    nom_title: "Why \"la Ruche\" (the Beehive)?"
+    nom_text: "In a beehive, every bee has a role. Nobody builds alone. It's the collective, patient, determined work that creates something greater than oneself. That's exactly what we want to do: a space where everyone brings their contribution, however small."
+    valeurs_title: "Our values"
+    valeur_accessibilite: "Radical accessibility"
+    valeur_accessibilite_desc: "Multilingual, simple, mobile-first. No technical barrier should prevent access to information."
+    valeur_horizontalite: "Horizontality"
+    valeur_horizontalite_desc: "No hierarchy of knowledge. A refugee's testimony is worth as much as a legal text."
+    valeur_ancrage: "Local roots"
+    valeur_ancrage_desc: "Start in Nancy, take root in a territory, then spread. Proximity before scale."
+    valeur_pouvoir: "Empowerment"
+    valeur_pouvoir_desc: "Informing is not assisting. The goal is to give people the keys to act on their own."
+    valeur_dignite: "Dignity"
+    valeur_dignite_desc: "Refugees are not victims. They are entrepreneurs, artists, parents, neighbors."
+    valeur_opensource: "Open source"
+    valeur_opensource_desc: "The code is open, the data is transparent, contributions are traceable."
+    pour_qui_title: "Who is it for?"
+    audience_refugees: "Refugees"
+    audience_refugees_desc: "Find your rights, French classes, professional opportunities and events near you."
+    audience_associations: "Organizations"
+    audience_associations_desc: "Make your actions visible, reach your audience, coordinate with other local actors."
+    audience_citizens: "Supportive citizens"
+    audience_citizens_desc: "Contribute concretely: report a resource, share an event, offer a language tandem."
+    cta_title: "Join la Ruche"
+    cta_explore: "🗺 Explore the map"
+    cta_contribute: "＋ Contribute"

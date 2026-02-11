@@ -15,26 +15,6 @@
       color: #1a1814;
     }
 
-    .navbar {
-      background: #0F0E0A;
-      padding: 1.2rem 2rem;
-      border-bottom: 3px solid #F5A800;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      color: white;
-      text-decoration: none;
-    }
-
-    .logo-text {
-      font-family: 'Fraunces', serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-    }
-
     .container {
       max-width: 700px;
       margin: 3rem auto;
@@ -284,12 +264,7 @@
 </head>
 <body>
 
-<nav class="navbar">
-  <a href="/" class="logo">
-    <span style="font-size: 1.8rem;">🐝</span>
-    <span class="logo-text">la Ruche</span>
-  </a>
-</nav>
+<%= render 'shared/navbar', active: 'contribuer' %>
 
 <div class="container">
   <a href="/" class="back-link">← Retour à l'accueil</a>
@@ -354,7 +329,7 @@
 
       <div class="form-group">
         <label>Contact (email, téléphone, site web)</label>
-        <%= f.text_field :contact_info, placeholder: 'Ex: contact@exemple.fr ou 06 12 34 56 78' %>
+        <%= f.text_field :contact_info, placeholder: 'Ex: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5d51504a5f5d4a7e5b465b534e525b10584c">[email&#160;protected]</a> ou 06 12 34 56 78' %>
         <p class="hint">Facultatif — pour que les personnes intéressées puissent vous contacter</p>
       </div>
     </div>
@@ -399,7 +374,7 @@
   <p style="margin-top: 0.5rem; font-size: 0.85rem;">Plateforme citoyenne à impact social</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Type selector
   const typeOptions = document.querySelectorAll('.type-option');
   const typeInput = document.getElementById('contribution_type');
@@ -467,17 +442,3 @@
     if (e.target.classList.contains('remove-photo')) {
       const index = parseInt(e.target.dataset.index);
       const dt = new DataTransfer();
-      const files = Array.from(fileInput.files);
-
-      files.forEach((file, i) => {
-        if (i !== index) dt.items.add(file);
-      });
-
-      fileInput.files = dt.files;
-      handleFiles();
-    }
-  });
-</script>
-
-</body>
-</html>

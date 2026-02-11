@@ -1,0 +1,197 @@
+<style>
+  /* NAVBAR */
+  .navbar {
+    background: #0F0E0A;
+    padding: 1.2rem 2rem;
+    border-bottom: 3px solid #F5A800;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: white;
+    text-decoration: none;
+  }
+
+  .logo-text {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: #F5A800; }
+  .nav-links a.active-link { color: #F5A800; font-weight: 600; }
+
+  .btn-contribute {
+    background: #F5A800;
+    color: #0F0E0A !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-contribute:hover { background: #E8920A; }
+
+  .btn-assistant { color: #F5A800 !important; font-weight: 500; }
+
+  /* BURGER */
+  .burger-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+  }
+  .burger-btn span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  .burger-btn.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .burger-btn.active span:nth-child(2) { opacity: 0; }
+  .burger-btn.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  /* MOBILE MENU */
+  .mobile-menu {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background: rgba(15, 14, 10, 0.97);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+    z-index: 999;
+    padding: 5rem 2rem 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .mobile-menu.active { opacity: 1; visibility: visible; }
+  .mobile-menu a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .mobile-menu a:hover { color: #F5A800; }
+  .mobile-menu .mobile-cta {
+    margin-top: 1rem;
+    background: #F5A800;
+    color: #0F0E0A;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .mobile-menu .mobile-cta:hover { background: #E8920A; color: #0F0E0A; }
+  .mobile-menu .mobile-assistant {
+    color: #F5A800;
+    font-size: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    border: 2px solid #F5A800;
+    padding: 0.6rem 1.5rem;
+    border-radius: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .navbar { padding: 1rem 1.2rem; }
+    .nav-desktop { display: none !important; }
+    .burger-btn { display: flex; }
+  }
+</style>
+
+<%# ===== current_page helper : passer local `active` avec le nom de la page ===== %>
+<% active ||= '' %>
+
+<nav class="navbar">
+  <a href="/" class="logo">
+    <span style="font-size: 1.8rem;">🐝</span>
+    <div class="logo-text">la Ruche</div>
+  </a>
+
+  <div class="nav-links nav-desktop">
+    <a href="/" class="<%= 'active-link' if active == 'home' %>">Accueil</a>
+    <a href="/philosophie" class="<%= 'active-link' if active == 'philosophie' %>">Nos principes</a>
+    <a href="/#contributions" class="<%= 'active-link' if active == 'contributions' %>">Contributions</a>
+    <a href="/#temoignages" class="<%= 'active-link' if active == 'temoignages' %>">Témoignages</a>
+    <a href="/assistant-juridique" class="btn-assistant <%= 'active-link' if active == 'assistant' %>">🤝 Assistant juridique</a>
+    <a href="<%= new_contribution_path %>" class="btn-contribute">＋ Contribuer</a>
+  </div>
+
+  <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/">🏠 Accueil</a>
+  <a href="/philosophie">💛 Nos principes</a>
+  <a href="/#contributions">🐝 Contributions</a>
+  <a href="/#temoignages">✨ Témoignages</a>
+  <a href="/assistant-juridique" class="mobile-assistant">🤝 Assistant juridique</a>
+  <a href="<%= new_contribution_path %>" class="mobile-cta">＋ Contribuer</a>
+</div>
+
+<script>
+  // Burger toggle — safe to include multiple times, only binds once
+  document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.getElementById('burgerBtn');
+    const mobile = document.getElementById('mobileMenu');
+    if (!burger || burger.dataset.bound) return;
+    burger.dataset.bound = 'true';
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      mobile.classList.toggle('active');
+      document.body.style.overflow = mobile.classList.contains('active') ? 'hidden' : '';
+    });
+
+    mobile.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        mobile.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  });
+</script>
