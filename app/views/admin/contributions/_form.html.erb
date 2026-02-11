@@ -1,0 +1,65 @@
+<%= form_with model: [:admin, contribution], local: true, multipart: true do |f| %>
+  <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem;">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Type de contribution</h3>
+    
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
+      <% Contribution::TYPES.each do |type| %>
+        <label style="cursor: pointer;">
+          <%= f.radio_button :contribution_type, type, required: true %>
+          <span style="margin-left: 0.5rem;">
+            <%= Contribution.new(contribution_type: type).type_emoji %> 
+            <%= Contribution.type_label(type) %>
+          </span>
+        </label>
+      <% end %>
+    </div>
+  </div>
+  
+  <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem;">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Informations</h3>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :title, 'Titre *' %>
+      <%= f.text_field :title, required: true, style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :description, 'Description *' %>
+      <%= f.text_area :description, required: true, rows: 6, style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :location, 'Adresse complète *' %>
+      <%= f.text_field :location, required: true, placeholder: 'Ex: 3 impasse du canal, 54000 Nancy', style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :contact_info, 'Contact' %>
+      <%= f.text_field :contact_info, placeholder: 'Email, téléphone, site web...', style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+    </div>
+  </div>
+  
+  <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem;">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Photos</h3>
+    <%= f.file_field :photos, multiple: true, accept: 'image/*', style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px;' %>
+  </div>
+  
+  <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem;">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Signature</h3>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :author_name, 'Auteur' %>
+      <%= f.text_field :author_name, placeholder: 'Ex: Marie L.', style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :author_flag, 'Drapeau (emoji)' %>
+      <%= f.text_field :author_flag, placeholder: '🇫🇷', maxlength: 2, style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+    </div>
+  </div>
+  
+  <div style="display: flex; gap: 1rem;">
+    <%= f.submit 'Enregistrer', class: 'btn btn-primary' %>
+    <%= link_to 'Annuler', admin_contributions_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>

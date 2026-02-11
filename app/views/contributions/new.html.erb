@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contribuer — la Ruche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fafafa;
+      color: #1a1814;
+    }
+
+    .navbar {
+      background: #0F0E0A;
+      padding: 1.2rem 2rem;
+      border-bottom: 3px solid #F5A800;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #666;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: #F5A800;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #0F0E0A;
+      margin-bottom: 0.5rem;
+    }
+
+    .intro {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .form-section {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-section h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #0F0E0A;
+      margin-bottom: 1.5rem;
+    }
+
+    .type-selector {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .type-option {
+      padding: 1.2rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .type-option:hover {
+      border-color: #F5A800;
+      background: #FFF8E7;
+    }
+
+    .type-option.selected {
+      border-color: #F5A800;
+      background: #FFF8E7;
+      border-width: 3px;
+    }
+
+    .type-option .emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .type-option .label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #0F0E0A;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #0F0E0A;
+      font-size: 0.95rem;
+    }
+
+    label .required {
+      color: #E8920A;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="file"],
+    textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #F5A800;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .hint {
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 0.3rem;
+    }
+
+    .file-upload-zone {
+      border: 2px dashed #e0e0e0;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      background: #fafafa;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .file-upload-zone:hover {
+      border-color: #F5A800;
+      background: #FFF8E7;
+    }
+
+    .file-upload-zone.dragover {
+      border-color: #F5A800;
+      background: #FFF8E7;
+    }
+
+    .upload-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .upload-text {
+      font-weight: 600;
+      color: #0F0E0A;
+      margin-bottom: 0.5rem;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .preview-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid #e0e0e0;
+    }
+
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .remove-photo {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: #F5A800;
+      color: #0F0E0A;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Fraunces', serif;
+    }
+
+    .submit-btn:hover {
+      background: #E8920A;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 168, 0, 0.3);
+    }
+
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    footer {
+      background: #0F0E0A;
+      border-top: 3px solid #F5A800;
+      padding: 1.5rem;
+      text-align: center;
+      color: #666;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 640px) {
+      .type-selector {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="logo">
+    <span style="font-size: 1.8rem;">🐝</span>
+    <span class="logo-text">la Ruche</span>
+  </a>
+</nav>
+
+<div class="container">
+  <a href="/" class="back-link">← Retour à l'accueil</a>
+
+  <h1>🐝 Contribuer à la Ruche</h1>
+  <p class="intro">
+    Partagez une ressource utile pour les réfugiés en France : cours de français,
+    événement culturel, initiative entrepreneuriale ou votre propre témoignage.
+  </p>
+
+  <%= form_with model: @contribution, local: true, multipart: true do |f| %>
+    <div class="form-section">
+      <h2>Type de contribution <span class="required">*</span></h2>
+
+      <div class="type-selector">
+        <div class="type-option" data-type="fle">
+          <span class="emoji">📚</span>
+          <span class="label">Cours de FLE</span>
+        </div>
+        <div class="type-option" data-type="event">
+          <span class="emoji">🎉</span>
+          <span class="label">Événement</span>
+        </div>
+        <div class="type-option" data-type="enterprise">
+          <span class="emoji">🚀</span>
+          <span class="label">Entreprise</span>
+        </div>
+        <div class="type-option" data-type="portrait">
+          <span class="emoji">✨</span>
+          <span class="label">Témoignage</span>
+        </div>
+      </div>
+
+      <%= f.hidden_field :contribution_type, id: 'contribution_type' %>
+    </div>
+
+    <div class="form-section">
+      <h2>Informations principales</h2>
+
+      <div class="form-group">
+        <label>
+          Titre <span class="required">*</span>
+        </label>
+        <%= f.text_field :title, placeholder: 'Ex: Cours de FLE gratuit tous les jeudis', required: true %>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Description <span class="required">*</span>
+        </label>
+        <%= f.text_area :description, placeholder: 'Décrivez votre ressource en détail...', required: true %>
+        <p class="hint">Soyez précis : horaires, public visé, modalités d'accès...</p>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Adresse complète <span class="required">*</span>
+        </label>
+        <%= f.text_field :location, placeholder: 'Ex: 3 impasse du canal, 54000 Nancy', required: true %>
+        <p class="hint">Numéro, rue, code postal et ville pour une localisation précise</p>
+      </div>
+
+      <div class="form-group">
+        <label>Contact (email, téléphone, site web)</label>
+        <%= f.text_field :contact_info, placeholder: 'Ex: contact@exemple.fr ou 06 12 34 56 78' %>
+        <p class="hint">Facultatif — pour que les personnes intéressées puissent vous contacter</p>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Photos</h2>
+
+      <div class="form-group">
+        <label for="file-input" class="file-upload-zone" id="upload-zone">
+          <div class="upload-icon">📸</div>
+          <div class="upload-text">Cliquez ou glissez vos photos ici</div>
+          <p class="hint">Vous pouvez ajouter plusieurs photos (JPG, PNG, max 5Mo chacune)</p>
+        </label>
+        <%= f.file_field :photos, multiple: true, accept: 'image/*', id: 'file-input', style: 'display: none;' %>
+
+        <div id="preview-container" class="preview-grid" style="display: none;"></div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Votre signature</h2>
+
+      <div class="form-group">
+        <label>Votre prénom</label>
+        <%= f.text_field :author_name, placeholder: 'Ex: Marie L.' %>
+        <p class="hint">Laissez vide pour rester anonyme</p>
+      </div>
+
+      <div class="form-group">
+        <label>Drapeau (emoji)</label>
+        <%= f.text_field :author_flag, placeholder: '🇫🇷', maxlength: 2 %>
+        <p class="hint">Ex: 🇫🇷 🇺🇦 🇸🇾 🇲🇦 🇨🇩</p>
+      </div>
+    </div>
+
+    <%= f.submit "🐝 Envoyer ma contribution", class: 'submit-btn', id: 'submit-btn', disabled: true %>
+  <% end %>
+</div>
+
+<footer>
+  <strong style="color: #F5A800; font-family: 'Fraunces', serif;">🐝 la Ruche</strong>
+  <p style="margin-top: 0.5rem; font-size: 0.85rem;">Plateforme citoyenne à impact social</p>
+</footer>
+
+<script>
+  // Type selector
+  const typeOptions = document.querySelectorAll('.type-option');
+  const typeInput = document.getElementById('contribution_type');
+  const submitBtn = document.getElementById('submit-btn');
+
+  typeOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      typeOptions.forEach(opt => opt.classList.remove('selected'));
+      option.classList.add('selected');
+      typeInput.value = option.dataset.type;
+      submitBtn.disabled = false;
+    });
+  });
+
+  // Photo upload
+  const fileInput = document.getElementById('file-input');
+  const uploadZone = document.getElementById('upload-zone');
+  const previewContainer = document.getElementById('preview-container');
+
+  uploadZone.addEventListener('click', () => fileInput.click());
+
+  fileInput.addEventListener('change', handleFiles);
+
+  uploadZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadZone.classList.add('dragover');
+  });
+
+  uploadZone.addEventListener('dragleave', () => {
+    uploadZone.classList.remove('dragover');
+  });
+
+  uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadZone.classList.remove('dragover');
+    fileInput.files = e.dataTransfer.files;
+    handleFiles();
+  });
+
+  function handleFiles() {
+    const files = Array.from(fileInput.files);
+    if (files.length === 0) return;
+
+    previewContainer.style.display = 'grid';
+    previewContainer.innerHTML = '';
+
+    files.forEach((file, index) => {
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const preview = document.createElement('div');
+          preview.className = 'preview-item';
+          preview.innerHTML = `
+            <img src="${e.target.result}" alt="Preview ${index + 1}">
+            <button type="button" class="remove-photo" data-index="${index}">×</button>
+          `;
+          previewContainer.appendChild(preview);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  previewContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('remove-photo')) {
+      const index = parseInt(e.target.dataset.index);
+      const dt = new DataTransfer();
+      const files = Array.from(fileInput.files);
+
+      files.forEach((file, i) => {
+        if (i !== index) dt.items.add(file);
+      });
+
+      fileInput.files = dt.files;
+      handleFiles();
+    }
+  });
+</script>
+
+</body>
+</html>

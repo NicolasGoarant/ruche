@@ -1,0 +1,109 @@
+<% if flash.any? %>
+  <div id="flash-messages">
+    <% flash.each do |type, message| %>
+      <div class="flash-message flash-<%= type %>" data-controller="flash">
+        <div class="flash-content">
+          <span class="flash-icon">
+            <%= type == 'notice' ? '✅' : type == 'alert' ? '⚠️' : 'ℹ️' %>
+          </span>
+          <span class="flash-text"><%= message %></span>
+          <button class="flash-close" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <style>
+    #flash-messages {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      max-width: 500px;
+    }
+    
+    .flash-message {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      margin-bottom: 10px;
+      animation: slideIn 0.3s ease-out;
+      border-left: 4px solid #F5A800;
+    }
+    
+    .flash-notice {
+      border-left-color: #4CAF50;
+    }
+    
+    .flash-alert {
+      border-left-color: #ff6b35;
+    }
+    
+    .flash-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+    }
+    
+    .flash-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    
+    .flash-text {
+      flex: 1;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #333;
+    }
+    
+    .flash-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #999;
+      cursor: pointer;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    
+    .flash-close:hover {
+      color: #333;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      #flash-messages {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+      }
+    }
+  </style>
+
+  <script>
+    // Auto-dismiss after 8 seconds
+    document.querySelectorAll('.flash-message').forEach(flash => {
+      setTimeout(() => {
+        flash.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => flash.remove(), 300);
+      }, 8000);
+    });
+  </script>
+<% end %>

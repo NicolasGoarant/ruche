@@ -1,0 +1,71 @@
+<div class="header">
+  <h1>📊 Dashboard Admin</h1>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-value"><%= @total_contributions %></div>
+    <div class="stat-label">Total contributions</div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-value"><%= @pending_contributions.count %></div>
+    <div class="stat-label">En attente</div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-value"><%= @published_contributions.count %></div>
+    <div class="stat-label">Publiées (10 dernières)</div>
+  </div>
+</div>
+
+<% if @pending_contributions.any? %>
+  <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+    <h2 style="font-family: 'Fraunces', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: #0F0E0A;">
+      ⏳ Contributions en attente de validation (<%= @pending_contributions.count %>)
+    </h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Titre</th>
+          <th>Auteur</th>
+          <th>Localisation</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pending_contributions.each do |contribution| %>
+          <tr>
+            <td><%= contribution.type_emoji %> <%= Contribution.type_label(contribution.contribution_type) %></td>
+            <td><strong><%= contribution.title %></strong></td>
+            <td><%= contribution.author_flag %> <%= contribution.author_name %></td>
+            <td><%= contribution.location %></td>
+            <td><%= contribution.created_at.strftime("%d/%m/%Y") %></td>
+            <td>
+              <div class="actions" style="display: flex; gap: 0.5rem;">
+                <form action="<%= publish_admin_contribution_path(contribution) %>" method="post" style="display: inline;">
+                  <input type="hidden" name="_method" value="patch">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                  <button type="submit" class="btn btn-success" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border: none; cursor: pointer;">✅ Publier</button>
+                </form>
+                <%= link_to '✏️', edit_admin_contribution_path(contribution), class: 'btn btn-secondary', style: 'font-size: 0.85rem; padding: 0.5rem 0.9rem;' %>
+                <form action="<%= admin_contribution_path(contribution) %>" method="post" style="display: inline;" onsubmit="return confirm('Supprimer cette contribution ?')">
+                  <input type="hidden" name="_method" value="delete">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                  <button type="submit" class="btn btn-danger" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border: none; cursor: pointer;">🗑</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div style="background: white; padding: 3rem; border-radius: 12px; text-align: center; color: #999;">
+    <p style="font-size: 1.2rem;">✅ Aucune contribution en attente</p>
+  </div>
+<% end %>

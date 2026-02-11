@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion Admin - la Ruche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(135deg, #0F0E0A 0%, #1A1814 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .login-container {
+      background: white;
+      border-radius: 16px;
+      padding: 3rem;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .logo-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    
+    .logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0F0E0A;
+    }
+    
+    .admin-badge {
+      display: inline-block;
+      background: #F5A800;
+      color: #0F0E0A;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+    
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      color: #0F0E0A;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #0F0E0A;
+      font-size: 0.95rem;
+    }
+    
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #F5A800;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    
+    .checkbox-group label {
+      margin: 0;
+      font-weight: 400;
+      cursor: pointer;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: #F5A800;
+      color: #0F0E0A;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Fraunces', serif;
+    }
+    
+    .submit-btn:hover {
+      background: #E8920A;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 168, 0, 0.3);
+    }
+    
+    .links {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    
+    .links a {
+      color: #666;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    
+    .links a:hover {
+      color: #F5A800;
+    }
+    
+    .alert {
+      background: #FFE5E5;
+      border-left: 4px solid #ff6b6b;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      color: #d63031;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="logo">
+    <span class="logo-icon">🐝</span>
+    <div class="logo-text">la Ruche</div>
+    <span class="admin-badge">ADMIN</span>
+  </div>
+  
+  <h2>Connexion administrateur</h2>
+  
+  <% if alert %>
+    <div class="alert"><%= alert %></div>
+  <% end %>
+  
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-group">
+      <%= f.label :email, "Email" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password, "Mot de passe" %>
+      <%= f.password_field :password, autocomplete: "current-password", required: true %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="checkbox-group">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me, "Se souvenir de moi" %>
+      </div>
+    <% end %>
+
+    <%= f.submit "Se connecter", class: 'submit-btn' %>
+  <% end %>
+
+  <div class="links">
+    <%- if devise_mapping.recoverable? %>
+      <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
+    <% end %>
+  </div>
+</div>
+
+</body>
+</html>

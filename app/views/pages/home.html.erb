@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐝 Ruche — Ensemble en France</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fafafa;
+      color: #1a1814;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #0F0E0A;
+      padding: 1.2rem 2rem;
+      border-bottom: 3px solid #F5A800;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #999;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #F5A800;
+    }
+
+    .btn-contribute {
+      background: #F5A800;
+      color: #0F0E0A;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-contribute:hover {
+      background: #E8920A;
+    }
+
+    /* HERO */
+    .hero {
+      background: #0F0E0A;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero em {
+      color: #F5A800;
+      font-style: italic;
+    }
+
+    .hero p {
+      color: #999;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* SECTION CARTE */
+    .map-section {
+      background: white;
+      padding: 3rem 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #0F0E0A;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .map-controls {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      border: 2px solid #e0e0e0;
+      background: white;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .legend-item.active {
+      border-color: #F5A800;
+      background: #FFF8E7;
+      font-weight: 600;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .locate-btn {
+      padding: 0.5rem 1.2rem;
+      background: #F5A800;
+      color: #0F0E0A;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .locate-btn:hover {
+      background: #E8920A;
+    }
+
+    #map {
+      height: 500px;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    /* CONTRIBUTIONS */
+    .contributions-section {
+      background: #f5f5f5;
+      padding: 4rem 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border-left: 4px solid #F5A800;
+      transition: all 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+      color: #0F0E0A;
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .card-meta {
+      font-size: 0.8rem;
+      color: #999;
+      padding-top: 0.7rem;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    /* PORTRAITS / TÉMOIGNAGES */
+    .portraits-section {
+      background: white;
+      padding: 4rem 0;
+    }
+
+    .portraits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .portrait-card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    .portrait-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transform: translateY(-3px);
+    }
+
+    .portrait-stripe {
+      height: 6px;
+      background: linear-gradient(90deg, #F5A800, #FFD166);
+    }
+
+    .portrait-body {
+      padding: 1.5rem;
+    }
+
+    .portrait-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .portrait-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #F5A800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .portrait-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0F0E0A;
+    }
+
+    .portrait-origin {
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    .portrait-quote {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      border-left: 3px solid #F5A800;
+      padding-left: 1rem;
+    }
+
+    .portrait-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.7rem;
+      background: #FFF8E7;
+      color: #E8920A;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0F0E0A;
+      border-top: 3px solid #F5A800;
+      padding: 2rem;
+      text-align: center;
+      color: #666;
+    }
+
+    footer strong {
+      color: #F5A800;
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+    }
+
+    footer p {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      #map {
+        height: 350px;
+      }
+
+      .cards, .portraits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="/" class="logo">
+    <span style="font-size: 1.8rem;">🐝</span>
+    <span class="logo-text">la Ruche</span>
+  </a>
+  <div class="nav-links">
+    <a href="#carte">Carte</a>
+    <a href="#contributions">Contributions</a>
+    <a href="#temoignages">Témoignages</a>
+    <a href="#" class="btn-contribute">＋ Contribuer</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Chaque voix enrichit <em>la ruche.</em></h1>
+  <p>Droits, apprentissage, entrepreneuriat, culture. Ruche connecte les réfugiés et les citoyens — et donne à chacun la possibilité de contribuer.</p>
+</section>
+
+<!-- CARTE -->
+<section id="carte" class="map-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>🗺 Explorer les ressources</h2>
+      <p>Découvrez toutes les opportunités près de chez vous</p>
+    </div>
+
+    <div class="map-controls">
+      <div class="legend-item active" data-layer="admin">
+        <div class="legend-dot" style="background:#C45A2A"></div>
+        <span>Droits & papiers</span>
+      </div>
+      <div class="legend-item active" data-layer="fle">
+        <div class="legend-dot" style="background:#3A7A5A"></div>
+        <span>Cours de FLE</span>
+      </div>
+      <div class="legend-item active" data-layer="entrep">
+        <div class="legend-dot" style="background:#F5A800"></div>
+        <span>Entrepreneuriat</span>
+      </div>
+      <div class="legend-item active" data-layer="culture">
+        <div class="legend-dot" style="background:#1A5B9A"></div>
+        <span>Convivialité</span>
+      </div>
+      <button class="locate-btn" id="locate-btn">📍 Me localiser</button>
+    </div>
+
+    <div id="map"></div>
+  </div>
+</section>
+
+<!-- CONTRIBUTIONS -->
+<section id="contributions" class="contributions-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>🐝 Contributions récentes</h2>
+      <p>Ressources partagées par la communauté</p>
+    </div>
+
+    <div class="cards">
+      <% @contributions = Contribution.published.recent.limit(6) %>
+      <% @contributions.each do |c| %>
+        <a href="/contributions/<%= c.id %>" style="text-decoration: none; color: inherit;"><div class="card">
+          <h3><%= c.type_emoji %> <%= c.title %></h3>
+          <p><%= c.description.truncate(120) %></p>
+          <div class="card-meta">
+            📍 <%= c.location %> · <%= c.author_flag %> <%= c.author_name %> · <%= c.formatted_date %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES / PORTRAITS -->
+<section id="temoignages" class="portraits-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>✨ Portraits & trajectoires</h2>
+      <p>Leurs mots, leurs chemins, leurs victoires</p>
+    </div>
+
+    <div class="portraits-grid">
+      <% @portraits = Portrait.ordered.limit(4) %>
+      <% @portraits.each do |p| %>
+        <div class="portrait-card">
+          <div class="portrait-stripe" style="background:<%= p.stripe_gradient || 'linear-gradient(90deg, #F5A800, #FFD166)' %>"></div>
+          <div class="portrait-body">
+            <div class="portrait-header">
+              <div class="portrait-avatar" style="background:<%= p.avatar_color %>">
+                <%= p.initial %>
+              </div>
+              <div>
+                <div class="portrait-name"><%= p.name %></div>
+                <div class="portrait-origin"><%= p.flag %> <%= p.origin %></div>
+              </div>
+            </div>
+            <div class="portrait-quote">"<%= p.quote %>"</div>
+            <div class="portrait-tags">
+              <% (p.tags || []).each do |tag| %>
+                <span class="tag"><%= tag %></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>🐝 la Ruche</strong>
+  <p>Plateforme citoyenne à impact social · Projet open-source</p>
+</footer>
+
+<!-- LEAFLET -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([48.692, 6.184], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap',
+    maxZoom: 19
+  }).addTo(map);
+
+  const layers = {
+    admin: L.layerGroup().addTo(map),
+    fle: L.layerGroup().addTo(map),
+    entrep: L.layerGroup().addTo(map),
+    culture: L.layerGroup().addTo(map)
+  };
+
+  const userLayer = L.layerGroup().addTo(map);
+  const colors = { admin: '#C45A2A', fle: '#3A7A5A', entrep: '#F5A800', culture: '#1A5B9A' };
+
+  function mkIcon(color, emoji) {
+    return L.divIcon({
+      html: `<div style="width:42px;height:42px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;border:3px solid white;box-shadow:0 3px 10px rgba(0,0,0,0.25);font-size:20px;">${emoji}</div>`,
+      iconSize: [42,42],
+      iconAnchor: [21,42],
+      popupAnchor: [0,-47],
+      className: ''
+    });
+  }
+
+  const staticPlaces = [
+    { type:'admin', lat:48.693, lng:6.180, title:'OFII Nancy', desc:'Office Français de l\'Immigration', emoji:'📋' },
+    { type:'admin', lat:48.688, lng:6.191, title:'Préfecture', desc:'Titres de séjour, naturalisation', emoji:'🏛' },
+    { type:'entrep', lat:48.700, lng:6.177, title:'BGE Grand Est', desc:'Accompagnement création d\'entreprise', emoji:'🚀' }
+  ];
+
+  staticPlaces.forEach(p => {
+    L.marker([p.lat, p.lng], { icon: mkIcon(colors[p.type], p.emoji) })
+      .bindPopup(`<strong>${p.title}</strong><br>${p.desc}`)
+      .addTo(layers[p.type]);
+  });
+
+  const popupContent = `
+  <div style="min-width: 240px;">
+    ${c.image_url ? `<img src="${c.image_url}" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px;">` : ''}
+    <strong style="font-size:1.05rem;display:block;margin-bottom:6px;">${c.title}</strong>
+    <p style="font-size:0.9rem;color:#666;margin-bottom:8px;">${c.description.substring(0, 80)}...</p>
+    <small style="color:#999;">🐝 ${c.author}</small>
+    <a href="/contributions/${c.id}" style="display:inline-block;margin-top:10px;background:#F5A800;color:#0F0E0A;padding:0.4rem 0.9rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;">Voir détails →</a>
+  </div>
+`;
+
+  fetch('/contributions/map_data')
+    .then(r => r.json())
+    .then(contribs => {
+      contribs.forEach(c => {
+        const layerType = c.type === 'fle' ? 'fle' :
+                          c.type === 'event' ? 'culture' :
+                          c.type === 'enterprise' ? 'entrep' : 'culture';
+
+        const typeLabel = c.type === 'fle' ? 'Cours de FLE' :
+                          c.type === 'event' ? 'Événement' :
+                          c.type === 'enterprise' ? 'Entreprise' : 'Témoignage';
+
+        const popupContent = `
+          <div style="min-width: 260px; font-family: 'DM Sans', sans-serif;">
+            ${c.image_url ? `
+              <img src="${c.image_url}"
+                   style="width:100%; height:140px; object-fit:cover; border-radius:8px; margin-bottom:12px;">
+            ` : ''}
+            <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: ${c.color}; font-weight: 700; margin-bottom: 6px;">
+              ${c.emoji} ${typeLabel}
+            </div>
+            <strong style="font-size: 1.05rem; display: block; margin-bottom: 8px; color: #1a1814; line-height: 1.3;">
+              ${c.title}
+            </strong>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px; line-height: 1.5;">
+              ${c.description.length > 100 ? c.description.substring(0, 100) + '...' : c.description}
+            </p>
+            <div style="font-size: 0.8rem; color: #999; margin-bottom: 12px;">
+              🐝 ${c.author} · ${c.location}
+            </div>
+            <a href="/contributions/${c.id}"
+               style="display: inline-block; background: #F5A800; color: #0F0E0A; padding: 0.5rem 1rem;
+                      border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
+                      transition: all 0.2s;"
+               onmouseover="this.style.background='#E8920A'"
+               onmouseout="this.style.background='#F5A800'">
+              Voir détails →
+            </a>
+          </div>
+        `;
+
+        L.marker([c.latitude, c.longitude], { icon: mkIcon(c.color, c.emoji) })
+          .bindPopup(popupContent, { maxWidth: 300 })
+          .addTo(layers[layerType]);
+      });
+    })
+    .catch(e => console.log('Erreur chargement contributions:', e));
+
+  document.querySelectorAll('.legend-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const layer = item.dataset.layer;
+      const isActive = item.classList.contains('active');
+
+      if (isActive) {
+        map.removeLayer(layers[layer]);
+        item.classList.remove('active');
+      } else {
+        layers[layer].addTo(map);
+        item.classList.add('active');
+      }
+    });
+  });
+
+  let watchId = null;
+  document.getElementById('locate-btn').addEventListener('click', () => {
+    if (watchId) {
+      navigator.geolocation.clearWatch(watchId);
+      watchId = null;
+      userLayer.clearLayers();
+      document.getElementById('locate-btn').textContent = '📍 Me localiser';
+      return;
+    }
+
+    if ('geolocation' in navigator) {
+      document.getElementById('locate-btn').textContent = '⏳ Recherche...';
+
+      navigator.geolocation.getCurrentPosition(pos => {
+        const { latitude, longitude, accuracy } = pos.coords;
+
+        userLayer.clearLayers();
+
+        if (accuracy) {
+          L.circle([latitude, longitude], {
+            radius: Math.min(accuracy, 1000),
+            color: '#1976D2',
+            fillColor: '#1976D2',
+            fillOpacity: 0.15,
+            weight: 1
+          }).addTo(userLayer);
+        }
+
+        L.circleMarker([latitude, longitude], {
+          radius: 9,
+          color: '#ffffff',
+          fillColor: '#1976D2',
+          fillOpacity: 1,
+          weight: 3
+        }).addTo(userLayer);
+
+        map.flyTo([latitude, longitude], 14);
+        document.getElementById('locate-btn').textContent = '🛑 Arrêter';
+      }, err => {
+        alert('Active la géolocalisation dans les paramètres de ton navigateur.');
+        document.getElementById('locate-btn').textContent = '📍 Me localiser';
+      }, {
+        enableHighAccuracy: true,
+        timeout: 10000
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
