@@ -280,20 +280,69 @@
       border-radius: 50%;
     }
 
-    .locate-btn {
-      padding: 0.5rem 1.2rem;
+    .locate-btn-map {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      z-index: 500;
+      width: 40px;
+      height: 40px;
       background: #F5A800;
       color: #0F0E0A;
       border: none;
-      border-radius: 20px;
+      border-radius: 50%;
       cursor: pointer;
+      font-size: 1.1rem;
       font-weight: 600;
-      font-size: 0.9rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
       transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .locate-btn:hover {
+    .locate-btn-map:hover {
       background: #E8920A;
+      transform: scale(1.1);
+    }
+
+    .locate-btn-map.active {
+      background: #e53935;
+    }
+
+    .map-wrapper {
+      position: relative;
+    }
+
+    /* MOBILE MAP FILTER */
+    .map-controls-mobile {
+      display: none;
+      gap: 0.7rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .map-controls-mobile select {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      border: 2px solid #e0e0e0;
+      background: white;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #1a1814;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    .map-controls-mobile select:focus {
+      outline: none;
+      border-color: #F5A800;
     }
 
     #map {
@@ -503,12 +552,11 @@
       }
 
       .map-controls {
-        gap: 0.5rem;
+        display: none !important;
       }
 
-      .legend-item {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
+      .map-controls-mobile {
+        display: flex;
       }
 
       .section-header h2 {
@@ -524,8 +572,6 @@
   <a href="/" class="logo">
     <span style="font-size: 1.8rem;">🐝</span>
     <div class="logo-text">la Ruche</div>
-    <div class="logo-separator"></div>
-    <div class="logo-baseline">la plateforme pour les réfugiés en France</div>
   </a>
 
   <!-- Menu desktop -->
@@ -556,7 +602,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <h1>Chaque voix enrichit <em>la ruche.</em></h1>
+  <h1>La plateforme d'aide aux réfugiés <em>en France.</em></h1>
   <p>Droits, apprentissage, entrepreneuriat, culture. Ruche connecte les réfugiés et les citoyens — et donne à chacun la possibilité de contribuer.</p>
 </section>
 
@@ -585,10 +631,22 @@
         <div class="legend-dot" style="background:#1A5B9A"></div>
         <span>Convivialité</span>
       </div>
-      <button class="locate-btn" id="locate-btn">📍 Me localiser</button>
     </div>
 
-    <div id="map"></div>
+    <div class="map-controls-mobile">
+      <select id="mobileLayerSelect">
+        <option value="all" selected>🗺 Toutes les ressources</option>
+        <option value="admin">🟠 Droits & papiers</option>
+        <option value="fle">🟢 Cours de FLE</option>
+        <option value="entrep">🟡 Entrepreneuriat</option>
+        <option value="culture">🔵 Convivialité</option>
+      </select>
+    </div>
+
+    <div class="map-wrapper">
+      <div id="map"></div>
+      <button class="locate-btn-map" id="locate-btn">📍</button>
+    </div>
   </div>
 </section>
 
@@ -762,18 +820,34 @@
     });
   });
 
+  // MOBILE DROPDOWN FILTER
+  document.getElementById('mobileLayerSelect').addEventListener('change', (e) => {
+    const val = e.target.value;
+    Object.keys(layers).forEach(key => {
+      if (val === 'all' || val === key) {
+        layers[key].addTo(map);
+      } else {
+        map.removeLayer(layers[key]);
+      }
+    });
+  });
+
+  // GEOLOCATION
   let watchId = null;
-  document.getElementById('locate-btn').addEventListener('click', () => {
+  const locateBtn = document.getElementById('locate-btn');
+
+  locateBtn.addEventListener('click', () => {
     if (watchId) {
       navigator.geolocation.clearWatch(watchId);
       watchId = null;
       userLayer.clearLayers();
-      document.getElementById('locate-btn').textContent = '📍 Me localiser';
+      locateBtn.textContent = '📍';
+      locateBtn.classList.remove('active');
       return;
     }
 
     if ('geolocation' in navigator) {
-      document.getElementById('locate-btn').textContent = '⏳ Recherche...';
+      locateBtn.textContent = '⏳';
 
       navigator.geolocation.getCurrentPosition(pos => {
         const { latitude, longitude, accuracy } = pos.coords;
@@ -799,10 +873,11 @@
         }).addTo(userLayer);
 
         map.flyTo([latitude, longitude], 14);
-        document.getElementById('locate-btn').textContent = '🛑 Arrêter';
+        locateBtn.textContent = '🛑';
+        locateBtn.classList.add('active');
       }, err => {
         alert('Active la géolocalisation dans les paramètres de ton navigateur.');
-        document.getElementById('locate-btn').textContent = '📍 Me localiser';
+        locateBtn.textContent = '📍';
       }, {
         enableHighAccuracy: true,
         timeout: 10000
