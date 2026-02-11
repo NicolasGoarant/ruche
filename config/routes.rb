@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
-  
+
   root "pages#home"
 
   get "droits", to: "pages#droits"
@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
+
+  get "philosophie", to: "pages#philosophie"
 end

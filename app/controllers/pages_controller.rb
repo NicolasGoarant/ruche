@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   layout false, only: [:home]
-  
+
   def home
   end
 
@@ -9,4 +9,9 @@ class PagesController < ApplicationController
                              .by_tags(params[:tags])
                              .ordered
   end
+
+  def philosophie
+  render layout: false
+  end
+
 end
