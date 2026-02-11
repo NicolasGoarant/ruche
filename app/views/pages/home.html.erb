@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<%= I18n.locale %>" dir="<%= %i[ar prs].include?(I18n.locale) ? 'rtl' : 'ltr' %>">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -128,6 +128,35 @@
     .cta-secondary:hover {
       border-color: #F5A800;
       color: #F5A800;
+    }
+
+    /* LANGUAGE SELECTOR IN HERO */
+    .hero-lang {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .hero-lang a {
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .hero-lang a:hover {
+      color: white;
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .hero-lang a.active {
+      color: #F5A800;
+      border-color: #F5A800;
+      background: rgba(245, 168, 0, 0.1);
     }
 
     /* SECTION CARTE */
@@ -284,14 +313,29 @@
       background: white;
       border: 1px solid #e0e0e0;
       border-radius: 12px;
-      padding: 1.5rem;
+      overflow: hidden;
       border-left: 4px solid #F5A800;
       transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
     }
 
     .card:hover {
       box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       transform: translateY(-3px);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.2rem 1.5rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .card h3 {
@@ -308,6 +352,7 @@
       color: #666;
       line-height: 1.6;
       margin-bottom: 1rem;
+      flex: 1;
     }
 
     .card-meta {
@@ -336,6 +381,8 @@
       border-radius: 12px;
       overflow: hidden;
       transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
     }
 
     .portrait-card:hover {
@@ -343,13 +390,22 @@
       transform: translateY(-3px);
     }
 
+    .portrait-photo {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
     .portrait-stripe {
-      height: 6px;
+      height: 5px;
       background: linear-gradient(90deg, #F5A800, #FFD166);
     }
 
     .portrait-body {
-      padding: 1.5rem;
+      padding: 1.2rem 1.5rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .portrait-header {
@@ -394,6 +450,7 @@
       margin-bottom: 1rem;
       border-left: 3px solid #F5A800;
       padding-left: 1rem;
+      flex: 1;
     }
 
     .portrait-tags {
@@ -444,6 +501,15 @@
 
       .hex-float { display: none; }
 
+      .hero-lang {
+        gap: 0.35rem;
+        margin-top: 1.5rem;
+      }
+      .hero-lang a {
+        font-size: 0.78rem;
+        padding: 0.3rem 0.55rem;
+      }
+
       #map {
         height: 350px;
       }
@@ -493,11 +559,20 @@
   </div>
 
   <div class="hero-content">
-    <h1>La plateforme d'aide aux réfugiés <em>en France.</em></h1>
-    <p>Droits, apprentissage, entrepreneuriat, culture. Ruche connecte les réfugiés et les citoyens — et donne à chacun la possibilité de contribuer.</p>
+    <h1><%= t('hero.title_html').html_safe %></h1>
+    <p><%= t('hero.subtitle') %></p>
     <div class="hero-cta">
-      <a href="#carte" class="cta-primary">🗺 Explorer la carte</a>
-      <a href="<%= new_contribution_path %>" class="cta-secondary">＋ Contribuer</a>
+      <a href="#carte" class="cta-primary"><%= t('hero.cta_map') %></a>
+      <a href="<%= new_contribution_path %>" class="cta-secondary"><%= t('hero.cta_contribute') %></a>
+    </div>
+
+    <div class="hero-lang">
+      <a href="<%= root_path(locale: :fr) %>" class="<%= 'active' if I18n.locale == :fr %>">🇫🇷 Français</a>
+      <a href="<%= root_path(locale: :en) %>" class="<%= 'active' if I18n.locale == :en %>">🇬🇧 English</a>
+      <a href="<%= root_path(locale: :ar) %>" class="<%= 'active' if I18n.locale == :ar %>">🇸🇦 العربية</a>
+      <a href="<%= root_path(locale: :uk) %>" class="<%= 'active' if I18n.locale == :uk %>">🇺🇦 Українська</a>
+      <a href="<%= root_path(locale: :prs) %>" class="<%= 'active' if I18n.locale == :prs %>">🇦🇫 دری</a>
+      <a href="<%= root_path(locale: :es) %>" class="<%= 'active' if I18n.locale == :es %>">🇪🇸 Español</a>
     </div>
   </div>
 </section>
@@ -506,36 +581,36 @@
 <section id="carte" class="map-section">
   <div class="container">
     <div class="section-header">
-      <h2>🗺 Explorer les ressources</h2>
-      <p>Découvrez toutes les opportunités près de chez vous</p>
+      <h2><%= t('map.title') %></h2>
+      <p><%= t('map.subtitle') %></p>
     </div>
 
     <div class="map-controls">
       <div class="legend-item active" data-layer="admin">
         <div class="legend-dot" style="background:#C45A2A"></div>
-        <span>Droits & papiers</span>
+        <span><%= t('map.filter_rights') %></span>
       </div>
       <div class="legend-item active" data-layer="fle">
         <div class="legend-dot" style="background:#3A7A5A"></div>
-        <span>Cours de FLE</span>
+        <span><%= t('map.filter_fle') %></span>
       </div>
       <div class="legend-item active" data-layer="entrep">
         <div class="legend-dot" style="background:#F5A800"></div>
-        <span>Entrepreneuriat</span>
+        <span><%= t('map.filter_entrepreneurship') %></span>
       </div>
       <div class="legend-item active" data-layer="culture">
         <div class="legend-dot" style="background:#1A5B9A"></div>
-        <span>Convivialité</span>
+        <span><%= t('map.filter_community') %></span>
       </div>
     </div>
 
     <div class="map-controls-mobile">
       <select id="mobileLayerSelect">
-        <option value="all" selected>🗺 Toutes les ressources</option>
-        <option value="admin">🟠 Droits & papiers</option>
-        <option value="fle">🟢 Cours de FLE</option>
-        <option value="entrep">🟡 Entrepreneuriat</option>
-        <option value="culture">🔵 Convivialité</option>
+        <option value="all" selected><%= t('map.filter_all') %></option>
+        <option value="admin"><%= t('map.filter_rights_mobile') %></option>
+        <option value="fle"><%= t('map.filter_fle_mobile') %></option>
+        <option value="entrep"><%= t('map.filter_entrepreneurship_mobile') %></option>
+        <option value="culture"><%= t('map.filter_community_mobile') %></option>
       </select>
     </div>
 
@@ -550,20 +625,25 @@
 <section id="contributions" class="contributions-section">
   <div class="container">
     <div class="section-header">
-      <h2>🐝 Contributions récentes</h2>
-      <p>Ressources partagées par la communauté</p>
+      <h2><%= t('contributions_section.title') %></h2>
+      <p><%= t('contributions_section.subtitle') %></p>
     </div>
 
     <div class="cards">
       <% @contributions = Contribution.published.recent.limit(6) %>
       <% @contributions.each do |c| %>
-        <a href="/contributions/<%= c.id %>" style="text-decoration: none; color: inherit;"><div class="card">
-          <h3><%= c.type_emoji %> <%= c.title %></h3>
-          <p><%= c.description.truncate(120) %></p>
-          <div class="card-meta">
-            📍 <%= c.location %> · <%= c.author_flag %> <%= c.author_name %> · <%= c.formatted_date %>
+        <a href="/contributions/<%= c.id %>" style="text-decoration: none; color: inherit;"><div class="card" style="border-left-color: <%= c.type_color %>">
+          <% if c.main_photo_url.present? %>
+            <img src="<%= c.main_photo_url %>" alt="<%= c.title %>" class="card-img" loading="lazy">
+          <% end %>
+          <div class="card-body">
+            <h3><%= c.type_emoji %> <%= c.title %></h3>
+            <p><%= c.description.truncate(120) %></p>
+            <div class="card-meta">
+              📍 <%= c.location %> · <%= c.author_flag %> <%= c.author_name %> · <%= c.formatted_date %>
+            </div>
           </div>
-        </div>
+        </div></a>
       <% end %>
     </div>
   </div>
@@ -573,23 +653,23 @@
 <section id="temoignages" class="portraits-section">
   <div class="container">
     <div class="section-header">
-      <h2>✨ Portraits & trajectoires</h2>
-      <p>Leurs mots, leurs chemins, leurs victoires</p>
+      <h2><%= t('portraits.title') %></h2>
+      <p><%= t('portraits.subtitle') %></p>
     </div>
 
     <div class="portraits-grid">
       <% @portraits = Portrait.ordered.limit(4) %>
       <% @portraits.each do |p| %>
         <div class="portrait-card">
+          <% if p.respond_to?(:photo_url) && p.photo_url.present? %>
+            <img src="<%= p.photo_url %>" alt="<%= p.name %>" class="portrait-photo" loading="lazy">
+          <% end %>
           <div class="portrait-stripe" style="background:<%= p.stripe_gradient || 'linear-gradient(90deg, #F5A800, #FFD166)' %>"></div>
           <div class="portrait-body">
             <div class="portrait-header">
-              <div class="portrait-avatar" style="background:<%= p.avatar_color %>">
-                <%= p.initial %>
-              </div>
               <div>
-                <div class="portrait-name"><%= p.name %></div>
-                <div class="portrait-origin"><%= p.flag %> <%= p.origin %></div>
+                <div class="portrait-name"><%= p.flag %> <%= p.name %></div>
+                <div class="portrait-origin"><%= p.origin %></div>
               </div>
             </div>
             <div class="portrait-quote">"<%= p.quote %>"</div>
@@ -607,13 +687,22 @@
 
 <!-- FOOTER -->
 <footer>
-  <strong>🐝 la Ruche</strong>
-  <p>Plateforme citoyenne à impact social · Projet open-source</p>
+  <strong><%= t('footer.brand') %></strong>
+  <p><%= t('footer.tagline') %></p>
 </footer>
 
 <!-- LEAFLET -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+  // i18n labels for JS
+  const i18n = {
+    filter_fle: "<%= t('map.filter_fle') %>",
+    filter_community: "<%= t('map.filter_community') %>",
+    filter_entrepreneurship: "<%= t('map.filter_entrepreneurship') %>",
+    filter_rights: "<%= t('map.filter_rights') %>",
+    view_details: "<%= I18n.t('map.view_details', default: 'Voir détails') %>"
+  };
+
   const map = L.map('map').setView([48.692, 6.184], 13);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -661,9 +750,13 @@
                           c.type === 'event' ? 'culture' :
                           c.type === 'enterprise' ? 'entrep' : 'culture';
 
-        const typeLabel = c.type === 'fle' ? 'Cours de FLE' :
-                          c.type === 'event' ? 'Événement' :
-                          c.type === 'enterprise' ? 'Entreprise' : 'Témoignage';
+        const typeLabels = {
+          fle: i18n.filter_fle,
+          event: i18n.filter_community,
+          enterprise: i18n.filter_entrepreneurship,
+          portrait: i18n.filter_rights
+        };
+        const typeLabel = typeLabels[c.type] || c.type;
 
         const popupContent = `
           <div style="min-width: 260px; font-family: 'DM Sans', sans-serif;">
@@ -689,7 +782,7 @@
                       transition: all 0.2s;"
                onmouseover="this.style.background='#E8920A'"
                onmouseout="this.style.background='#F5A800'">
-              Voir détails →
+              ${i18n.view_details} →
             </a>
           </div>
         `;

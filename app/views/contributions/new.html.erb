@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<%= I18n.locale %>" dir="<%= %i[ar prs].include?(I18n.locale) ? 'rtl' : 'ltr' %>">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contribuer — la Ruche</title>
+  <title><%= t('contribution_form.page_title') %></title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -267,34 +267,33 @@
 <%= render 'shared/navbar', active: 'contribuer' %>
 
 <div class="container">
-  <a href="/" class="back-link">← Retour à l'accueil</a>
+  <a href="/" class="back-link"><%= t('contribution_form.back') %></a>
 
-  <h1>🐝 Contribuer à la Ruche</h1>
+  <h1><%= t('contribution_form.title') %></h1>
   <p class="intro">
-    Partagez une ressource utile pour les réfugiés en France : cours de français,
-    événement culturel, initiative entrepreneuriale ou votre propre témoignage.
+    <%= t('contribution_form.intro') %>
   </p>
 
   <%= form_with model: @contribution, local: true, multipart: true do |f| %>
     <div class="form-section">
-      <h2>Type de contribution <span class="required">*</span></h2>
+      <h2><%= t('contribution_form.type_title') %> <span class="required"><%= t('contribution_form.required') %></span></h2>
 
       <div class="type-selector">
         <div class="type-option" data-type="fle">
           <span class="emoji">📚</span>
-          <span class="label">Cours de FLE</span>
+          <span class="label"><%= t('contribution_form.type_fle') %></span>
         </div>
         <div class="type-option" data-type="event">
           <span class="emoji">🎉</span>
-          <span class="label">Événement</span>
+          <span class="label"><%= t('contribution_form.type_event') %></span>
         </div>
         <div class="type-option" data-type="enterprise">
           <span class="emoji">🚀</span>
-          <span class="label">Entreprise</span>
+          <span class="label"><%= t('contribution_form.type_enterprise') %></span>
         </div>
         <div class="type-option" data-type="portrait">
           <span class="emoji">✨</span>
-          <span class="label">Témoignage</span>
+          <span class="label"><%= t('contribution_form.type_portrait') %></span>
         </div>
       </div>
 
@@ -302,46 +301,46 @@
     </div>
 
     <div class="form-section">
-      <h2>Informations principales</h2>
+      <h2><%= t('contribution_form.info_title') %></h2>
 
       <div class="form-group">
         <label>
           Titre <span class="required">*</span>
         </label>
-        <%= f.text_field :title, placeholder: 'Ex: Cours de FLE gratuit tous les jeudis', required: true %>
+        <%= f.text_field :title, placeholder: t('contribution_form.placeholder_title'), required: true %>
       </div>
 
       <div class="form-group">
         <label>
           Description <span class="required">*</span>
         </label>
-        <%= f.text_area :description, placeholder: 'Décrivez votre ressource en détail...', required: true %>
-        <p class="hint">Soyez précis : horaires, public visé, modalités d'accès...</p>
+        <%= f.text_area :description, placeholder: t('contribution_form.placeholder_description'), required: true %>
+        <p class="hint"><%= t('contribution_form.hint_description') %></p>
       </div>
 
       <div class="form-group">
         <label>
           Adresse complète <span class="required">*</span>
         </label>
-        <%= f.text_field :location, placeholder: 'Ex: 3 impasse du canal, 54000 Nancy', required: true %>
-        <p class="hint">Numéro, rue, code postal et ville pour une localisation précise</p>
+        <%= f.text_field :location, placeholder: t('contribution_form.placeholder_address'), required: true %>
+        <p class="hint"><%= t('contribution_form.hint_address') %></p>
       </div>
 
       <div class="form-group">
-        <label>Contact (email, téléphone, site web)</label>
+        <label><%= t('contribution_form.label_contact') %></label>
         <%= f.text_field :contact_info, placeholder: 'Ex: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5d51504a5f5d4a7e5b465b534e525b10584c">[email&#160;protected]</a> ou 06 12 34 56 78' %>
-        <p class="hint">Facultatif — pour que les personnes intéressées puissent vous contacter</p>
+        <p class="hint"><%= t('contribution_form.hint_contact') %></p>
       </div>
     </div>
 
     <div class="form-section">
-      <h2>Photos</h2>
+      <h2><%= t('contribution_form.photos_title') %></h2>
 
       <div class="form-group">
         <label for="file-input" class="file-upload-zone" id="upload-zone">
           <div class="upload-icon">📸</div>
-          <div class="upload-text">Cliquez ou glissez vos photos ici</div>
-          <p class="hint">Vous pouvez ajouter plusieurs photos (JPG, PNG, max 5Mo chacune)</p>
+          <div class="upload-text"><%= t('contribution_form.photos_upload') %></div>
+          <p class="hint"><%= t('contribution_form.photos_hint') %></p>
         </label>
         <%= f.file_field :photos, multiple: true, accept: 'image/*', id: 'file-input', style: 'display: none;' %>
 
@@ -350,28 +349,28 @@
     </div>
 
     <div class="form-section">
-      <h2>Votre signature</h2>
+      <h2><%= t('contribution_form.signature_title') %></h2>
 
       <div class="form-group">
-        <label>Votre prénom</label>
-        <%= f.text_field :author_name, placeholder: 'Ex: Marie L.' %>
-        <p class="hint">Laissez vide pour rester anonyme</p>
+        <label><%= t('contribution_form.label_name') %></label>
+        <%= f.text_field :author_name, placeholder: t('contribution_form.placeholder_name') %>
+        <p class="hint"><%= t('contribution_form.hint_name') %></p>
       </div>
 
       <div class="form-group">
-        <label>Drapeau (emoji)</label>
+        <label><%= t('contribution_form.label_flag') %></label>
         <%= f.text_field :author_flag, placeholder: '🇫🇷', maxlength: 2 %>
         <p class="hint">Ex: 🇫🇷 🇺🇦 🇸🇾 🇲🇦 🇨🇩</p>
       </div>
     </div>
 
-    <%= f.submit "🐝 Envoyer ma contribution", class: 'submit-btn', id: 'submit-btn', disabled: true %>
+    <%= f.submit t('contribution_form.submit'), class: 'submit-btn', id: 'submit-btn', disabled: true %>
   <% end %>
 </div>
 
 <footer>
-  <strong style="color: #F5A800; font-family: 'Fraunces', serif;">🐝 la Ruche</strong>
-  <p style="margin-top: 0.5rem; font-size: 0.85rem;">Plateforme citoyenne à impact social</p>
+  <strong style="color: #F5A800; font-family: 'Fraunces', serif;"><%= t('footer.brand') %></strong>
+  <p style="margin-top: 0.5rem; font-size: 0.85rem;"><%= t('footer.tagline') %></p>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>

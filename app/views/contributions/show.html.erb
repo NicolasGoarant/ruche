@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<%= I18n.locale %>" dir="<%= %i[ar prs].include?(I18n.locale) ? 'rtl' : 'ltr' %>">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,7 +136,7 @@
 <%= render 'shared/navbar' %>
 
 <div class="container">
-  <a href="/" class="back-link">← Retour à l'accueil</a>
+  <a href="/" class="back-link"><%= t('contribution_show.back') %></a>
 
   <% if @contribution.image_url.present? %>
     <img src="<%= @contribution.image_url %>" alt="<%= @contribution.title %>" class="hero-image">
@@ -178,7 +178,7 @@
 
 <footer>
   <strong style="color: #F5A800; font-family: 'Fraunces', serif; font-size: 1.1rem;">🐝 la Ruche</strong>
-  <p style="margin-top: 0.5rem; font-size: 0.85rem;">Plateforme citoyenne à impact social</p>
+  <p style="margin-top: 0.5rem; font-size: 0.85rem;"><%= t('footer.tagline') %></p>
 </footer>
 
 </body>

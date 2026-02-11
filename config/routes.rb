@@ -1,19 +1,22 @@
 Rails.application.routes.draw do
   devise_for :admins
 
-  root "pages#home"
+  scope "(:locale)", locale: /fr|en|ar|uk|prs|es/ do
+    root "pages#home"
 
-  get "droits", to: "pages#droits"
-  get "assistant-juridique", to: "legal#assistant"
-  post "assistant-juridique/chat", to: "legal#chat"
+    get "droits", to: "pages#droits"
+    get "philosophie", to: "pages#philosophie"
+    get "assistant-juridique", to: "legal#assistant"
+    post "assistant-juridique/chat", to: "legal#chat"
 
-  resources :contributions, only: [:index, :new, :create, :show] do
-    collection do
-      get :map_data
+    resources :contributions, only: [:index, :new, :create, :show] do
+      collection do
+        get :map_data
+      end
     end
-  end
 
-  resources :portraits, only: [:index, :show]
+    resources :portraits, only: [:index, :show]
+  end
 
   namespace :admin do
     root to: "dashboard#index"
@@ -26,6 +29,4 @@ Rails.application.routes.draw do
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
-
-  get "philosophie", to: "pages#philosophie"
 end

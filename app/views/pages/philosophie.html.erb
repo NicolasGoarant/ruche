@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<%= I18n.locale %>" dir="<%= %i[ar prs].include?(I18n.locale) ? 'rtl' : 'ltr' %>">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🐝 la Ruche — Notre philosophie</title>
+  <title><%= t('philosophie.page_title') %></title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,800;1,400;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -462,13 +462,13 @@
     <div class="accent-line"></div>
 
     <div class="manifeste-body">
-      <h2>Le constat</h2>
+      <h2><%= t('philosophie.constat_title') %></h2>
       <p>Quand on arrive dans un pays dont on ne maîtrise ni la langue ni les codes administratifs, chaque démarche devient un parcours du combattant. Où déposer sa demande d'asile ? Comment faire reconnaître son diplôme ? Qui peut m'aider à monter mon entreprise ? Les réponses existent, mais elles sont éparpillées entre des sites institutionnels, des associations locales, des dispositifs méconnus.</p>
       <p>Le résultat : des personnes qualifiées, motivées, prêtes à contribuer à la société française, se retrouvent bloquées — non par manque de volonté, mais par manque d'information.</p>
 
       <div class="accent-line"></div>
 
-      <h2>Notre réponse</h2>
+      <h2><%= t('philosophie.reponse_title') %></h2>
       <p>La Ruche rassemble sur une même plateforme tout ce qu'une personne déplacée a besoin de savoir et de trouver pour avancer. Pas un portail institutionnel de plus, pas un énième répertoire figé — un espace vivant, alimenté autant par les professionnels que par la communauté elle-même.</p>
       <p>Concrètement, la Ruche c'est une carte interactive des ressources près de chez soi, un assistant juridique propulsé par l'intelligence artificielle pour répondre aux questions sur ses droits, un espace où chacun peut partager un cours de français, un événement, un témoignage ou une entreprise créée.</p>
 
@@ -486,7 +486,7 @@
   <div class="container">
     <div class="nom-grid">
       <div class="nom-text">
-        <h2>Pourquoi « la Ruche » ?</h2>
+        <h2><%= t('philosophie.nom_title') %></h2>
         <p>Une ruche, c'est un lieu où chaque individu, aussi petit soit-il, contribue à quelque chose de plus grand que lui. Aucune abeille ne construit seule. C'est le travail collectif, la circulation de l'information, le partage des ressources qui font la force de la colonie.</p>
 
         <div class="nom-highlight">
@@ -505,43 +505,43 @@
 
 <!-- VALEURS -->
 <section class="valeurs-section">
-  <div class="section-title">Nos valeurs</div>
+  <div class="section-title"><%= t('philosophie.valeurs_title') %></div>
   <div class="section-subtitle">Ce qui guide chaque décision, chaque fonctionnalité, chaque ligne de code.</div>
 
   <div class="valeurs-grid">
     <div class="valeur-card" style="--card-accent: #F5A800;">
       <span class="valeur-emoji">🔓</span>
-      <h3>Accessibilité radicale</h3>
+      <h3><%= t('philosophie.valeur_accessibilite') %></h3>
       <p>L'information sur les droits ne devrait jamais être un privilège. La Ruche est gratuite, ouverte, et pensée pour être comprise par quelqu'un qui apprend le français.</p>
     </div>
 
     <div class="valeur-card" style="--card-accent: #3A7A5A;">
       <span class="valeur-emoji">🤝</span>
-      <h3>Horizontalité</h3>
+      <h3><%= t('philosophie.valeur_horizontalite') %></h3>
       <p>Pas de hiérarchie entre ceux qui « aident » et ceux qui « sont aidés ». Sur la Ruche, tout le monde peut contribuer, tout le monde peut apprendre.</p>
     </div>
 
     <div class="valeur-card" style="--card-accent: #1A5B9A;">
       <span class="valeur-emoji">🏗️</span>
-      <h3>Ancrage local</h3>
+      <h3><%= t('philosophie.valeur_ancrage') %></h3>
       <p>L'intégration se joue à l'échelle d'un quartier, d'une ville, d'une association. La Ruche géolocalise les ressources pour que l'aide soit concrète, pas abstraite.</p>
     </div>
 
     <div class="valeur-card" style="--card-accent: #C45A2A;">
       <span class="valeur-emoji">💡</span>
-      <h3>Pouvoir d'agir</h3>
+      <h3><%= t('philosophie.valeur_pouvoir') %></h3>
       <p>Nous ne voulons pas créer de la dépendance. Chaque outil de la Ruche — l'assistant juridique, la carte, les portraits — vise à rendre autonome, pas assisté.</p>
     </div>
 
     <div class="valeur-card" style="--card-accent: #6A3A9A;">
       <span class="valeur-emoji">🌍</span>
-      <h3>Dignité</h3>
+      <h3><%= t('philosophie.valeur_dignite') %></h3>
       <p>Les personnes déplacées ne sont pas des « cas ». Ce sont des ingénieurs, des cuisinières, des artistes, des parents. La Ruche montre des trajectoires, pas des statistiques.</p>
     </div>
 
     <div class="valeur-card" style="--card-accent: #0F0E0A;">
       <span class="valeur-emoji">🔧</span>
-      <h3>Open source</h3>
+      <h3><%= t('philosophie.valeur_opensource') %></h3>
       <p>La Ruche est un projet ouvert. Le code est public, les données sont transparentes. Parce qu'un outil citoyen doit appartenir à tout le monde.</p>
     </div>
   </div>
@@ -549,7 +549,7 @@
 
 <!-- POUR QUI -->
 <section class="pour-qui">
-  <div class="section-title">Pour qui ?</div>
+  <div class="section-title"><%= t('philosophie.pour_qui_title') %></div>
   <div class="section-subtitle">La Ruche s'adresse à toute personne concernée par l'accueil et l'intégration.</div>
 
   <div class="public-grid">
@@ -567,7 +567,7 @@
 
     <div class="public-card">
       <span class="pub-emoji">🙋</span>
-      <h3>Citoyens solidaires</h3>
+      <h3><%= t('philosophie.audience_citizens') %></h3>
       <p>Vous voulez aider mais ne savez pas comment ? Partagez un tandem linguistique, organisez un repas, relayez un témoignage.</p>
     </div>
   </div>
@@ -575,10 +575,10 @@
 
 <!-- CTA -->
 <section class="cta-section">
-  <h2>Rejoignez la Ruche</h2>
+  <h2><%= t('philosophie.cta_title') %></h2>
   <p>Chaque contribution — qu'elle soit un cours de français, un événement, un témoignage — fait grandir la communauté.</p>
   <div class="cta-buttons">
-    <a href="<%= new_contribution_path %>" class="cta-primary">＋ Contribuer</a>
+    <a href="<%= new_contribution_path %>" class="cta-primary"><%= t('philosophie.cta_contribute') %></a>
     <a href="/" class="cta-secondary">Explorer la carte</a>
   </div>
 </section>

@@ -73,6 +73,7 @@ Portrait.create!([
     tags: ['Entrepreneuriat', 'Tech'],
     avatar_color: '#C45A2A',
     stripe_gradient: 'linear-gradient(90deg,#C45A2A,#E87A4A)',
+    photo_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
     position: 1
   },
   {
@@ -83,6 +84,7 @@ Portrait.create!([
     tags: ['Intégration', 'Commerce'],
     avatar_color: '#1A5B9A',
     stripe_gradient: 'linear-gradient(90deg,#1A5B9A,#3A80C0)',
+    photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
     position: 2
   },
   {
@@ -93,6 +95,7 @@ Portrait.create!([
     tags: ['Culture', 'Cuisine'],
     avatar_color: '#F5A800',
     stripe_gradient: 'linear-gradient(90deg,#F5A800,#FFD166)',
+    photo_url: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&q=80',
     position: 3
   },
   {
@@ -103,6 +106,7 @@ Portrait.create!([
     tags: ['Ingénierie', 'Résilience'],
     avatar_color: '#6A3A9A',
     stripe_gradient: 'linear-gradient(90deg,#6A3A9A,#9A60C0)',
+    photo_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80',
     position: 4
   }
 ])
