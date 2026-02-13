@@ -1,5 +1,5 @@
 <% content_for :nav_active, 'home' %>
-<% content_for :title, '🐝 Ruche — Ensemble en France' %>
+<% content_for :title, '🧵 Tisserands — Ensemble en France' %>
 
 <% content_for :styles do %>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -515,7 +515,7 @@
     });
 
     const localePrefix = '<%= I18n.locale == I18n.default_locale ? "" : "/#{I18n.locale}" %>';
-    fetch(localePrefix + '/contributions/map_data')
+    fetch('<%= map_data_contributions_path %>')
       .then(r => r.json())
       .then(contribs => {
         contribs.forEach(c => {
@@ -547,7 +547,7 @@
                 ${c.description.length > 100 ? c.description.substring(0, 100) + '...' : c.description}
               </p>
               <div style="font-size: 0.8rem; color: #999; margin-bottom: 12px;">
-                🐝 ${c.author} · ${c.location}
+                🧵 ${c.author} · ${c.location}
               </div>
               <a href="${localePrefix}/contributions/${c.id}"
                  style="display: inline-block; background: #F5A800; color: #0F0E0A; padding: 0.5rem 1rem;

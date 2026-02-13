@@ -103,7 +103,7 @@
     <!-- Desktop: pills -->
     <div class="filter-bar">
       <a href="<%= contributions_path %>" class="filter-btn <%= 'active' unless params[:type].present? %>">
-        🐝 <%= t('contributions_section.filter_all', default: 'Tous') %>
+        🧵 <%= t('contributions_section.filter_all', default: 'Tous') %>
       </a>
       <% Contribution::TYPE_CONFIG.each do |type, config| %>
         <a href="<%= contributions_path(type: type) %>" class="filter-btn <%= 'active' if params[:type] == type %>">
@@ -116,7 +116,7 @@
     <div class="filter-mobile">
       <select onchange="window.location.href = this.value">
         <option value="<%= contributions_path %>" <%= 'selected' unless params[:type].present? %>>
-          🐝 <%= t('contributions_section.filter_all', default: 'Tous les partages') %>
+          🧵 <%= t('contributions_section.filter_all', default: 'Tous les partages') %>
         </option>
         <% Contribution::TYPE_CONFIG.each do |type, config| %>
           <option value="<%= contributions_path(type: type) %>" <%= 'selected' if params[:type] == type %>>

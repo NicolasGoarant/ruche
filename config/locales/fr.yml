@@ -10,12 +10,12 @@ fr:
     contribute: "Partager"
     mobile_home: "🏠 Accueil"
     mobile_principles: "💛 Nos principes"
-    mobile_contributions: "🐝 Partages"
+    mobile_contributions: "🧵 Partages"
     mobile_testimonials: "✨ Trajectoires"
 
   hero:
     title_html: "La plateforme d'<em>aide aux réfugiés</em> en France."
-    subtitle: "Droits, apprentissage, entrepreneuriat, culture. La Ruche connecte les réfugiés et les citoyens — et donne à chacun la possibilité de partager."
+    subtitle: "Droits, apprentissage, entrepreneuriat, culture. Les Tisserands connecte les réfugiés et les citoyens — et donne à chacun la possibilité de partager."
     cta_map: "🗺 Explorer la carte"
     cta_contribute: "＋ Partager"
 
@@ -35,7 +35,7 @@ fr:
     view_details: "Voir détails"
 
   contributions_section:
-    title: "🐝 Partages récents"
+    title: "🧵 Partages récents"
     subtitle: "Les ressources de la communauté"
 
   portraits:
@@ -43,7 +43,7 @@ fr:
     subtitle: "Leurs mots, leurs chemins, leurs victoires"
 
   footer:
-    brand: "🐝 la Ruche"
+    brand: "🧵 Les Tisserands"
     tagline: "Plateforme citoyenne à impact social · Projet open-source"
 
   contribution_show:
@@ -54,7 +54,7 @@ fr:
     photos: "📸 Photos"
 
   assistant:
-    page_title: "Assistant juridique - la Ruche"
+    page_title: "Assistant juridique - Les Tisserands"
     title: "🤝 Assistant juridique"
     subtitle: "Posez vos questions sur votre situation administrative en France"
     disclaimer_html: "<strong>⚠️ Information importante :</strong> Cet assistant vous donne des informations générales sur le droit des étrangers en France. Pour votre situation personnelle, consultez toujours une association juridique gratuite (France Terre d'Asile, La Cimade) ou un avocat spécialisé."
@@ -67,47 +67,47 @@ fr:
     docs_attached: "Documents joints"
 
   philosophie:
-    page_title: "Nos principes — la Ruche"
-    hero_title_html: "Pourquoi <em>la Ruche ?</em>"
+    page_title: "Nos principes — Les Tisserands"
+    hero_title_html: "Pourquoi <em>Les Tisserands ?</em>"
     hero_subtitle: "Derrière chaque outil, chaque carte, chaque témoignage, il y a une conviction : personne ne devrait reconstruire sa vie seul."
     manifeste_intro: "En France, des milliers de personnes déplacées cherchent chaque jour à comprendre leurs droits, à apprendre la langue, à créer leur activité. L'information existe, mais elle est dispersée, opaque, souvent inaccessible."
     constat_title: "Le constat"
     constat_p1: "Quand on arrive dans un pays dont on ne maîtrise ni la langue ni les codes administratifs, chaque démarche devient un parcours du combattant. Où déposer sa demande d'asile ? Comment faire reconnaître son diplôme ? Qui peut m'aider à monter mon entreprise ? Les réponses existent, mais elles sont éparpillées entre des sites institutionnels, des associations locales, des dispositifs méconnus."
     constat_p2: "Le résultat : des personnes qualifiées, motivées, prêtes à contribuer à la société française, se retrouvent bloquées — non par manque de volonté, mais par manque d'information."
     reponse_title: "Notre réponse"
-    reponse_p1: "La Ruche rassemble sur une même plateforme tout ce qu'une personne déplacée a besoin de savoir et de trouver pour avancer. Pas un portail institutionnel de plus, pas un énième répertoire figé — un espace vivant, alimenté autant par les professionnels que par la communauté elle-même."
-    reponse_p2: "Concrètement, la Ruche c'est une carte interactive des ressources près de chez soi, un assistant juridique propulsé par l'intelligence artificielle pour répondre aux questions sur ses droits, un espace où chacun peut partager un cours de français, un événement, un témoignage ou une entreprise créée."
+    reponse_p1: "Les Tisserands rassemble sur une même plateforme tout ce qu'une personne déplacée a besoin de savoir et de trouver pour avancer. Pas un portail institutionnel de plus, pas un énième répertoire figé — un espace vivant, alimenté autant par les professionnels que par la communauté elle-même."
+    reponse_p2: "Concrètement, Les Tisserands c'est une carte interactive des ressources près de chez soi, un assistant juridique propulsé par l'intelligence artificielle pour répondre aux questions sur ses droits, un espace où chacun peut partager un cours de français, un événement, un témoignage ou une entreprise créée."
     citoyenne_title: "Une plateforme citoyenne"
-    citoyenne_p1: "La Ruche ne se substitue ni aux associations ni aux institutions. Elle les rend visibles. Elle amplifie ce qui existe déjà sur le terrain et comble les trous dans l'information."
+    citoyenne_p1: "Les Tisserands ne se substitue ni aux associations ni aux institutions. Elle les rend visibles. Elle amplifie ce qui existe déjà sur le terrain et comble les trous dans l'information."
     citoyenne_p2: "Et surtout, elle donne la parole aux premiers concernés. Parce que l'intégration ne se décrète pas d'en haut : elle se construit par ceux qui la vivent. Les partages, les trajectoires, les parcours d'entrepreneurs réfugiés — tout cela vient de la communauté, pour la communauté."
-    nom_title: "Pourquoi « la Ruche » ?"
-    nom_p1: "Une ruche, c'est un lieu où chaque individu, aussi petit soit-il, contribue à quelque chose de plus grand que lui. Aucune abeille ne construit seule. C'est le travail collectif, la circulation de l'information, le partage des ressources qui font la force de la colonie."
-    nom_highlight: "Nous croyons que l'intégration fonctionne de la même manière : chaque contribution compte, chaque voix enrichit l'ensemble."
+    nom_title: "Pourquoi « Les Tisserands » ?"
+    nom_p1: "Un tisserand, c'est celui qui relie. Fil après fil, lien après lien, il crée un tissu plus solide que chacune de ses parties. Le philosophe Abdennour Bidar les appelle ainsi : ceux qui, attentifs à la qualité du lien social, reconstruisent patiemment ce qui a été déchiré."
+    nom_highlight: "Nous croyons que l'intégration fonctionne ainsi : chaque lien tissé renforce le tout, chaque voix enrichit le tissu commun."
     nom_p2: "Un cours de français partagé par un bénévole. Un témoignage d'une ingénieure afghane qui a refait sa vie. Une soirée cuisine ouverte à tous. Chacun de ces gestes, aussi modeste soit-il, renforce le maillage qui permet à d'autres d'avancer."
-    nom_caption: "Chaque voix enrichit la ruche."
+    nom_caption: "Chaque fil renforce le tissu."
     valeurs_title: "Nos valeurs"
     valeurs_subtitle: "Ce qui guide chaque décision, chaque fonctionnalité, chaque ligne de code."
     valeur_accessibilite: "Accessibilité radicale"
-    valeur_accessibilite_desc: "L'information sur les droits ne devrait jamais être un privilège. La Ruche est gratuite, ouverte, et pensée pour être comprise par quelqu'un qui apprend le français."
+    valeur_accessibilite_desc: "L'information sur les droits ne devrait jamais être un privilège. Les Tisserands est gratuite, ouverte, et pensée pour être comprise par quelqu'un qui apprend le français."
     valeur_horizontalite: "Horizontalité"
-    valeur_horizontalite_desc: "Pas de hiérarchie entre ceux qui « aident » et ceux qui « sont aidés ». Sur la Ruche, tout le monde peut contribuer, tout le monde peut apprendre."
+    valeur_horizontalite_desc: "Pas de hiérarchie entre ceux qui « aident » et ceux qui « sont aidés ». Sur Les Tisserands, tout le monde peut contribuer, tout le monde peut apprendre."
     valeur_ancrage: "Ancrage local"
-    valeur_ancrage_desc: "L'intégration se joue à l'échelle d'un quartier, d'une ville, d'une association. La Ruche géolocalise les ressources pour que l'aide soit concrète, pas abstraite."
+    valeur_ancrage_desc: "L'intégration se joue à l'échelle d'un quartier, d'une ville, d'une association. Les Tisserands géolocalise les ressources pour que l'aide soit concrète, pas abstraite."
     valeur_pouvoir: "Pouvoir d'agir"
-    valeur_pouvoir_desc: "Nous ne voulons pas créer de la dépendance. Chaque outil de la Ruche — l'assistant juridique, la carte, les portraits — vise à rendre autonome, pas assisté."
+    valeur_pouvoir_desc: "Nous ne voulons pas créer de la dépendance. Chaque outil de Les Tisserands — l'assistant juridique, la carte, les portraits — vise à rendre autonome, pas assisté."
     valeur_dignite: "Dignité"
-    valeur_dignite_desc: "Les personnes déplacées ne sont pas des « cas ». Ce sont des ingénieurs, des cuisinières, des artistes, des parents. La Ruche montre des trajectoires, pas des statistiques."
+    valeur_dignite_desc: "Les personnes déplacées ne sont pas des « cas ». Ce sont des ingénieurs, des cuisinières, des artistes, des parents. Les Tisserands montre des trajectoires, pas des statistiques."
     valeur_opensource: "Open source"
-    valeur_opensource_desc: "La Ruche est un projet ouvert. Le code est public, les données sont transparentes. Parce qu'un outil citoyen doit appartenir à tout le monde."
+    valeur_opensource_desc: "Les Tisserands est un projet ouvert. Le code est public, les données sont transparentes. Parce qu'un outil citoyen doit appartenir à tout le monde."
     pour_qui_title: "Pour qui ?"
-    pour_qui_subtitle: "La Ruche s'adresse à toute personne concernée par l'accueil et l'intégration."
+    pour_qui_subtitle: "Les Tisserands s'adresse à toute personne concernée par l'accueil et l'intégration."
     audience_refugees: "Personnes réfugiées et déplacées"
     audience_refugees_desc: "Trouvez les informations sur vos droits, les cours de français près de chez vous, les dispositifs d'aide à la création d'entreprise."
     audience_associations: "Associations et acteurs de terrain"
     audience_associations_desc: "Rendez vos actions visibles. Référencez vos cours, vos événements, vos permanences sur la carte pour toucher ceux qui en ont besoin."
     audience_citizens: "Citoyens solidaires"
     audience_citizens_desc: "Vous voulez aider mais ne savez pas comment ? Partagez un tandem linguistique, organisez un repas, relayez un témoignage."
-    cta_title: "Rejoignez la Ruche"
+    cta_title: "Rejoignez Les Tisserands"
     cta_subtitle: "Chaque contribution — qu'elle soit un cours de français, un événement, un témoignage — fait grandir la communauté."
     cta_explore: "🗺 Explorer la carte"
     cta_contribute: "＋ Partager"
@@ -117,7 +117,7 @@ fr:
     back: "← Retour aux trajectoires"
     origin: "Origine"
     location: "Lieu"
-    cta_text: "Vous aussi, partagez votre parcours ou contribuez à la Ruche."
+    cta_text: "Vous aussi, partagez votre parcours ou contribuez à Les Tisserands."
     cta_button: "＋ Contribuer"
 
 
@@ -125,7 +125,7 @@ fr:
     back: "← Retour aux trajectoires"
 
   contribution_form:
-    page_title: "Nouveau partage — la Ruche"
+    page_title: "Nouveau partage — Les Tisserands"
     back: "← Retour"
     title: "Proposer une ressource"
     intro: "Partagez un bon plan, un cours, un événement ou un témoignage avec la communauté. Votre proposition sera relue avant mise en ligne."

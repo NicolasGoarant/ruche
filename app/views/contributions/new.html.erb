@@ -1,43 +1,32 @@
 <% content_for :nav_active, 'contribuer' %>
 <% content_for :title, t('contribution_form.page_title') %>
-
 <% content_for :styles do %>
   <style>
-    /* === CONTRIBUTION FORM STYLES === */
-
     .form-container {
       max-width: 700px;
       margin: 3rem auto;
       padding: 0 2rem;
     }
-
     .back-link {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      color: var(--color-text-muted);
+      color: var(--color-dark);
       text-decoration: none;
       font-size: 0.9rem;
       margin-bottom: 2rem;
       transition: color 0.2s;
     }
-
-    .back-link:hover {
-      color: var(--color-primary);
-    }
-
-    .form-container h1 {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--color-dark);
-      margin-bottom: 0.5rem;
-    }
+    .back-link:hover { color: var(--color-primary); }
 
     .intro {
-      color: var(--color-text-muted);
-      font-size: 1rem;
+      color: var(--color-dark);
+      font-size: 1.15rem;
       margin-bottom: 2.5rem;
+      background: #FFF8E7;
+      padding: 1.2rem 1.5rem;
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--color-primary);
       line-height: 1.6;
     }
 
@@ -47,8 +36,12 @@
       border-radius: var(--radius-md);
       padding: 2rem;
       margin-bottom: 2rem;
+      transition: border-color 0.3s;
     }
-
+    .form-section.highlight {
+      border-color: var(--color-primary-hover);
+      box-shadow: 0 0 0 3px rgba(245, 168, 0, 0.15);
+    }
     .form-section h2 {
       font-family: var(--font-display);
       font-size: 1.3rem;
@@ -61,9 +54,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
-      margin-bottom: 2rem;
     }
-
     .type-option {
       padding: 1.2rem;
       border: 2px solid var(--color-border);
@@ -72,34 +63,22 @@
       transition: all 0.2s;
       text-align: center;
     }
-
     .type-option:hover {
       border-color: var(--color-primary);
       background: #FFF8E7;
     }
-
     .type-option.selected {
       border-color: var(--color-primary);
       background: #FFF8E7;
       border-width: 3px;
     }
-
-    .type-option .emoji {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .type-option .label {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--color-dark);
-    }
+    .type-option .emoji { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+    .type-option .label { font-weight: 600; font-size: 0.95rem; color: var(--color-dark); }
 
     .form-group {
       margin-bottom: 1.5rem;
     }
-
+    .form-group:last-child { margin-bottom: 0; }
     .form-group label {
       display: block;
       font-weight: 600;
@@ -107,13 +86,11 @@
       color: var(--color-dark);
       font-size: 0.95rem;
     }
-
-    .form-group label .required {
-      color: var(--color-primary-hover);
-    }
+    .form-group label .required { color: var(--color-primary-hover); }
 
     .form-group input[type="text"],
     .form-group input[type="email"],
+    .form-group input[type="tel"],
     .form-group input[type="url"],
     .form-group textarea {
       width: 100%;
@@ -124,22 +101,46 @@
       font-size: 0.95rem;
       transition: border-color 0.2s;
     }
-
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
       border-color: var(--color-primary);
     }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
 
     .hint {
       font-size: 0.85rem;
       color: var(--color-text-light);
       margin-top: 0.3rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .flag-picker {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .flag-btn {
+      font-size: 1.5rem;
+      padding: 0.4rem 0.5rem;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+    .flag-btn:hover { border-color: var(--color-primary); background: #FFF8E7; }
+    .flag-btn.selected {
+      border-color: var(--color-primary);
+      background: #FFF8E7;
+      border-width: 3px;
     }
 
     .file-upload-zone {
@@ -152,23 +153,13 @@
       cursor: pointer;
       display: block;
     }
-
     .file-upload-zone:hover,
     .file-upload-zone.dragover {
       border-color: var(--color-primary);
       background: #FFF8E7;
     }
-
-    .upload-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .upload-text {
-      font-weight: 600;
-      color: var(--color-dark);
-      margin-bottom: 0.5rem;
-    }
+    .upload-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .upload-text { font-weight: 600; color: var(--color-dark); margin-bottom: 0.5rem; }
 
     .preview-grid {
       display: grid;
@@ -176,7 +167,6 @@
       gap: 1rem;
       margin-top: 1rem;
     }
-
     .preview-item {
       position: relative;
       aspect-ratio: 1;
@@ -184,23 +174,15 @@
       overflow: hidden;
       border: 2px solid var(--color-border);
     }
-
-    .preview-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
+    .preview-item img { width: 100%; height: 100%; object-fit: cover; }
     .remove-photo {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 5px; right: 5px;
       background: rgba(0,0,0,0.7);
       color: white;
       border: none;
       border-radius: 50%;
-      width: 24px;
-      height: 24px;
+      width: 24px; height: 24px;
       cursor: pointer;
       font-size: 16px;
       line-height: 1;
@@ -219,85 +201,87 @@
       transition: all 0.2s;
       font-family: var(--font-display);
     }
-
     .submit-btn:hover {
       background: var(--color-primary-hover);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(245, 168, 0, 0.3);
     }
 
-    .submit-btn:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-      transform: none;
-    }
-
     @media (max-width: 640px) {
-      .type-selector {
-        grid-template-columns: 1fr;
-      }
+      .type-selector { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
     }
   </style>
 <% end %>
 
 <div class="form-container">
-  <a href="<%= root_path %>" class="back-link"><%= t('contribution_form.back') %></a>
+  <a href="<%= root_path %>" class="back-link"><%= t('contribution_form.back', default: '← Retour') %></a>
+  <p class="intro"><%= t('contribution_form.intro', default: "Partagez un bon plan, un cours, un événement ou un témoignage avec la communauté. Votre proposition sera relue avant mise en ligne.") %></p>
 
-  <h1><%= t('contribution_form.title') %></h1>
-  <p class="intro"><%= t('contribution_form.intro') %></p>
+  <%= form_with model: @contribution, local: true, multipart: true, id: 'contribution-form' do |f| %>
 
-  <%= form_with model: @contribution, local: true, multipart: true do |f| %>
-    <div class="form-section">
-      <h2><%= t('contribution_form.type_title') %> <span class="required"><%= t('contribution_form.required') %></span></h2>
-
+    <!-- TYPE -->
+    <div class="form-section" id="section-type">
+      <h2><%= t('contribution_form.type_title', default: 'Que proposes-tu ?') %> <span class="required">*</span></h2>
       <div class="type-selector">
         <div class="type-option" data-type="fle">
           <span class="emoji">📚</span>
-          <span class="label"><%= t('contribution_form.type_fle') %></span>
+          <span class="label"><%= t('contribution_form.type_fle', default: 'Cours de FLE') %></span>
         </div>
         <div class="type-option" data-type="event">
           <span class="emoji">🎉</span>
-          <span class="label"><%= t('contribution_form.type_event') %></span>
+          <span class="label"><%= t('contribution_form.type_event', default: 'Convivialité') %></span>
         </div>
         <div class="type-option" data-type="enterprise">
           <span class="emoji">🚀</span>
-          <span class="label"><%= t('contribution_form.type_enterprise') %></span>
+          <span class="label"><%= t('contribution_form.type_enterprise', default: 'Entrepreneuriat') %></span>
         </div>
         <div class="type-option" data-type="portrait">
           <span class="emoji">✨</span>
-          <span class="label"><%= t('contribution_form.type_portrait') %></span>
+          <span class="label"><%= t('contribution_form.type_portrait', default: 'Témoignage') %></span>
         </div>
       </div>
-
       <%= f.hidden_field :contribution_type, id: 'contribution_type' %>
     </div>
 
-    <div class="form-section">
-      <h2><%= t('contribution_form.info_title') %></h2>
-
+    <!-- INFOS -->
+    <div class="form-section" id="section-info">
+      <h2><%= t('contribution_form.info_title', default: 'Informations') %></h2>
       <div class="form-group">
         <label><%= t('contribution_form.label_title', default: 'Titre') %> <span class="required">*</span></label>
-        <%= f.text_field :title, placeholder: t('contribution_form.placeholder_title'), required: true %>
+        <%= f.text_field :title, placeholder: t('contribution_form.placeholder_title', default: 'Ex : Cours de français gratuit le mardi'), required: true %>
       </div>
-
       <div class="form-group">
         <label><%= t('contribution_form.label_description', default: 'Description') %> <span class="required">*</span></label>
-        <%= f.text_area :description, placeholder: t('contribution_form.placeholder_description'), required: true %>
-        <p class="hint"><%= t('contribution_form.hint_description') %></p>
+        <%= f.text_area :description, placeholder: t('contribution_form.placeholder_description', default: 'Décrivez la ressource en quelques phrases...'), required: true %>
+        <p class="hint"><%= t('contribution_form.hint_description', default: 'Soyez précis : lieu, horaires, conditions d\'accès...') %></p>
       </div>
-
       <div class="form-group">
         <label><%= t('contribution_form.label_address', default: 'Adresse complète') %> <span class="required">*</span></label>
-        <%= f.text_field :location, placeholder: t('contribution_form.placeholder_address'), required: true %>
-        <p class="hint"><%= t('contribution_form.hint_address') %></p>
+        <%= f.text_field :location, placeholder: t('contribution_form.placeholder_address', default: 'Ex : 3 rue de la Paix, 54000 Nancy'), required: true %>
+        <p class="hint"><%= t('contribution_form.hint_address', default: "L'adresse sera géolocalisée sur la carte") %></p>
       </div>
-
-      <div class="form-group">
-        <label><%= t('contribution_form.label_contact') %></label>
-        <%= f.text_field :contact_info, placeholder: t('contribution_form.placeholder_contact', default: 'Ex: contact@exemple.fr ou 06 12 34 56 78') %>
-        <p class="hint"><%= t('contribution_form.hint_contact') %></p>
     </div>
-    <div class="form-section">
+
+    <!-- CONTACT -->
+    <div class="form-section" id="section-contact">
+      <h2><%= t('contribution_form.contact_title', default: 'Comment te joindre ?') %></h2>
+      <div class="contact-grid">
+        <div class="form-group">
+          <label>📧 <%= t('contribution_form.label_email', default: 'Courriel') %></label>
+          <input type="email" id="contact-email" placeholder="<%= t('contribution_form.placeholder_email', default: 'Ex : contact@exemple.fr') %>">
+        </div>
+        <div class="form-group">
+          <label>📱 <%= t('contribution_form.label_phone', default: 'Téléphone') %></label>
+          <input type="tel" id="contact-phone" placeholder="<%= t('contribution_form.placeholder_phone', default: 'Ex : 06 12 34 56 78') %>">
+        </div>
+      </div>
+      <%= f.hidden_field :contact_info, id: 'contact_info_hidden' %>
+      <p class="hint"><%= t('contribution_form.hint_contact', default: 'Optionnel — sera visible publiquement') %></p>
+    </div>
+
+    <!-- PHOTOS -->
+    <div class="form-section" id="section-photos">
       <h2><%= t('contribution_form.photos_title', default: 'Photos') %></h2>
       <div class="form-group">
         <label for="file-input" class="file-upload-zone" id="upload-zone">
@@ -309,46 +293,83 @@
         <div id="preview-container" class="preview-grid" style="display: none;"></div>
       </div>
     </div>
-    <div class="form-section">
+
+    <!-- SIGNATURE -->
+    <div class="form-section" id="section-signature">
+      <h2><%= t('contribution_form.signature_title', default: 'Qui es-tu ?') %></h2>
+      <div class="form-group">
+        <label><%= t('contribution_form.label_name', default: 'Ton nom ou pseudo') %></label>
+        <%= f.text_field :author_name, placeholder: t('contribution_form.placeholder_name', default: 'Ex : Marie L.') %>
+        <p class="hint"><%= t('contribution_form.hint_name', default: 'Optionnel — tu peux rester anonyme') %></p>
+      </div>
+      <div class="form-group">
+        <label><%= t('contribution_form.label_flag', default: 'Ton drapeau') %></label>
+        <%= f.hidden_field :author_flag, id: 'author_flag_hidden' %>
+        <div class="flag-picker" id="flag-picker">
+          <button type="button" class="flag-btn" data-flag="🌍">🌍</button>
+          <button type="button" class="flag-btn" data-flag="🇫🇷">🇫🇷</button>
+          <button type="button" class="flag-btn" data-flag="🇬🇧">🇬🇧</button>
+          <button type="button" class="flag-btn" data-flag="🇺🇦">🇺🇦</button>
+          <button type="button" class="flag-btn" data-flag="🇸🇾">🇸🇾</button>
+          <button type="button" class="flag-btn" data-flag="🇦🇫">🇦🇫</button>
+          <button type="button" class="flag-btn" data-flag="🇲🇦">🇲🇦</button>
+          <button type="button" class="flag-btn" data-flag="🇨🇩">🇨🇩</button>
+          <button type="button" class="flag-btn" data-flag="🇪🇸">🇪🇸</button>
+          <button type="button" class="flag-btn" data-flag="🇹🇷">🇹🇷</button>
+          <button type="button" class="flag-btn" data-flag="🇩🇿">🇩🇿</button>
+          <button type="button" class="flag-btn" data-flag="🇪🇷">🇪🇷</button>
+        </div>
+      </div>
     </div>
 
-    <div class="form-section">
-      <h2><%= t('contribution_form.signature_title') %></h2>
-
-      <div class="form-group">
-        <label><%= t('contribution_form.label_name') %></label>
-        <%= f.text_field :author_name, placeholder: t('contribution_form.placeholder_name') %>
-        <p class="hint"><%= t('contribution_form.hint_name') %></p>
-      </div>
-
-      <div class="form-group">
-        <label><%= t('contribution_form.label_flag') %></label>
-        <%= f.text_field :author_flag, placeholder: '🇫🇷', maxlength: 2 %>
-        <p class="hint">Ex: 🇫🇷 🇺🇦 🇸🇾 🇲🇦 🇨🇩</p>
-      </div>
-    </div>
-
-    <%= f.submit t('contribution_form.submit'), class: 'submit-btn', id: 'submit-btn', disabled: true %>
+    <%= f.submit t('contribution_form.submit', default: 'Envoyer ma proposition'), class: 'submit-btn', id: 'submit-btn' %>
   <% end %>
 </div>
 
 <% content_for :scripts do %>
   <script>
-    // Type selector
+    // === TYPE SELECTOR ===
     const typeOptions = document.querySelectorAll('.type-option');
     const typeInput = document.getElementById('contribution_type');
-    const submitBtn = document.getElementById('submit-btn');
 
     typeOptions.forEach(option => {
       option.addEventListener('click', () => {
         typeOptions.forEach(opt => opt.classList.remove('selected'));
         option.classList.add('selected');
         typeInput.value = option.dataset.type;
-        submitBtn.disabled = false;
       });
     });
 
-    // Photo upload
+    // === FLAG PICKER ===
+    const flagBtns = document.querySelectorAll('.flag-btn');
+    const flagInput = document.getElementById('author_flag_hidden');
+    // Default
+    flagInput.value = '🌍';
+    document.querySelector('.flag-btn[data-flag="🌍"]').classList.add('selected');
+
+    flagBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        flagBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        flagInput.value = btn.dataset.flag;
+      });
+    });
+
+    // === CONTACT MERGE ===
+    const emailInput = document.getElementById('contact-email');
+    const phoneInput = document.getElementById('contact-phone');
+    const contactHidden = document.getElementById('contact_info_hidden');
+
+    function mergeContact() {
+      const parts = [];
+      if (emailInput.value.trim()) parts.push(emailInput.value.trim());
+      if (phoneInput.value.trim()) parts.push(phoneInput.value.trim());
+      contactHidden.value = parts.join(' · ');
+    }
+    emailInput.addEventListener('input', mergeContact);
+    phoneInput.addEventListener('input', mergeContact);
+
+    // === PHOTO UPLOAD ===
     const fileInput = document.getElementById('file-input');
     const uploadZone = document.getElementById('upload-zone');
     const previewContainer = document.getElementById('preview-container');
@@ -359,11 +380,7 @@
       e.preventDefault();
       uploadZone.classList.add('dragover');
     });
-
-    uploadZone.addEventListener('dragleave', () => {
-      uploadZone.classList.remove('dragover');
-    });
-
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
     uploadZone.addEventListener('drop', (e) => {
       e.preventDefault();
       uploadZone.classList.remove('dragover');
@@ -374,20 +391,15 @@
     function handleFiles() {
       const files = Array.from(fileInput.files);
       if (files.length === 0) return;
-
       previewContainer.style.display = 'grid';
       previewContainer.innerHTML = '';
-
-      files.forEach((file, index) => {
+      files.slice(0, 5).forEach((file, index) => {
         if (file.type.startsWith('image/')) {
           const reader = new FileReader();
           reader.onload = (e) => {
             const preview = document.createElement('div');
             preview.className = 'preview-item';
-            preview.innerHTML = `
-              <img src="${e.target.result}" alt="Preview ${index + 1}">
-              <button type="button" class="remove-photo" data-index="${index}">×</button>
-            `;
+            preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview"><button type="button" class="remove-photo" data-index="' + index + '">×</button>';
             previewContainer.appendChild(preview);
           };
           reader.readAsDataURL(file);
@@ -399,16 +411,56 @@
       if (e.target.classList.contains('remove-photo')) {
         const index = parseInt(e.target.dataset.index);
         const dt = new DataTransfer();
-        const files = Array.from(fileInput.files);
-        files.forEach((file, i) => {
+        Array.from(fileInput.files).forEach((file, i) => {
           if (i !== index) dt.items.add(file);
         });
         fileInput.files = dt.files;
         handleFiles();
-        if (dt.files.length === 0) {
-          previewContainer.style.display = 'none';
-        }
+        if (dt.files.length === 0) previewContainer.style.display = 'none';
       }
     });
+
+    // === FORM VALIDATION — scroll to first incomplete section ===
+    document.getElementById('contribution-form').addEventListener('submit', function(e) {
+      // Check type
+      if (!typeInput.value) {
+        e.preventDefault();
+        scrollToSection('section-type');
+        return;
+      }
+      // Check required fields
+      const title = document.querySelector('input[name="contribution[title]"]');
+      const desc = document.querySelector('textarea[name="contribution[description]"]');
+      const loc = document.querySelector('input[name="contribution[location]"]');
+
+      if (!title.value.trim()) {
+        e.preventDefault();
+        scrollToSection('section-info');
+        title.focus();
+        return;
+      }
+      if (!desc.value.trim()) {
+        e.preventDefault();
+        scrollToSection('section-info');
+        desc.focus();
+        return;
+      }
+      if (!loc.value.trim()) {
+        e.preventDefault();
+        scrollToSection('section-info');
+        loc.focus();
+        return;
+      }
+
+      // Merge contact before submit
+      mergeContact();
+    });
+
+    function scrollToSection(id) {
+      const section = document.getElementById(id);
+      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      section.classList.add('highlight');
+      setTimeout(() => section.classList.remove('highlight'), 2000);
+    }
   </script>
 <% end %>

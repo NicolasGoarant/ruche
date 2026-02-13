@@ -20,6 +20,8 @@ class Contribution < ApplicationRecord
   validates :author_name, presence: true
 
   # Type configuration
+  TYPES = %w[fle event enterprise portrait rights].freeze
+
   TYPE_CONFIG = {
     'fle'        => { emoji: '📚', color: '#3A7A5A', label: 'Cours de FLE' },
     'event'      => { emoji: '🎉', color: '#6A3A9A', label: 'Convivialité' },

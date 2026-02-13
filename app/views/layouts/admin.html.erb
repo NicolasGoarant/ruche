@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - la Ruche</title>
+  <title>Admin - Les Tisserands</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -229,8 +229,8 @@
 
 <aside class="sidebar">
   <div class="logo">
-    <span style="font-size: 1.8rem;">🐝</span>
-    <span class="logo-text">la Ruche</span>
+    <span style="font-size: 1.8rem;">🧵</span>
+    <span class="logo-text">Les Tisserands</span>
     <span class="admin-badge">ADMIN</span>
   </div>
   
@@ -246,7 +246,7 @@
 
     <li class="nav-item">
       <%= link_to admin_contributions_path, class: "nav-link #{controller_name == 'contributions' && action_name == 'index' ? 'active' : ''}" do %>
-        <span class="nav-icon">🐝</span>
+        <span class="nav-icon">🧵</span>
         <span>Partages</span>
       <% end %>
     </li>
