@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins
 
-  scope "(:locale)", locale: /fr|en|ar|uk|prs|es/ do
+  scope "(:locale)", locale: /fr|en|ar|uk|prs|es|de/ do
     root "pages#home"
 
     get "droits", to: "pages#droits"

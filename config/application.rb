@@ -24,7 +24,7 @@ module Ruche
     config.load_defaults 7.2
 
     # i18n — langues disponibles et locale par défaut
-    config.i18n.available_locales = [:fr, :en, :ar, :uk, :prs, :es]
+    config.i18n.available_locales = [:fr, :en, :ar, :uk, :prs, :es, :de]
     config.i18n.default_locale = :fr
     config.i18n.fallbacks = true
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]

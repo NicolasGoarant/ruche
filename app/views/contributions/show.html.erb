@@ -1,15 +1,13 @@
 <% content_for :title, "#{@contribution.translated_title} — Les Tisserands" %>
 
 <% content_for :styles do %>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    /* === CONTRIBUTION SHOW STYLES === */
-
     .show-container {
       max-width: 800px;
       margin: 3rem auto;
       padding: 0 2rem;
     }
-
     .back-link {
       display: inline-flex;
       align-items: center;
@@ -20,10 +18,7 @@
       margin-bottom: 2rem;
       transition: color 0.2s;
     }
-
-    .back-link:hover {
-      color: var(--color-primary);
-    }
+    .back-link:hover { color: var(--color-primary); }
 
     .hero-image {
       width: 100%;
@@ -32,7 +27,6 @@
       border-radius: var(--radius-md);
       margin-bottom: 2rem;
     }
-
     .type-badge {
       display: inline-flex;
       align-items: center;
@@ -43,7 +37,6 @@
       font-weight: 600;
       margin-bottom: 1.5rem;
     }
-
     .badge-fle { background: #E4F3EC; color: #3A7A5A; }
     .badge-event { background: #E4EEF8; color: #1A5B9A; }
     .badge-enterprise { background: #FBE9E0; color: #C45A2A; }
@@ -58,7 +51,6 @@
       line-height: 1.2;
       margin-bottom: 1.5rem;
     }
-
     .meta {
       display: flex;
       gap: 1.5rem;
@@ -70,51 +62,92 @@
       font-size: 0.9rem;
       color: var(--color-text-muted);
     }
-
     .meta-item {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-
     .content {
       font-size: 1.05rem;
       line-height: 1.8;
       color: #333;
       margin-bottom: 2rem;
     }
-
     .contact-box {
       background: #FFF8E7;
       border: 2px solid var(--color-primary);
       border-radius: var(--radius-md);
       padding: 1.5rem;
-      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
-
     .contact-box h3 {
       font-family: var(--font-display);
       font-size: 1.2rem;
       margin-bottom: 0.8rem;
       color: var(--color-dark);
     }
-
     .contact-box p {
       font-size: 0.95rem;
       color: var(--color-text-muted);
       margin-bottom: 0.5rem;
     }
-
     .contact-info {
       font-size: 1.05rem;
       color: var(--color-primary-hover);
       font-weight: 600;
     }
+
+    /* MINI MAP */
+    .map-section-show {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    .map-section-show h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--color-dark);
+    }
+    #show-map {
+      height: 300px;
+      width: 100%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border: 1px solid var(--color-border);
+    }
+    .directions-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      color: var(--color-primary-hover);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .directions-link:hover { color: var(--color-primary); }
+
+    /* PHOTOS */
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .photos-grid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+    }
   </style>
 <% end %>
 
 <div class="show-container">
-  <a href="<%= root_path %>" class="back-link"><%= t('contribution_show.back') %></a>
+  <a href="<%= contributions_path %>" class="back-link"><%= t('contribution_show.back') %></a>
 
   <% if @contribution.image_url.present? %>
     <img src="<%= @contribution.image_url %>" alt="<%= @contribution.translated_title %>" class="hero-image">
@@ -145,6 +178,15 @@
     <%= simple_format(@contribution.translated_description) %>
   </div>
 
+  <% if @contribution.photos.attached? %>
+    <h3 style="font-family: var(--font-display); margin-bottom: 1rem;"><%= t('contribution_show.photos', default: '📸 Photos') %></h3>
+    <div class="photos-grid">
+      <% @contribution.photos.each do |photo| %>
+        <img src="<%= url_for(photo) %>" alt="Photo">
+      <% end %>
+    </div>
+  <% end %>
+
   <% if @contribution.contact_info.present? %>
     <div class="contact-box">
       <h3><%= t('contribution_show.contact_title') %></h3>
@@ -152,4 +194,43 @@
       <div class="contact-info"><%= @contribution.contact_info %></div>
     </div>
   <% end %>
+
+  <% if @contribution.latitude.present? && @contribution.longitude.present? %>
+    <div class="map-section-show">
+      <h3>📍 <%= t('contribution_show.location_title', default: 'Localisation') %></h3>
+      <div id="show-map"></div>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=<%= @contribution.latitude %>,<%= @contribution.longitude %>"
+         target="_blank" rel="noopener" class="directions-link">
+        🧭 <%= t('contribution_show.directions', default: "S'y rendre (Google Maps)") %>
+      </a>
+    </div>
+  <% end %>
 </div>
+
+<% if @contribution.latitude.present? && @contribution.longitude.present? %>
+  <% content_for :scripts do %>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      var lat = <%= @contribution.latitude %>;
+      var lng = <%= @contribution.longitude %>;
+      var map = L.map('show-map', { scrollWheelZoom: false }).setView([lat, lng], 15);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap',
+        maxZoom: 19
+      }).addTo(map);
+
+      var icon = L.divIcon({
+        html: '<div style="width:42px;height:42px;border-radius:50%;background:<%= @contribution.type_color %>;display:flex;align-items:center;justify-content:center;border:3px solid white;box-shadow:0 3px 10px rgba(0,0,0,0.25);font-size:20px;"><%= @contribution.type_emoji %></div>',
+        iconSize: [42, 42],
+        iconAnchor: [21, 42],
+        className: ''
+      });
+
+      L.marker([lat, lng], { icon: icon })
+        .addTo(map)
+        .bindPopup('<strong><%= j @contribution.translated_title %></strong><br><%= j @contribution.location %>')
+        .openPopup();
+    </script>
+  <% end %>
+<% end %>
