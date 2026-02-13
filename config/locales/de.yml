@@ -156,3 +156,23 @@ de:
     location: "Standort"
     cta_text: "Auch Sie können Ihren Lebensweg teilen oder zum Gewebe beitragen."
     cta_button: "＋ Teilen"
+
+
+
+
+  bidar_quote:
+    text: "\"Konzentrieren Sie sich zum Beispiel auf das fließende Wasser. Der bescheidenste Bach genügt. Sehen Sie, mit welchem Einfallsreichtum und welcher Ausdauer dieser kleine Schlaukopf seinen gewundenen Weg trotz aller kleinen und großen Hindernisse fortsetzt.\""
+  hero:
+    assistant_placeholder: "Stellen Sie hier Ihre Rechtsfrage..."
+    assistant_btn: "Frage stellen"
+  needs:
+    title: "Ich suche..."
+    subtitle: "Direkter Zugang zu den Ressourcen, die Sie brauchen"
+    fle: "Französisch lernen"
+    fle_sub: "Französischkurse, Tandems, Workshops"
+    rights: "meine Rechte verstehen"
+    rights_sub: "Asyl, Aufenthaltstitel, Arbeit"
+    enterprise: "ein Unternehmen gründen"
+    enterprise_sub: "Begleitung, Finanzierung"
+    community: "Leute treffen"
+    community_sub: "Veranstaltungen, Essen, Austausch"

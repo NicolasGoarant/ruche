@@ -142,3 +142,21 @@ en:
 
   portrait_show:
     back: "← Back to journeys"
+
+
+  bidar_quote:
+    text: "\"Focus for example on the flowing water. The most modest stream will do. See with what ingenuity and perseverance this little clever one pursues its winding path despite all obstacles large and small.\""
+  hero:
+    assistant_placeholder: "Ask your legal question here..."
+    assistant_btn: "Ask my question"
+  needs:
+    title: "I'm looking for..."
+    subtitle: "Access the resources you need directly"
+    fle: "learn French"
+    fle_sub: "French courses, tandems, workshops"
+    rights: "understand my rights"
+    rights_sub: "Asylum, residency, work permits"
+    enterprise: "start a business"
+    enterprise_sub: "Support, funding"
+    community: "meet people"
+    community_sub: "Events, meals, exchanges"

@@ -156,3 +156,20 @@ fr:
     hint_name: "Optionnel — vous pouvez rester anonyme"
     label_flag: "Votre drapeau"
     submit: "Envoyer ma proposition"
+
+  bidar_quote:
+    text: "« Concentrez-vous par exemple sur l'eau qui coule. Le plus modeste ruisseau suffira. Voyez avec quelle ingéniosité et persévérance ce petit malin poursuit sa route sinueuse malgré tous les empêchements petits et grands. »"
+  hero:
+    assistant_placeholder: "Posez votre question juridique ici..."
+    assistant_btn: "Poser ma question"
+  needs:
+    title: "Je cherche à..."
+    subtitle: "Accédez directement aux ressources dont vous avez besoin"
+    fle: "apprendre le français"
+    fle_sub: "Cours de FLE, tandems, ateliers"
+    rights: "comprendre mes droits"
+    rights_sub: "Asile, titres de séjour, travail"
+    enterprise: "créer mon entreprise"
+    enterprise_sub: "Accompagnement, financement"
+    community: "organiser des rencontres"
+    community_sub: "Événements, repas, échanges"
