@@ -1,6 +1,6 @@
 class ContributionsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create]
-  layout false, only: [:show, :new]
+  # CSRF token is now included via the layout's meta tags
+  # No need to skip verify_authenticity_token
 
   def index
     @contributions = Contribution.published
@@ -21,13 +21,12 @@ class ContributionsController < ApplicationController
     @contribution = Contribution.new(contribution_params)
 
     if @contribution.save
-      # Envoyer l'email à l'admin
       ContributionMailer.new_contribution(@contribution).deliver_now
-      
+
       respond_to do |format|
-        format.html { 
-          redirect_to root_path, 
-          notice: '🐝 Contribution bien reçue ! Nous l\'analysons et la mettons en ligne d\'ici demain. Merci à vous — L\'équipe de la Ruche' 
+        format.html {
+          redirect_to root_path,
+          notice: "🐝 Contribution bien reçue ! Nous l'analysons et la mettons en ligne d'ici demain. Merci à vous — L'équipe de la Ruche"
         }
         format.json { render json: @contribution, status: :created }
       end
@@ -44,25 +43,21 @@ class ContributionsController < ApplicationController
   end
 
   def map_data
-    contributions = Contribution.published
-                                 .where.not(latitude: nil, longitude: nil)
-                                 .by_type(params[:type])
+    contributions = Contribution.published.where.not(latitude: nil)
 
     render json: contributions.map { |c|
       {
         id: c.id,
-        type: c.contribution_type,
-        title: c.title,
-        description: c.description,
-        location: c.location,
+        title: c.translated_title,
+        description: c.translated_description,
         latitude: c.latitude,
         longitude: c.longitude,
+        type: c.contribution_type,
         emoji: c.type_emoji,
         color: c.type_color,
-        author: c.author_name,
-        flag: c.author_flag,
         image_url: c.main_photo_url,
-        contributed: true
+        author: "#{c.author_flag} #{c.author_name}",
+        location: c.location
       }
     }
   end
@@ -78,8 +73,7 @@ class ContributionsController < ApplicationController
       :contact_info,
       :author_name,
       :author_flag,
-      :image_url,
-      photos: []
+      :image_url, photos: [],
     )
   end
 end

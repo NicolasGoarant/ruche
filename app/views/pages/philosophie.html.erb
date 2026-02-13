@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="<%= I18n.locale %>" dir="<%= %i[ar prs].include?(I18n.locale) ? 'rtl' : 'ltr' %>">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= t('philosophie.page_title') %></title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,800;1,400;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<% content_for :nav_active, 'philosophie' %>
+<% content_for :title, t('philosophie.page_title') %>
 
+<% content_for :styles do %>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* === PHILOSOPHIE-SPECIFIC STYLES === */
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #fafafa;
-      color: #1a1814;
-    }
-
-    /* HERO PHILOSOPHIE */
+    /* HERO */
     .hero-philo {
-      background: #0F0E0A;
+      background: var(--color-dark);
       padding: 5rem 2rem 4rem;
       text-align: center;
       position: relative;
@@ -27,17 +17,15 @@
     .hero-philo::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -20%;
-      width: 140%;
-      height: 200%;
+      top: -50%; left: -20%;
+      width: 140%; height: 200%;
       background: radial-gradient(ellipse at 30% 50%, rgba(245, 168, 0, 0.06) 0%, transparent 60%),
                   radial-gradient(ellipse at 70% 50%, rgba(196, 90, 42, 0.04) 0%, transparent 60%);
       pointer-events: none;
     }
 
     .hero-philo h1 {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: clamp(2.5rem, 5vw, 3.5rem);
       font-weight: 800;
       color: white;
@@ -50,7 +38,7 @@
     }
 
     .hero-philo em {
-      color: #F5A800;
+      color: var(--color-primary);
       font-style: italic;
     }
 
@@ -63,13 +51,6 @@
       position: relative;
     }
 
-    /* SECTION COMMUNE */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
     /* MANIFESTE */
     .manifeste {
       padding: 5rem 0;
@@ -77,7 +58,7 @@
     }
 
     .manifeste-intro {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 1.5rem;
       font-weight: 400;
       line-height: 1.7;
@@ -91,9 +72,9 @@
 
     .manifeste-intro::before {
       content: '"';
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 5rem;
-      color: #F5A800;
+      color: var(--color-primary);
       position: absolute;
       top: -2rem;
       left: 50%;
@@ -103,17 +84,15 @@
     }
 
     .manifeste-body h2 {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 1.8rem;
       font-weight: 800;
-      color: #0F0E0A;
+      color: var(--color-dark);
       margin-bottom: 1rem;
       margin-top: 3rem;
     }
 
-    .manifeste-body h2:first-child {
-      margin-top: 0;
-    }
+    .manifeste-body h2:first-child { margin-top: 0; }
 
     .manifeste-body p {
       font-size: 1.05rem;
@@ -125,7 +104,7 @@
     .accent-line {
       width: 60px;
       height: 4px;
-      background: #F5A800;
+      background: var(--color-primary);
       border-radius: 2px;
       margin: 2.5rem 0;
     }
@@ -133,20 +112,23 @@
     /* VALEURS */
     .valeurs-section {
       padding: 5rem 0;
-      background: #f5f5f5;
+      background: var(--color-bg-alt);
     }
 
-    .valeurs-section .section-title {
-      font-family: 'Fraunces', serif;
+    .valeurs-section .section-title,
+    .pour-qui .section-title,
+    .cta-section h2 {
+      font-family: var(--font-display);
       font-size: 2.2rem;
       font-weight: 800;
       text-align: center;
       margin-bottom: 0.5rem;
     }
 
-    .valeurs-section .section-subtitle {
+    .valeurs-section .section-subtitle,
+    .pour-qui .section-subtitle {
       text-align: center;
-      color: #666;
+      color: var(--color-text-muted);
       margin-bottom: 3rem;
     }
 
@@ -161,9 +143,9 @@
 
     .valeur-card {
       background: white;
-      border-radius: 16px;
+      border-radius: var(--radius-lg);
       padding: 2rem;
-      border: 1px solid #e0e0e0;
+      border: 1px solid var(--color-border);
       transition: all 0.3s;
       position: relative;
       overflow: hidden;
@@ -172,11 +154,9 @@
     .valeur-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 4px;
-      background: var(--card-accent, #F5A800);
+      background: var(--card-accent, var(--color-primary));
     }
 
     .valeur-card:hover {
@@ -191,10 +171,10 @@
     }
 
     .valeur-card h3 {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 1.25rem;
       font-weight: 700;
-      color: #0F0E0A;
+      color: var(--color-dark);
       margin-bottom: 0.8rem;
     }
 
@@ -204,7 +184,7 @@
       line-height: 1.7;
     }
 
-    /* SECTION NOM */
+    /* NOM */
     .nom-section {
       padding: 5rem 0;
       background: white;
@@ -217,9 +197,7 @@
       align-items: center;
     }
 
-    .nom-visual {
-      text-align: center;
-    }
+    .nom-visual { text-align: center; }
 
     .ruche-icon {
       font-size: 6rem;
@@ -234,17 +212,17 @@
     }
 
     .ruche-caption {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-style: italic;
-      color: #999;
+      color: var(--color-text-light);
       font-size: 1rem;
     }
 
     .nom-text h2 {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 1.8rem;
       font-weight: 800;
-      color: #0F0E0A;
+      color: var(--color-dark);
       margin-bottom: 1.2rem;
     }
 
@@ -257,14 +235,14 @@
 
     .nom-highlight {
       background: #FFF8E7;
-      border-left: 4px solid #F5A800;
+      border-left: 4px solid var(--color-primary);
       padding: 1.2rem 1.5rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin: 1.5rem 0;
     }
 
     .nom-highlight p {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-style: italic;
       color: #333;
       font-size: 1.1rem;
@@ -274,24 +252,12 @@
     /* POUR QUI */
     .pour-qui {
       padding: 5rem 0;
-      background: #0F0E0A;
+      background: var(--color-dark);
       color: white;
     }
 
-    .pour-qui .section-title {
-      font-family: 'Fraunces', serif;
-      font-size: 2.2rem;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 0.5rem;
-      color: white;
-    }
-
-    .pour-qui .section-subtitle {
-      text-align: center;
-      color: #888;
-      margin-bottom: 3rem;
-    }
+    .pour-qui .section-title { color: white; }
+    .pour-qui .section-subtitle { color: #888; }
 
     .public-grid {
       display: grid;
@@ -304,13 +270,13 @@
 
     .public-card {
       border: 1px solid #333;
-      border-radius: 12px;
+      border-radius: var(--radius-md);
       padding: 1.8rem;
       transition: all 0.3s;
     }
 
     .public-card:hover {
-      border-color: #F5A800;
+      border-color: var(--color-primary);
       background: rgba(245, 168, 0, 0.05);
     }
 
@@ -321,7 +287,7 @@
     }
 
     .public-card h3 {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 1.15rem;
       font-weight: 700;
       margin-bottom: 0.6rem;
@@ -333,23 +299,15 @@
       line-height: 1.6;
     }
 
-    /* CTA */
+    /* CTA SECTION */
     .cta-section {
       padding: 5rem 0;
       background: white;
       text-align: center;
     }
 
-    .cta-section h2 {
-      font-family: 'Fraunces', serif;
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #0F0E0A;
-      margin-bottom: 1rem;
-    }
-
     .cta-section p {
-      color: #666;
+      color: var(--color-text-muted);
       font-size: 1.05rem;
       max-width: 550px;
       margin: 0 auto 2rem;
@@ -363,64 +321,29 @@
       flex-wrap: wrap;
     }
 
-    .cta-primary {
-      background: #F5A800;
-      color: #0F0E0A;
+    .cta-secondary-dark {
+      border: 2px solid var(--color-dark);
+      color: var(--color-dark);
       padding: 0.9rem 2rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.05rem;
-      transition: all 0.2s;
-    }
-
-    .cta-primary:hover { background: #E8920A; }
-
-    .cta-secondary {
-      border: 2px solid #0F0E0A;
-      color: #0F0E0A;
-      padding: 0.9rem 2rem;
-      border-radius: 30px;
+      border-radius: var(--radius-pill);
       text-decoration: none;
       font-weight: 600;
       font-size: 1.05rem;
       transition: all 0.2s;
     }
 
-    .cta-secondary:hover {
-      background: #0F0E0A;
+    .cta-secondary-dark:hover {
+      background: var(--color-dark);
       color: white;
     }
 
-    /* FOOTER */
-    footer {
-      background: #0F0E0A;
-      border-top: 3px solid #F5A800;
-      padding: 2rem;
-      text-align: center;
-      color: #666;
-    }
-
-    footer strong {
-      color: #F5A800;
-      font-family: 'Fraunces', serif;
-      font-size: 1.1rem;
-    }
-
-    footer p {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-    }
-
-    /* RESPONSIVE */
+    /* RESPONSIVE PHILOSOPHIE */
     @media (max-width: 768px) {
       .hero-philo { padding: 3.5rem 1.5rem 3rem; }
       .hero-philo h1 { font-size: 2rem; }
-
       .manifeste { padding: 3rem 0; }
       .manifeste-intro { font-size: 1.2rem; }
       .manifeste-body h2 { font-size: 1.4rem; margin-top: 2rem; }
-
       .valeurs-grid, .public-grid { grid-template-columns: 1fr; }
 
       .nom-grid {
@@ -430,74 +353,65 @@
       .nom-visual { order: -1; }
       .ruche-icon { font-size: 4rem; }
 
-      .valeurs-section, .pour-qui, .cta-section, .nom-section {
-        padding: 3rem 0;
-      }
+      .valeurs-section, .pour-qui, .cta-section, .nom-section { padding: 3rem 0; }
 
       .valeurs-section .section-title,
       .pour-qui .section-title,
-      .cta-section h2 {
-        font-size: 1.8rem;
-      }
+      .cta-section h2 { font-size: 1.8rem; }
     }
   </style>
-</head>
-<body>
-
-<%= render 'shared/navbar', active: 'philosophie' %>
+<% end %>
 
 <!-- HERO -->
 <section class="hero-philo">
-  <h1>Pourquoi <em>la Ruche ?</em></h1>
-  <p>Derrière chaque outil, chaque carte, chaque témoignage, il y a une conviction : personne ne devrait reconstruire sa vie seul.</p>
+  <h1><%= t('philosophie.hero_title_html').html_safe %></h1>
+  <p><%= t('philosophie.hero_subtitle') %></p>
 </section>
 
 <!-- MANIFESTE -->
 <section class="manifeste">
-  <div class="container">
+  <div class="container--narrow">
     <div class="manifeste-intro">
-      En France, des milliers de personnes déplacées cherchent chaque jour à comprendre leurs droits, à apprendre la langue, à créer leur activité. L'information existe, mais elle est dispersée, opaque, souvent inaccessible.
+      <%= t('philosophie.manifeste_intro') %>
     </div>
 
     <div class="accent-line"></div>
 
     <div class="manifeste-body">
       <h2><%= t('philosophie.constat_title') %></h2>
-      <p>Quand on arrive dans un pays dont on ne maîtrise ni la langue ni les codes administratifs, chaque démarche devient un parcours du combattant. Où déposer sa demande d'asile ? Comment faire reconnaître son diplôme ? Qui peut m'aider à monter mon entreprise ? Les réponses existent, mais elles sont éparpillées entre des sites institutionnels, des associations locales, des dispositifs méconnus.</p>
-      <p>Le résultat : des personnes qualifiées, motivées, prêtes à contribuer à la société française, se retrouvent bloquées — non par manque de volonté, mais par manque d'information.</p>
+      <p><%= t('philosophie.constat_p1') %></p>
+      <p><%= t('philosophie.constat_p2') %></p>
 
       <div class="accent-line"></div>
 
       <h2><%= t('philosophie.reponse_title') %></h2>
-      <p>La Ruche rassemble sur une même plateforme tout ce qu'une personne déplacée a besoin de savoir et de trouver pour avancer. Pas un portail institutionnel de plus, pas un énième répertoire figé — un espace vivant, alimenté autant par les professionnels que par la communauté elle-même.</p>
-      <p>Concrètement, la Ruche c'est une carte interactive des ressources près de chez soi, un assistant juridique propulsé par l'intelligence artificielle pour répondre aux questions sur ses droits, un espace où chacun peut partager un cours de français, un événement, un témoignage ou une entreprise créée.</p>
+      <p><%= t('philosophie.reponse_p1') %></p>
+      <p><%= t('philosophie.reponse_p2') %></p>
 
       <div class="accent-line"></div>
 
-      <h2>Une plateforme citoyenne</h2>
-      <p>La Ruche ne se substitue ni aux associations ni aux institutions. Elle les rend visibles. Elle amplifie ce qui existe déjà sur le terrain et comble les trous dans l'information.</p>
-      <p>Et surtout, elle donne la parole aux premiers concernés. Parce que l'intégration ne se décrète pas d'en haut : elle se construit par ceux qui la vivent. Les contributions, les témoignages, les portraits d'entrepreneurs réfugiés — tout cela vient de la communauté, pour la communauté.</p>
+      <h2><%= t('philosophie.citoyenne_title') %></h2>
+      <p><%= t('philosophie.citoyenne_p1') %></p>
+      <p><%= t('philosophie.citoyenne_p2') %></p>
     </div>
   </div>
 </section>
 
 <!-- NOM -->
 <section class="nom-section">
-  <div class="container">
+  <div class="container--narrow">
     <div class="nom-grid">
       <div class="nom-text">
         <h2><%= t('philosophie.nom_title') %></h2>
-        <p>Une ruche, c'est un lieu où chaque individu, aussi petit soit-il, contribue à quelque chose de plus grand que lui. Aucune abeille ne construit seule. C'est le travail collectif, la circulation de l'information, le partage des ressources qui font la force de la colonie.</p>
-
+        <p><%= t('philosophie.nom_p1') %></p>
         <div class="nom-highlight">
-          <p>Nous croyons que l'intégration fonctionne de la même manière : chaque contribution compte, chaque voix enrichit l'ensemble.</p>
+          <p><%= t('philosophie.nom_highlight') %></p>
         </div>
-
-        <p>Un cours de français partagé par un bénévole. Un témoignage d'une ingénieure afghane qui a refait sa vie. Une soirée cuisine ouverte à tous. Chacun de ces gestes, aussi modeste soit-il, renforce le maillage qui permet à d'autres d'avancer.</p>
+        <p><%= t('philosophie.nom_p2') %></p>
       </div>
       <div class="nom-visual">
         <span class="ruche-icon">🐝</span>
-        <span class="ruche-caption">Chaque voix enrichit la ruche.</span>
+        <span class="ruche-caption"><%= t('philosophie.nom_caption') %></span>
       </div>
     </div>
   </div>
@@ -506,43 +420,38 @@
 <!-- VALEURS -->
 <section class="valeurs-section">
   <div class="section-title"><%= t('philosophie.valeurs_title') %></div>
-  <div class="section-subtitle">Ce qui guide chaque décision, chaque fonctionnalité, chaque ligne de code.</div>
+  <div class="section-subtitle"><%= t('philosophie.valeurs_subtitle') %></div>
 
   <div class="valeurs-grid">
     <div class="valeur-card" style="--card-accent: #F5A800;">
       <span class="valeur-emoji">🔓</span>
       <h3><%= t('philosophie.valeur_accessibilite') %></h3>
-      <p>L'information sur les droits ne devrait jamais être un privilège. La Ruche est gratuite, ouverte, et pensée pour être comprise par quelqu'un qui apprend le français.</p>
+      <p><%= t('philosophie.valeur_accessibilite_desc') %></p>
     </div>
-
     <div class="valeur-card" style="--card-accent: #3A7A5A;">
       <span class="valeur-emoji">🤝</span>
       <h3><%= t('philosophie.valeur_horizontalite') %></h3>
-      <p>Pas de hiérarchie entre ceux qui « aident » et ceux qui « sont aidés ». Sur la Ruche, tout le monde peut contribuer, tout le monde peut apprendre.</p>
+      <p><%= t('philosophie.valeur_horizontalite_desc') %></p>
     </div>
-
     <div class="valeur-card" style="--card-accent: #1A5B9A;">
       <span class="valeur-emoji">🏗️</span>
       <h3><%= t('philosophie.valeur_ancrage') %></h3>
-      <p>L'intégration se joue à l'échelle d'un quartier, d'une ville, d'une association. La Ruche géolocalise les ressources pour que l'aide soit concrète, pas abstraite.</p>
+      <p><%= t('philosophie.valeur_ancrage_desc') %></p>
     </div>
-
     <div class="valeur-card" style="--card-accent: #C45A2A;">
       <span class="valeur-emoji">💡</span>
       <h3><%= t('philosophie.valeur_pouvoir') %></h3>
-      <p>Nous ne voulons pas créer de la dépendance. Chaque outil de la Ruche — l'assistant juridique, la carte, les portraits — vise à rendre autonome, pas assisté.</p>
+      <p><%= t('philosophie.valeur_pouvoir_desc') %></p>
     </div>
-
     <div class="valeur-card" style="--card-accent: #6A3A9A;">
       <span class="valeur-emoji">🌍</span>
       <h3><%= t('philosophie.valeur_dignite') %></h3>
-      <p>Les personnes déplacées ne sont pas des « cas ». Ce sont des ingénieurs, des cuisinières, des artistes, des parents. La Ruche montre des trajectoires, pas des statistiques.</p>
+      <p><%= t('philosophie.valeur_dignite_desc') %></p>
     </div>
-
     <div class="valeur-card" style="--card-accent: #0F0E0A;">
       <span class="valeur-emoji">🔧</span>
       <h3><%= t('philosophie.valeur_opensource') %></h3>
-      <p>La Ruche est un projet ouvert. Le code est public, les données sont transparentes. Parce qu'un outil citoyen doit appartenir à tout le monde.</p>
+      <p><%= t('philosophie.valeur_opensource_desc') %></p>
     </div>
   </div>
 </section>
@@ -550,25 +459,23 @@
 <!-- POUR QUI -->
 <section class="pour-qui">
   <div class="section-title"><%= t('philosophie.pour_qui_title') %></div>
-  <div class="section-subtitle">La Ruche s'adresse à toute personne concernée par l'accueil et l'intégration.</div>
+  <div class="section-subtitle"><%= t('philosophie.pour_qui_subtitle') %></div>
 
   <div class="public-grid">
     <div class="public-card">
       <span class="pub-emoji">🧳</span>
-      <h3>Personnes réfugiées et déplacées</h3>
-      <p>Trouvez les informations sur vos droits, les cours de français près de chez vous, les dispositifs d'aide à la création d'entreprise.</p>
+      <h3><%= t('philosophie.audience_refugees') %></h3>
+      <p><%= t('philosophie.audience_refugees_desc') %></p>
     </div>
-
     <div class="public-card">
       <span class="pub-emoji">🏫</span>
-      <h3>Associations et acteurs de terrain</h3>
-      <p>Rendez vos actions visibles. Référencez vos cours, vos événements, vos permanences sur la carte pour toucher ceux qui en ont besoin.</p>
+      <h3><%= t('philosophie.audience_associations') %></h3>
+      <p><%= t('philosophie.audience_associations_desc') %></p>
     </div>
-
     <div class="public-card">
       <span class="pub-emoji">🙋</span>
       <h3><%= t('philosophie.audience_citizens') %></h3>
-      <p>Vous voulez aider mais ne savez pas comment ? Partagez un tandem linguistique, organisez un repas, relayez un témoignage.</p>
+      <p><%= t('philosophie.audience_citizens_desc') %></p>
     </div>
   </div>
 </section>
@@ -576,21 +483,9 @@
 <!-- CTA -->
 <section class="cta-section">
   <h2><%= t('philosophie.cta_title') %></h2>
-  <p>Chaque contribution — qu'elle soit un cours de français, un événement, un témoignage — fait grandir la communauté.</p>
+  <p><%= t('philosophie.cta_subtitle') %></p>
   <div class="cta-buttons">
     <a href="<%= new_contribution_path %>" class="cta-primary"><%= t('philosophie.cta_contribute') %></a>
-    <a href="/" class="cta-secondary">Explorer la carte</a>
+    <a href="<%= root_path %>" class="cta-secondary-dark"><%= t('philosophie.cta_explore') %></a>
   </div>
 </section>
-
-<!-- FOOTER -->
-<footer>
-  <strong>🐝 la Ruche</strong>
-  <p>Plateforme citoyenne à impact social · Projet open-source</p>
-</footer>
-
-<script>
-</script>
-
-</body>
-</html>

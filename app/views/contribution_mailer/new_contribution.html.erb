@@ -138,13 +138,14 @@
     <% if @contribution.photos.attached? %>
       <div style="margin: 20px 0;">
         <strong style="color: #0F0E0A;">📸 Photos (<%= @contribution.photos.count %>) :</strong>
+        <div style="margin-top: 10px;">
+          <% @contribution.photos.each do |photo| %>
+            <img src="<%= url_for(photo) %>" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 10px;">
+          <% end %>
+        </div>
       </div>
-      <div class="photos-grid">
-        <% @contribution.photos.each do |photo| %>
-          <%= image_tag rails_blob_url(photo), class: 'photo-item', alt: 'Photo contribution' %>
-        <% end %>
-      </div>
-    <% elsif @contribution.image_url.present? %>
+    <% end %>
+    <% if @contribution.image_url.present? %>
       <div style="text-align: center; margin: 20px 0;">
         <img src="<%= @contribution.image_url %>" alt="<%= @contribution.title %>" style="max-width: 100%; height: auto; border-radius: 8px;">
       </div>

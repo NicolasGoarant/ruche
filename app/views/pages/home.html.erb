@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html lang="<%= I18n.locale %>" dir="<%= %i[ar prs].include?(I18n.locale) ? 'rtl' : 'ltr' %>">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🐝 Ruche — Ensemble en France</title>
+<% content_for :nav_active, 'home' %>
+<% content_for :title, '🐝 Ruche — Ensemble en France' %>
+
+<% content_for :styles do %>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #fafafa;
-      color: #1a1814;
-    }
+    /* === HOME-SPECIFIC STYLES === */
 
     /* HERO */
     .hero {
-      background: #0F0E0A;
+      background: var(--color-dark);
       padding: 5rem 2rem;
       text-align: center;
       position: relative;
@@ -58,7 +48,7 @@
     }
 
     .hero h1 {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 800;
       color: white;
@@ -67,7 +57,7 @@
     }
 
     .hero em {
-      color: #F5A800;
+      color: var(--color-primary);
       font-style: italic;
     }
 
@@ -84,7 +74,7 @@
       pointer-events: none;
       z-index: 0;
     }
-    .hex-float svg { fill: none; stroke: #F5A800; }
+    .hex-float svg { fill: none; stroke: var(--color-primary); }
     .hex-1 { top: 8%; left: 5%; opacity: 0.35; animation: floatHex 8s ease-in-out infinite; }
     .hex-2 { top: 15%; right: 8%; opacity: 0.25; animation: floatHex 10s ease-in-out infinite 1s; }
     .hex-3 { bottom: 10%; left: 12%; opacity: 0.2; animation: floatHex 12s ease-in-out infinite 2s; }
@@ -103,31 +93,6 @@
       gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
-    }
-    .hero-cta a {
-      padding: 0.8rem 1.8rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-    .cta-primary {
-      background: #F5A800;
-      color: #0F0E0A;
-    }
-    .cta-primary:hover {
-      background: #E8920A;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(245, 168, 0, 0.3);
-    }
-    .cta-secondary {
-      border: 2px solid rgba(255,255,255,0.25);
-      color: white;
-    }
-    .cta-secondary:hover {
-      border-color: #F5A800;
-      color: #F5A800;
     }
 
     /* LANGUAGE SELECTOR IN HERO */
@@ -154,8 +119,8 @@
       background: rgba(255, 255, 255, 0.05);
     }
     .hero-lang a.active {
-      color: #F5A800;
-      border-color: #F5A800;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
       background: rgba(245, 168, 0, 0.1);
     }
 
@@ -163,30 +128,6 @@
     .map-section {
       background: white;
       padding: 3rem 0;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-
-    .section-header h2 {
-      font-family: 'Fraunces', serif;
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #0F0E0A;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-header p {
-      color: #666;
-      font-size: 1rem;
     }
 
     .map-controls {
@@ -205,14 +146,14 @@
       padding: 0.5rem 1rem;
       border-radius: 20px;
       cursor: pointer;
-      border: 2px solid #e0e0e0;
+      border: 2px solid var(--color-border);
       background: white;
       font-size: 0.9rem;
       transition: all 0.2s;
     }
 
     .legend-item.active {
-      border-color: #F5A800;
+      border-color: var(--color-primary);
       background: #FFF8E7;
       font-weight: 600;
     }
@@ -223,6 +164,10 @@
       border-radius: 50%;
     }
 
+    .map-wrapper {
+      position: relative;
+    }
+
     .locate-btn-map {
       position: absolute;
       bottom: 16px;
@@ -230,8 +175,8 @@
       z-index: 500;
       width: 40px;
       height: 40px;
-      background: #F5A800;
-      color: #0F0E0A;
+      background: var(--color-primary);
+      color: var(--color-dark);
       border: none;
       border-radius: 50%;
       cursor: pointer;
@@ -245,16 +190,12 @@
     }
 
     .locate-btn-map:hover {
-      background: #E8920A;
+      background: var(--color-primary-hover);
       transform: scale(1.1);
     }
 
     .locate-btn-map.active {
       background: #e53935;
-    }
-
-    .map-wrapper {
-      position: relative;
     }
 
     /* MOBILE MAP FILTER */
@@ -268,13 +209,13 @@
     .map-controls-mobile select {
       flex: 1;
       padding: 0.7rem 1rem;
-      border-radius: 12px;
-      border: 2px solid #e0e0e0;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--color-border);
       background: white;
-      font-family: 'DM Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.95rem;
       font-weight: 500;
-      color: #1a1814;
+      color: var(--color-text);
       appearance: none;
       -webkit-appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='2' fill='none'/%3E%3C/svg%3E");
@@ -285,220 +226,63 @@
     }
     .map-controls-mobile select:focus {
       outline: none;
-      border-color: #F5A800;
+      border-color: var(--color-primary);
     }
 
     #map {
       height: 500px;
       width: 100%;
-      border-radius: 12px;
+      border-radius: var(--radius-md);
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
 
-    /* CONTRIBUTIONS */
+    /* CONTRIBUTIONS SECTION */
     .contributions-section {
-      background: #f5f5f5;
+      background: var(--color-bg-alt);
       padding: 4rem 0;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .card {
-      background: white;
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      overflow: hidden;
-      border-left: 4px solid #F5A800;
-      transition: all 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card:hover {
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      transform: translateY(-3px);
-    }
-
-    .card-img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-    }
-
-    .card-body {
-      padding: 1.2rem 1.5rem 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card h3 {
-      font-family: 'Fraunces', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.7rem;
-      color: #0F0E0A;
-      line-height: 1.3;
-    }
-
-    .card p {
-      font-size: 0.9rem;
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-      flex: 1;
-    }
-
-    .card-meta {
-      font-size: 0.8rem;
-      color: #999;
-      padding-top: 0.7rem;
-      border-top: 1px solid #f0f0f0;
-    }
-
-    /* PORTRAITS / TÉMOIGNAGES */
+    /* PORTRAITS SECTION */
     .portraits-section {
       background: white;
       padding: 4rem 0;
     }
 
-    .portraits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .portrait-card {
-      background: white;
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: all 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .portrait-card:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      transform: translateY(-3px);
-    }
-
-    .portrait-photo {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .portrait-stripe {
-      height: 5px;
-      background: linear-gradient(90deg, #F5A800, #FFD166);
-    }
-
-    .portrait-body {
-      padding: 1.2rem 1.5rem 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .portrait-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .portrait-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: #F5A800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Fraunces', serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: white;
-    }
-
-    .portrait-name {
-      font-family: 'Fraunces', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #0F0E0A;
-    }
-
-    .portrait-origin {
-      font-size: 0.8rem;
-      color: #999;
-    }
-
-    .portrait-quote {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: #333;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-      border-left: 3px solid #F5A800;
-      padding-left: 1rem;
-      flex: 1;
-    }
-
-    .portrait-tags {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      font-size: 0.75rem;
-      padding: 0.3rem 0.7rem;
-      background: #FFF8E7;
-      color: #E8920A;
-      border-radius: 12px;
-      font-weight: 600;
-    }
-
-    /* FOOTER */
-    footer {
-      background: #0F0E0A;
-      border-top: 3px solid #F5A800;
-      padding: 2rem;
+    /* SEE ALL LINKS */
+    .section-see-all {
       text-align: center;
-      color: #666;
+      margin-top: 2.5rem;
     }
 
-    footer strong {
-      color: #F5A800;
-      font-family: 'Fraunces', serif;
-      font-size: 1.1rem;
+    .see-all-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.8rem 1.8rem;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      transition: all 0.2s;
     }
 
-    footer p {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
+    .see-all-link:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transform: translateY(-2px);
     }
 
-    /* RESPONSIVE */
+    /* RESPONSIVE HOME */
     @media (max-width: 768px) {
       .hero {
         padding: 3.5rem 1.5rem;
         min-height: 320px;
       }
 
-      .hero h1 {
-        font-size: 2rem;
-      }
-
+      .hero h1 { font-size: 2rem; }
       .hex-float { display: none; }
 
       .hero-lang {
@@ -510,35 +294,16 @@
         padding: 0.3rem 0.55rem;
       }
 
-      #map {
-        height: 350px;
-      }
+      #map { height: 350px; }
 
-      .cards, .portraits-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .map-controls {
-        display: none !important;
-      }
-
-      .map-controls-mobile {
-        display: flex;
-      }
-
-      .section-header h2 {
-        font-size: 1.8rem;
-      }
+      .map-controls { display: none !important; }
+      .map-controls-mobile { display: flex; }
     }
   </style>
-</head>
-<body>
-
-<%= render 'shared/navbar', active: 'home' %>
+<% end %>
 
 <!-- HERO -->
 <section class="hero">
-  <!-- Floating hexagons -->
   <div class="hex-float hex-1">
     <svg width="80" height="92" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="2"/></svg>
   </div>
@@ -587,19 +352,19 @@
 
     <div class="map-controls">
       <div class="legend-item active" data-layer="admin">
-        <div class="legend-dot" style="background:#C45A2A"></div>
+        <div class="legend-dot" style="background: var(--color-rights)"></div>
         <span><%= t('map.filter_rights') %></span>
       </div>
       <div class="legend-item active" data-layer="fle">
-        <div class="legend-dot" style="background:#3A7A5A"></div>
+        <div class="legend-dot" style="background: var(--color-fle)"></div>
         <span><%= t('map.filter_fle') %></span>
       </div>
       <div class="legend-item active" data-layer="entrep">
-        <div class="legend-dot" style="background:#F5A800"></div>
+        <div class="legend-dot" style="background: var(--color-entrep)"></div>
         <span><%= t('map.filter_entrepreneurship') %></span>
       </div>
       <div class="legend-item active" data-layer="culture">
-        <div class="legend-dot" style="background:#1A5B9A"></div>
+        <div class="legend-dot" style="background: var(--color-culture)"></div>
         <span><%= t('map.filter_community') %></span>
       </div>
     </div>
@@ -630,26 +395,33 @@
     </div>
 
     <div class="cards">
-      <% @contributions = Contribution.published.recent.limit(6) %>
       <% @contributions.each do |c| %>
-        <a href="/contributions/<%= c.id %>" style="text-decoration: none; color: inherit;"><div class="card" style="border-left-color: <%= c.type_color %>">
-          <% if c.main_photo_url.present? %>
-            <img src="<%= c.main_photo_url %>" alt="<%= c.title %>" class="card-img" loading="lazy">
-          <% end %>
-          <div class="card-body">
-            <h3><%= c.type_emoji %> <%= c.title %></h3>
-            <p><%= c.description.truncate(120) %></p>
-            <div class="card-meta">
-              📍 <%= c.location %> · <%= c.author_flag %> <%= c.author_name %> · <%= c.formatted_date %>
+        <a href="<%= contribution_path(c) %>" style="text-decoration: none; color: inherit;">
+          <div class="card" style="border-left-color: <%= c.type_color %>">
+            <% if c.main_photo_url.present? %>
+              <img src="<%= c.main_photo_url %>" alt="<%= c.title %>" class="card-img" loading="lazy">
+            <% end %>
+            <div class="card-body">
+              <h3><%= c.type_emoji %> <%= c.translated_title %></h3>
+              <p><%= c.translated_description.truncate(120) %></p>
+              <div class="card-meta">
+                📍 <%= c.location %> · <%= c.author_flag %> <%= c.author_name %> · <%= c.formatted_date %>
+              </div>
             </div>
           </div>
-        </div></a>
+        </a>
       <% end %>
+    </div>
+
+    <div class="section-see-all">
+      <a href="<%= contributions_path %>" class="see-all-link">
+        <%= t('contributions_section.see_all', default: 'Tous les partages') %> →
+      </a>
     </div>
   </div>
 </section>
 
-<!-- TÉMOIGNAGES / PORTRAITS -->
+<!-- PORTRAITS -->
 <section id="temoignages" class="portraits-section">
   <div class="container">
     <div class="section-header">
@@ -658,222 +430,210 @@
     </div>
 
     <div class="portraits-grid">
-      <% @portraits = Portrait.ordered.limit(4) %>
       <% @portraits.each do |p| %>
-        <div class="portrait-card">
-          <% if p.respond_to?(:photo_url) && p.photo_url.present? %>
-            <img src="<%= p.photo_url %>" alt="<%= p.name %>" class="portrait-photo" loading="lazy">
-          <% end %>
-          <div class="portrait-stripe" style="background:<%= p.stripe_gradient || 'linear-gradient(90deg, #F5A800, #FFD166)' %>"></div>
-          <div class="portrait-body">
-            <div class="portrait-header">
-              <div>
-                <div class="portrait-name"><%= p.flag %> <%= p.name %></div>
-                <div class="portrait-origin"><%= p.origin %></div>
+        <a href="<%= portrait_path(p) %>" style="text-decoration: none; color: inherit;">
+          <div class="portrait-card">
+            <% if p.respond_to?(:photo_url) && p.photo_url.present? %>
+              <img src="<%= p.photo_url %>" alt="<%= p.name %>" class="portrait-photo" loading="lazy">
+            <% end %>
+            <div class="portrait-stripe" style="background:<%= p.stripe_gradient || 'linear-gradient(90deg, #F5A800, #FFD166)' %>"></div>
+            <div class="portrait-body">
+              <div class="portrait-header">
+                <div>
+                  <div class="portrait-name"><%= p.flag %> <%= p.name %></div>
+                  <div class="portrait-origin"><%= p.translated_origin %></div>
+                </div>
+              </div>
+              <div class="portrait-quote">"<%= p.translated_quote %>"</div>
+              <div class="portrait-tags">
+                <% (p.translated_tags || []).each do |tag| %>
+                  <span class="tag"><%= tag %></span>
+                <% end %>
               </div>
             </div>
-            <div class="portrait-quote">"<%= p.quote %>"</div>
-            <div class="portrait-tags">
-              <% (p.tags || []).each do |tag| %>
-                <span class="tag"><%= tag %></span>
-              <% end %>
-            </div>
           </div>
-        </div>
+        </a>
       <% end %>
+    </div>
+
+    <div class="section-see-all">
+      <a href="<%= portraits_path %>" class="see-all-link">
+        <%= t('portraits.see_all', default: 'Toutes les trajectoires') %> →
+      </a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <strong><%= t('footer.brand') %></strong>
-  <p><%= t('footer.tagline') %></p>
-</footer>
+<% content_for :scripts do %>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const i18n = {
+      filter_fle: "<%= t('map.filter_fle') %>",
+      filter_community: "<%= t('map.filter_community') %>",
+      filter_entrepreneurship: "<%= t('map.filter_entrepreneurship') %>",
+      filter_rights: "<%= t('map.filter_rights') %>",
+      view_details: "<%= t('map.view_details') %>"
+    };
 
-<!-- LEAFLET -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-  // i18n labels for JS
-  const i18n = {
-    filter_fle: "<%= t('map.filter_fle') %>",
-    filter_community: "<%= t('map.filter_community') %>",
-    filter_entrepreneurship: "<%= t('map.filter_entrepreneurship') %>",
-    filter_rights: "<%= t('map.filter_rights') %>",
-    view_details: "<%= I18n.t('map.view_details', default: 'Voir détails') %>"
-  };
+    const map = L.map('map').setView([48.692, 6.184], 13);
 
-  const map = L.map('map').setView([48.692, 6.184], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap',
+      maxZoom: 19
+    }).addTo(map);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap',
-    maxZoom: 19
-  }).addTo(map);
+    const layers = {
+      admin: L.layerGroup().addTo(map),
+      fle: L.layerGroup().addTo(map),
+      entrep: L.layerGroup().addTo(map),
+      culture: L.layerGroup().addTo(map)
+    };
 
-  const layers = {
-    admin: L.layerGroup().addTo(map),
-    fle: L.layerGroup().addTo(map),
-    entrep: L.layerGroup().addTo(map),
-    culture: L.layerGroup().addTo(map)
-  };
+    const userLayer = L.layerGroup().addTo(map);
+    const colors = { admin: '#C45A2A', fle: '#3A7A5A', entrep: '#F5A800', culture: '#1A5B9A' };
 
-  const userLayer = L.layerGroup().addTo(map);
-  const colors = { admin: '#C45A2A', fle: '#3A7A5A', entrep: '#F5A800', culture: '#1A5B9A' };
-
-  function mkIcon(color, emoji) {
-    return L.divIcon({
-      html: `<div style="width:42px;height:42px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;border:3px solid white;box-shadow:0 3px 10px rgba(0,0,0,0.25);font-size:20px;">${emoji}</div>`,
-      iconSize: [42,42],
-      iconAnchor: [21,42],
-      popupAnchor: [0,-47],
-      className: ''
-    });
-  }
-
-  const staticPlaces = [
-    { type:'admin', lat:48.693, lng:6.180, title:'OFII Nancy', desc:'Office Français de l\'Immigration', emoji:'📋' },
-    { type:'admin', lat:48.688, lng:6.191, title:'Préfecture', desc:'Titres de séjour, naturalisation', emoji:'🏛' },
-    { type:'entrep', lat:48.700, lng:6.177, title:'BGE Grand Est', desc:'Accompagnement création d\'entreprise', emoji:'🚀' }
-  ];
-
-  staticPlaces.forEach(p => {
-    L.marker([p.lat, p.lng], { icon: mkIcon(colors[p.type], p.emoji) })
-      .bindPopup(`<strong>${p.title}</strong><br>${p.desc}`)
-      .addTo(layers[p.type]);
-  });
-
-  fetch('/contributions/map_data')
-    .then(r => r.json())
-    .then(contribs => {
-      contribs.forEach(c => {
-        const layerType = c.type === 'fle' ? 'fle' :
-                          c.type === 'event' ? 'culture' :
-                          c.type === 'enterprise' ? 'entrep' : 'culture';
-
-        const typeLabels = {
-          fle: i18n.filter_fle,
-          event: i18n.filter_community,
-          enterprise: i18n.filter_entrepreneurship,
-          portrait: i18n.filter_rights
-        };
-        const typeLabel = typeLabels[c.type] || c.type;
-
-        const popupContent = `
-          <div style="min-width: 260px; font-family: 'DM Sans', sans-serif;">
-            ${c.image_url ? `
-              <img src="${c.image_url}"
-                   style="width:100%; height:140px; object-fit:cover; border-radius:8px; margin-bottom:12px;">
-            ` : ''}
-            <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: ${c.color}; font-weight: 700; margin-bottom: 6px;">
-              ${c.emoji} ${typeLabel}
-            </div>
-            <strong style="font-size: 1.05rem; display: block; margin-bottom: 8px; color: #1a1814; line-height: 1.3;">
-              ${c.title}
-            </strong>
-            <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px; line-height: 1.5;">
-              ${c.description.length > 100 ? c.description.substring(0, 100) + '...' : c.description}
-            </p>
-            <div style="font-size: 0.8rem; color: #999; margin-bottom: 12px;">
-              🐝 ${c.author} · ${c.location}
-            </div>
-            <a href="/contributions/${c.id}"
-               style="display: inline-block; background: #F5A800; color: #0F0E0A; padding: 0.5rem 1rem;
-                      border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
-                      transition: all 0.2s;"
-               onmouseover="this.style.background='#E8920A'"
-               onmouseout="this.style.background='#F5A800'">
-              ${i18n.view_details} →
-            </a>
-          </div>
-        `;
-
-        L.marker([c.latitude, c.longitude], { icon: mkIcon(c.color, c.emoji) })
-          .bindPopup(popupContent, { maxWidth: 300 })
-          .addTo(layers[layerType]);
+    function mkIcon(color, emoji) {
+      return L.divIcon({
+        html: `<div style="width:42px;height:42px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;border:3px solid white;box-shadow:0 3px 10px rgba(0,0,0,0.25);font-size:20px;">${emoji}</div>`,
+        iconSize: [42,42],
+        iconAnchor: [21,42],
+        popupAnchor: [0,-47],
+        className: ''
       });
-    })
-    .catch(e => console.log('Erreur chargement contributions:', e));
-
-  document.querySelectorAll('.legend-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const layer = item.dataset.layer;
-      const isActive = item.classList.contains('active');
-
-      if (isActive) {
-        map.removeLayer(layers[layer]);
-        item.classList.remove('active');
-      } else {
-        layers[layer].addTo(map);
-        item.classList.add('active');
-      }
-    });
-  });
-
-  // MOBILE DROPDOWN FILTER
-  document.getElementById('mobileLayerSelect').addEventListener('change', (e) => {
-    const val = e.target.value;
-    Object.keys(layers).forEach(key => {
-      if (val === 'all' || val === key) {
-        layers[key].addTo(map);
-      } else {
-        map.removeLayer(layers[key]);
-      }
-    });
-  });
-
-  // GEOLOCATION
-  let watchId = null;
-  const locateBtn = document.getElementById('locate-btn');
-
-  locateBtn.addEventListener('click', () => {
-    if (watchId) {
-      navigator.geolocation.clearWatch(watchId);
-      watchId = null;
-      userLayer.clearLayers();
-      locateBtn.textContent = '📍';
-      locateBtn.classList.remove('active');
-      return;
     }
 
-    if ('geolocation' in navigator) {
-      locateBtn.textContent = '⏳';
+    const staticPlaces = [
+      { type:'admin', lat:48.693, lng:6.180, title:'OFII Nancy', desc:'Office Français de l\'Immigration', emoji:'📋' },
+      { type:'admin', lat:48.688, lng:6.191, title:'Préfecture', desc:'Titres de séjour, naturalisation', emoji:'🏛' },
+      { type:'entrep', lat:48.700, lng:6.177, title:'BGE Grand Est', desc:'Accompagnement création d\'entreprise', emoji:'🚀' }
+    ];
 
-      navigator.geolocation.getCurrentPosition(pos => {
-        const { latitude, longitude, accuracy } = pos.coords;
+    staticPlaces.forEach(p => {
+      L.marker([p.lat, p.lng], { icon: mkIcon(colors[p.type], p.emoji) })
+        .bindPopup(`<strong>${p.title}</strong><br>${p.desc}`)
+        .addTo(layers[p.type]);
+    });
 
-        userLayer.clearLayers();
+    const localePrefix = '<%= I18n.locale == I18n.default_locale ? "" : "/#{I18n.locale}" %>';
+    fetch(localePrefix + '/contributions/map_data')
+      .then(r => r.json())
+      .then(contribs => {
+        contribs.forEach(c => {
+          const layerType = c.type === 'fle' ? 'fle' :
+                            c.type === 'event' ? 'culture' :
+                            c.type === 'enterprise' ? 'entrep' : 'culture';
 
-        if (accuracy) {
-          L.circle([latitude, longitude], {
-            radius: Math.min(accuracy, 1000),
-            color: '#1976D2',
-            fillColor: '#1976D2',
-            fillOpacity: 0.15,
-            weight: 1
-          }).addTo(userLayer);
+          const typeLabels = {
+            fle: i18n.filter_fle,
+            event: i18n.filter_community,
+            enterprise: i18n.filter_entrepreneurship,
+            portrait: i18n.filter_rights
+          };
+          const typeLabel = typeLabels[c.type] || c.type;
+
+          const popupContent = `
+            <div style="min-width: 260px; font-family: 'DM Sans', sans-serif;">
+              ${c.image_url ? `
+                <img src="${c.image_url}"
+                     style="width:100%; height:140px; object-fit:cover; border-radius:8px; margin-bottom:12px;">
+              ` : ''}
+              <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: ${c.color}; font-weight: 700; margin-bottom: 6px;">
+                ${c.emoji} ${typeLabel}
+              </div>
+              <strong style="font-size: 1.05rem; display: block; margin-bottom: 8px; color: #1a1814; line-height: 1.3;">
+                ${c.title}
+              </strong>
+              <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px; line-height: 1.5;">
+                ${c.description.length > 100 ? c.description.substring(0, 100) + '...' : c.description}
+              </p>
+              <div style="font-size: 0.8rem; color: #999; margin-bottom: 12px;">
+                🐝 ${c.author} · ${c.location}
+              </div>
+              <a href="${localePrefix}/contributions/${c.id}"
+                 style="display: inline-block; background: #F5A800; color: #0F0E0A; padding: 0.5rem 1rem;
+                        border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
+                        transition: all 0.2s;"
+                 onmouseover="this.style.background='#E8920A'"
+                 onmouseout="this.style.background='#F5A800'">
+                ${i18n.view_details} →
+              </a>
+            </div>
+          `;
+
+          L.marker([c.latitude, c.longitude], { icon: mkIcon(c.color, c.emoji) })
+            .bindPopup(popupContent, { maxWidth: 300 })
+            .addTo(layers[layerType]);
+        });
+      })
+      .catch(e => console.log('Erreur chargement contributions:', e));
+
+    // Layer toggle
+    document.querySelectorAll('.legend-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const layer = item.dataset.layer;
+        if (item.classList.contains('active')) {
+          map.removeLayer(layers[layer]);
+          item.classList.remove('active');
+        } else {
+          layers[layer].addTo(map);
+          item.classList.add('active');
         }
-
-        L.circleMarker([latitude, longitude], {
-          radius: 9,
-          color: '#ffffff',
-          fillColor: '#1976D2',
-          fillOpacity: 1,
-          weight: 3
-        }).addTo(userLayer);
-
-        map.flyTo([latitude, longitude], 14);
-        locateBtn.textContent = '🛑';
-        locateBtn.classList.add('active');
-      }, err => {
-        alert('Active la géolocalisation dans les paramètres de ton navigateur.');
-        locateBtn.textContent = '📍';
-      }, {
-        enableHighAccuracy: true,
-        timeout: 10000
       });
-    }
-  });
-</script>
+    });
 
-</body>
-</html>
+    // Mobile dropdown
+    document.getElementById('mobileLayerSelect').addEventListener('change', (e) => {
+      const val = e.target.value;
+      Object.keys(layers).forEach(key => {
+        if (val === 'all' || val === key) {
+          layers[key].addTo(map);
+        } else {
+          map.removeLayer(layers[key]);
+        }
+      });
+    });
+
+    // Geolocation
+    let watchId = null;
+    const locateBtn = document.getElementById('locate-btn');
+
+    locateBtn.addEventListener('click', () => {
+      if (watchId) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+        userLayer.clearLayers();
+        locateBtn.textContent = '📍';
+        locateBtn.classList.remove('active');
+        return;
+      }
+
+      if ('geolocation' in navigator) {
+        locateBtn.textContent = '⏳';
+        navigator.geolocation.getCurrentPosition(pos => {
+          const { latitude, longitude, accuracy } = pos.coords;
+          userLayer.clearLayers();
+
+          if (accuracy) {
+            L.circle([latitude, longitude], {
+              radius: Math.min(accuracy, 1000),
+              color: '#1976D2', fillColor: '#1976D2',
+              fillOpacity: 0.15, weight: 1
+            }).addTo(userLayer);
+          }
+
+          L.circleMarker([latitude, longitude], {
+            radius: 9, color: '#ffffff',
+            fillColor: '#1976D2', fillOpacity: 1, weight: 3
+          }).addTo(userLayer);
+
+          map.flyTo([latitude, longitude], 14);
+          locateBtn.textContent = '🛑';
+          locateBtn.classList.add('active');
+        }, err => {
+          alert('<%= t("map.geolocation_error", default: "Active la géolocalisation dans les paramètres de ton navigateur.") %>');
+          locateBtn.textContent = '📍';
+        }, { enableHighAccuracy: true, timeout: 10000 });
+      }
+    });
+  </script>
+<% end %>

@@ -1,0 +1,56 @@
+<%= form_with model: [:admin, portrait], local: true do |f| %>
+  <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem;">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Identité</h3>
+
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :name, 'Nom *' %>
+      <%= f.text_field :name, required: true, placeholder: 'Ex : Olena Kovalenko', style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+      <div>
+        <%= f.label :flag, 'Drapeau (emoji)' %>
+        <%= f.text_field :flag, placeholder: '🇺🇦', maxlength: 4, style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+      </div>
+      <div>
+        <%= f.label :origin, 'Origine *' %>
+        <%= f.text_field :origin, required: true, placeholder: 'Ex : Ukraine · Arrivée en 2022', style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem;">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Témoignage</h3>
+
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :quote, 'Citation *' %>
+      <%= f.text_area :quote, required: true, rows: 4, placeholder: "Les mots de la personne, entre guillemets...", style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem; font-style: italic;' %>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :tags, 'Tags (séparés par des virgules)' %>
+      <%= f.text_field :tags, value: portrait.tags&.join(', '), placeholder: 'Ex : Entrepreneuriat, Tech, Cuisine', style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+      <small style="color: #999;">Séparez les tags par des virgules</small>
+    </div>
+  </div>
+
+  <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem;">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Visuel</h3>
+
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :photo_url, 'URL de la photo' %>
+      <%= f.text_field :photo_url, placeholder: 'https://...', style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <%= f.label :stripe_gradient, 'Gradient de la bande' %>
+      <%= f.text_field :stripe_gradient, placeholder: 'Ex : linear-gradient(90deg, #005BBB, #FFD500)', style: 'width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.95rem; margin-top: 0.5rem;' %>
+      <small style="color: #999;">Couleurs du drapeau d'origine — laisser vide pour le gradient par défaut</small>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 1rem;">
+    <%= f.submit 'Enregistrer', class: 'btn btn-primary' %>
+    <%= link_to 'Annuler', admin_portraits_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>

@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
-  layout false, only: [:home]
-
   def home
+    @contributions = Contribution.published.recent.limit(6)
+    @portraits = Portrait.ordered.limit(3)
   end
 
   def droits
@@ -11,7 +11,5 @@ class PagesController < ApplicationController
   end
 
   def philosophie
-  render layout: false
   end
-
 end

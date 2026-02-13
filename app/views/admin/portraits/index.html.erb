@@ -1,0 +1,50 @@
+<div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+  <h1>✨ Trajectoires</h1>
+  <%= link_to '+ Nouvelle trajectoire', new_admin_portrait_path, class: 'btn btn-primary' %>
+</div>
+
+<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+  <% if @portraits.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Nom</th>
+          <th>Origine</th>
+          <th>Citation</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @portraits.each do |portrait| %>
+          <tr>
+            <td>
+              <% if portrait.photo_url.present? %>
+                <img src="<%= portrait.photo_url %>" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+              <% else %>
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">👤</div>
+              <% end %>
+            </td>
+            <td><strong><%= portrait.flag %> <%= portrait.name %></strong></td>
+            <td><%= portrait.origin %></td>
+            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= portrait.quote.truncate(80) %></td>
+            <td><%= portrait.created_at.strftime("%d/%m/%Y") %></td>
+            <td>
+              <div style="display: flex; gap: 0.5rem;">
+                <%= link_to '✏️', edit_admin_portrait_path(portrait), class: 'btn btn-secondary', style: 'font-size: 0.85rem; padding: 0.5rem 0.9rem;' %>
+                <form action="<%= admin_portrait_path(portrait) %>" method="post" style="display: inline;" onsubmit="return confirm('Supprimer cette trajectoire ?')">
+                  <input type="hidden" name="_method" value="delete">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                  <button type="submit" class="btn btn-danger" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border: none; cursor: pointer;">🗑</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p style="text-align: center; color: #999; padding: 2rem;">Aucune trajectoire pour le moment.</p>
+  <% end %>
+</div>

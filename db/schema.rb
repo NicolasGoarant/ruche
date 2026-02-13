@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_11_175037) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_12_122106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_11_175037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_url"
+    t.jsonb "translations", default: {}, null: false
     t.index ["contribution_type"], name: "index_contributions_on_contribution_type"
     t.index ["latitude", "longitude"], name: "index_contributions_on_latitude_and_longitude"
     t.index ["published"], name: "index_contributions_on_published"
@@ -85,6 +86,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_11_175037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo_url"
+    t.jsonb "translations", default: {}, null: false
     t.index ["position"], name: "index_portraits_on_position"
   end
 

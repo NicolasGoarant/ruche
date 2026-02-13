@@ -9,13 +9,13 @@ Rails.application.routes.draw do
     get "assistant-juridique", to: "legal#assistant"
     post "assistant-juridique/chat", to: "legal#chat"
 
-    resources :contributions, only: [:index, :new, :create, :show] do
+    resources :contributions, path: "partages", only: [:index, :new, :create, :show] do
       collection do
         get :map_data
       end
     end
 
-    resources :portraits, only: [:index, :show]
+    resources :portraits, path: "trajectoires", only: [:index, :show]
   end
 
   namespace :admin do
@@ -26,6 +26,7 @@ Rails.application.routes.draw do
         patch :unpublish
       end
     end
+    resources :portraits
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

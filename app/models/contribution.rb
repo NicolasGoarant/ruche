@@ -1,56 +1,50 @@
 class Contribution < ApplicationRecord
-  TYPES = %w[fle event enterprise portrait].freeze
-
+  include Translatable
   has_many_attached :photos
+  translates :title, :description
 
-  validates :contribution_type, presence: true, inclusion: { in: TYPES }
-  validates :title, presence: true, length: { maximum: 200 }
-  validates :description, presence: true
-  validates :location, presence: true
-
+  # Scopes
   scope :published, -> { where(published: true) }
-  scope :by_type, ->(type) { where(contribution_type: type) if type.present? }
   scope :recent, -> { order(created_at: :desc) }
+  scope :by_type, ->(type) { type.present? ? where(contribution_type: type) : all }
 
+  # Geocoding
   geocoded_by :location
-  after_validation :geocode, if: ->(obj) { obj.location.present? && obj.location_changed? }
+  after_validation :geocode, if: :will_save_change_to_location?
 
-  def self.type_label(type)
-    {
-      'fle' => 'Cours de FLE',
-      'event' => 'Événement',
-      'enterprise' => 'Entreprise créée',
-      'portrait' => 'Témoignage'
-    }[type]
+  # Validations
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :contribution_type, presence: true
+  validates :location, presence: true
+  validates :author_name, presence: true
+
+  # Type configuration
+  TYPE_CONFIG = {
+    'fle'        => { emoji: '📚', color: '#3A7A5A', label: 'Cours de FLE' },
+    'event'      => { emoji: '🎉', color: '#6A3A9A', label: 'Convivialité' },
+    'enterprise' => { emoji: '💼', color: '#1A5B9A', label: 'Entrepreneuriat' },
+    'portrait'   => { emoji: '✨', color: '#C45A2A', label: 'Témoignage' },
+    'rights'     => { emoji: '📄', color: '#F5A800', label: 'Droits & papiers' }
+  }.freeze
+
+  def type_emoji
+    TYPE_CONFIG.dig(contribution_type, :emoji) || '🐝'
   end
 
   def type_color
-    {
-      'fle' => '#3A7A5A',
-      'event' => '#1A5B9A',
-      'enterprise' => '#C45A2A',
-      'portrait' => '#6A3A9A'
-    }[contribution_type]
+    TYPE_CONFIG.dig(contribution_type, :color) || '#F5A800'
   end
 
-  def type_emoji
-    {
-      'fle' => '📚',
-      'event' => '🎉',
-      'enterprise' => '🚀',
-      'portrait' => '✨'
-    }[contribution_type]
+  def self.type_label(type)
+    TYPE_CONFIG.dig(type, :label) || type
   end
 
   def formatted_date
-    created_at.strftime("%d %b %Y")
+    created_at&.strftime('%e %b %Y')&.strip
   end
 
   def main_photo_url
-    if photos.attached? && photos.first.present?
-      Rails.application.routes.url_helpers.url_for(photos.first)
-    else
-      image_url
-    end
+    image_url
   end
 end

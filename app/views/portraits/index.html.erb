@@ -1,0 +1,61 @@
+<% content_for :nav_active, 'temoignages' %>
+<% content_for :title, t('portraits.title', default: 'Trajectoires') %>
+
+<% content_for :styles do %>
+  <style>
+    .portraits-index {
+      padding: 4rem 0;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--color-primary); }
+  </style>
+<% end %>
+
+<section class="portraits-index">
+  <div class="container">
+    <a href="<%= root_path %>" class="back-link">← <%= t('portraits.back', default: 'Retour à l\'accueil') %></a>
+
+    <div class="section-header">
+      <h2><%= t('portraits.title') %></h2>
+      <p><%= t('portraits.subtitle') %></p>
+    </div>
+
+    <div class="portraits-grid">
+      <% @portraits.each do |p| %>
+        <a href="<%= portrait_path(p) %>" style="text-decoration: none; color: inherit;">
+          <div class="portrait-card">
+            <% if p.photo_url.present? %>
+              <img src="<%= p.photo_url %>" alt="<%= p.name %>" class="portrait-photo" loading="lazy">
+            <% end %>
+            <div class="portrait-stripe" style="background:<%= p.stripe_gradient || 'linear-gradient(90deg, #F5A800, #FFD166)' %>"></div>
+            <div class="portrait-body">
+              <div class="portrait-header">
+                <div>
+                  <div class="portrait-name"><%= p.flag %> <%= p.name %></div>
+                  <div class="portrait-origin"><%= p.translated_origin %></div>
+                </div>
+              </div>
+              <div class="portrait-quote">"<%= p.translated_quote %>"</div>
+              <div class="portrait-tags">
+                <% (p.translated_tags || []).each do |tag| %>
+                  <span class="tag"><%= tag %></span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</section>

@@ -1,159 +1,32 @@
-<style>
-  /* NAVBAR */
-  .navbar {
-    background: #0F0E0A;
-    padding: 1.2rem 2rem;
-    border-bottom: 3px solid #F5A800;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 1000;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    color: white;
-    text-decoration: none;
-  }
-
-  .logo-text {
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
-    font-weight: 800;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-  }
-
-  .nav-links a {
-    color: #999;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: #F5A800; }
-  .nav-links a.active-link { color: #F5A800; font-weight: 600; }
-
-  .btn-contribute {
-    background: #F5A800;
-    color: #0F0E0A !important;
-    padding: 0.6rem 1.2rem;
-    border-radius: 20px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .btn-contribute:hover { background: #E8920A; }
-
-  .btn-assistant { color: #F5A800 !important; font-weight: 500; }
-
-  /* BURGER */
-  .burger-btn {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    z-index: 1001;
-  }
-  .burger-btn span {
-    display: block;
-    width: 24px;
-    height: 2.5px;
-    background: white;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-    transform-origin: center;
-  }
-  .burger-btn.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-  .burger-btn.active span:nth-child(2) { opacity: 0; }
-  .burger-btn.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
-
-  /* MOBILE MENU */
-  .mobile-menu {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    background: rgba(15, 14, 10, 0.97);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.3rem;
-    z-index: 999;
-    padding: 5rem 2rem 2rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-  .mobile-menu.active { opacity: 1; visibility: visible; }
-  .mobile-menu a {
-    color: white;
-    text-decoration: none;
-    font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    transition: all 0.2s;
-    text-align: center;
-  }
-  .mobile-menu a:hover { color: #F5A800; }
-  .mobile-menu .mobile-cta {
-    margin-top: 1rem;
-    background: #F5A800;
-    color: #0F0E0A;
-    padding: 0.8rem 2rem;
-    border-radius: 30px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-  }
-  .mobile-menu .mobile-cta:hover { background: #E8920A; color: #0F0E0A; }
-  .mobile-menu .mobile-assistant {
-    color: #F5A800;
-    font-size: 1rem;
-    font-family: 'DM Sans', sans-serif;
-    border: 2px solid #F5A800;
-    padding: 0.6rem 1.5rem;
-    border-radius: 30px;
-  }
-
-  @media (max-width: 768px) {
-    .navbar { padding: 1rem 1.2rem; }
-    .nav-desktop { display: none !important; }
-    .burger-btn { display: flex; }
-  }
-</style>
-
-<%# ===== current_page helper : passer local `active` avec le nom de la page ===== %>
+<%# CSS is now in ruche.css — this partial is pure HTML + minimal JS %>
 <% active ||= '' %>
 
 <nav class="navbar">
-  <a href="/" class="logo">
+  <a href="<%= root_path %>" class="logo">
     <span style="font-size: 1.8rem;">🐝</span>
     <div class="logo-text">la Ruche</div>
   </a>
 
   <div class="nav-links nav-desktop">
-    <a href="/" class="<%= 'active-link' if active == 'home' %>">Accueil</a>
-    <a href="/philosophie" class="<%= 'active-link' if active == 'philosophie' %>">Nos principes</a>
-    <a href="/#contributions" class="<%= 'active-link' if active == 'contributions' %>">Contributions</a>
-    <a href="/#temoignages" class="<%= 'active-link' if active == 'temoignages' %>">Témoignages</a>
-    <a href="/assistant-juridique" class="btn-assistant <%= 'active-link' if active == 'assistant' %>">🤝 Assistant juridique</a>
-    <a href="<%= new_contribution_path %>" class="btn-contribute">＋ Contribuer</a>
+    <a href="<%= root_path %>" class="<%= 'active-link' if active == 'home' %>"><%= t('navbar.home') %></a>
+    <a href="<%= philosophie_path %>" class="<%= 'active-link' if active == 'philosophie' %>"><%= t('navbar.principles') %></a>
+    <a href="<%= contributions_path %>" class="<%= 'active-link' if active == 'contributions' %>"><%= t('navbar.contributions') %></a>
+    <a href="<%= portraits_path %>" class="<%= 'active-link' if active == 'temoignages' %>"><%= t('navbar.testimonials') %></a>
+    <a href="<%= assistant_juridique_path %>" class="btn-assistant <%= 'active-link' if active == 'assistant' %>">🤝 <%= t('navbar.legal_assistant') %></a>
+    <a href="<%= new_contribution_path %>" class="btn-contribute">＋ <%= t('navbar.share', default: 'Partager') %></a>
+    <div class="lang-switcher">
+      <button class="lang-switcher-btn" id="langBtn" aria-label="Language">
+        🌐 <%= t('language_name') %> ▾
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <a href="<%= url_for(locale: :fr) %>" class="<%= 'current-lang' if I18n.locale == :fr %>">🇫🇷 Français</a>
+        <a href="<%= url_for(locale: :en) %>" class="<%= 'current-lang' if I18n.locale == :en %>">🇬🇧 English</a>
+        <a href="<%= url_for(locale: :ar) %>" class="<%= 'current-lang' if I18n.locale == :ar %>">🇸🇦 العربية</a>
+        <a href="<%= url_for(locale: :uk) %>" class="<%= 'current-lang' if I18n.locale == :uk %>">🇺🇦 Українська</a>
+        <a href="<%= url_for(locale: :prs) %>" class="<%= 'current-lang' if I18n.locale == :prs %>">🇦🇫 دری</a>
+        <a href="<%= url_for(locale: :es) %>" class="<%= 'current-lang' if I18n.locale == :es %>">🇪🇸 Español</a>
+      </div>
+    </div>
   </div>
 
   <button class="burger-btn" id="burgerBtn" aria-label="Menu">
@@ -164,16 +37,23 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="/">🏠 Accueil</a>
-  <a href="/philosophie">💛 Nos principes</a>
-  <a href="/#contributions">🐝 Contributions</a>
-  <a href="/#temoignages">✨ Témoignages</a>
-  <a href="/assistant-juridique" class="mobile-assistant">🤝 Assistant juridique</a>
-  <a href="<%= new_contribution_path %>" class="mobile-cta">＋ Contribuer</a>
+  <a href="<%= root_path %>"><%= t('navbar.mobile_home') %></a>
+  <a href="<%= philosophie_path %>"><%= t('navbar.mobile_principles') %></a>
+  <a href="<%= contributions_path %>"><%= t('navbar.mobile_contributions') %></a>
+  <a href="<%= portraits_path %>"><%= t('navbar.mobile_testimonials') %></a>
+  <a href="<%= assistant_juridique_path %>" class="mobile-assistant">🤝 <%= t('navbar.legal_assistant') %></a>
+  <a href="<%= new_contribution_path %>" class="mobile-cta">＋ <%= t('navbar.share', default: 'Partager') %></a>
+  <div class="mobile-lang-flags">
+    <a href="<%= url_for(locale: :fr) %>" class="<%= 'active' if I18n.locale == :fr %>">🇫🇷</a>
+    <a href="<%= url_for(locale: :en) %>" class="<%= 'active' if I18n.locale == :en %>">🇬🇧</a>
+    <a href="<%= url_for(locale: :ar) %>" class="<%= 'active' if I18n.locale == :ar %>">🇸🇦</a>
+    <a href="<%= url_for(locale: :uk) %>" class="<%= 'active' if I18n.locale == :uk %>">🇺🇦</a>
+    <a href="<%= url_for(locale: :prs) %>" class="<%= 'active' if I18n.locale == :prs %>">🇦🇫</a>
+    <a href="<%= url_for(locale: :es) %>" class="<%= 'active' if I18n.locale == :es %>">🇪🇸</a>
+  </div>
 </div>
 
 <script>
-  // Burger toggle — safe to include multiple times, only binds once
   document.addEventListener('DOMContentLoaded', () => {
     const burger = document.getElementById('burgerBtn');
     const mobile = document.getElementById('mobileMenu');
@@ -193,5 +73,15 @@
         document.body.style.overflow = '';
       });
     });
+
+    const langBtn = document.getElementById('langBtn');
+    const langDrop = document.getElementById('langDropdown');
+    if (langBtn && langDrop) {
+      langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langDrop.classList.toggle('open');
+      });
+      document.addEventListener('click', () => langDrop.classList.remove('open'));
+    }
   });
 </script>

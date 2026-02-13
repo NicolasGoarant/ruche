@@ -23,6 +23,12 @@ module Ruche
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
 
+    # i18n — langues disponibles et locale par défaut
+    config.i18n.available_locales = [:fr, :en, :ar, :uk, :prs, :es]
+    config.i18n.default_locale = :fr
+    config.i18n.fallbacks = true
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.

@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= content_for(:title) || "Ruche" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="<%= I18n.locale %>" dir="<%= %i[ar prs].include?(I18n.locale) ? 'rtl' : 'ltr' %>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title><%= content_for(:title) || "🐝 Ruche — Ensemble en France" %></title>
 
-    <%= yield :head %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
-  </body>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,800;1,400;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <%= stylesheet_link_tag "ruche", "data-turbo-track": "reload" %>
+
+  <%= yield :styles %>
+  <%= yield :head %>
+
+  <%= javascript_importmap_tags %>
+
+  <meta name="turbo-visit-control" content="reload">
+</head>
+<body>
+
+  <%= render 'shared/navbar', active: content_for(:nav_active).presence || '' %>
+  <%= render 'shared/flash' if flash.any? %>
+
+  <main>
+    <%= yield %>
+  </main>
+
+  <%= render 'shared/footer' %>
+
+  <%= yield :scripts %>
+
+</body>
 </html>

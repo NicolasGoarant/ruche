@@ -55,6 +55,12 @@
     .nav-menu {
       list-style: none;
     }
+
+    .nav-separator {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 0.8rem 1.5rem;
+    }
     
     .nav-item {
       margin: 0.3rem 0;
@@ -235,18 +241,39 @@
         <span>Dashboard</span>
       <% end %>
     </li>
+
+    <li><div class="nav-separator"></div></li>
+
     <li class="nav-item">
-      <%= link_to admin_contributions_path, class: "nav-link #{current_page?(admin_contributions_path) ? 'active' : ''}" do %>
-        <span class="nav-icon">📝</span>
-        <span>Contributions</span>
+      <%= link_to admin_contributions_path, class: "nav-link #{controller_name == 'contributions' && action_name == 'index' ? 'active' : ''}" do %>
+        <span class="nav-icon">🐝</span>
+        <span>Partages</span>
       <% end %>
     </li>
     <li class="nav-item">
-      <%= link_to new_admin_contribution_path, class: "nav-link" do %>
+      <%= link_to new_admin_contribution_path, class: "nav-link #{controller_name == 'contributions' && action_name == 'new' ? 'active' : ''}" do %>
         <span class="nav-icon">➕</span>
-        <span>Nouvelle contribution</span>
+        <span>Nouveau partage</span>
       <% end %>
     </li>
+
+    <li><div class="nav-separator"></div></li>
+
+    <li class="nav-item">
+      <%= link_to admin_portraits_path, class: "nav-link #{controller_name == 'portraits' && action_name == 'index' ? 'active' : ''}" do %>
+        <span class="nav-icon">✨</span>
+        <span>Trajectoires</span>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to new_admin_portrait_path, class: "nav-link #{controller_name == 'portraits' && action_name == 'new' ? 'active' : ''}" do %>
+        <span class="nav-icon">➕</span>
+        <span>Nouvelle trajectoire</span>
+      <% end %>
+    </li>
+
+    <li><div class="nav-separator"></div></li>
+
     <li class="nav-item">
       <%= link_to root_path, class: "nav-link" do %>
         <span class="nav-icon">🌐</span>

@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html lang="<%= I18n.locale %>" dir="<%= %i[ar prs].include?(I18n.locale) ? 'rtl' : 'ltr' %>">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= @contribution.title %> — la Ruche</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<% content_for :title, "#{@contribution.translated_title} — la Ruche" %>
 
+<% content_for :styles do %>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* === CONTRIBUTION SHOW STYLES === */
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #fafafa;
-      color: #1a1814;
-    }
-
-    .container {
+    .show-container {
       max-width: 800px;
       margin: 3rem auto;
       padding: 0 2rem;
@@ -25,7 +14,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      color: #666;
+      color: var(--color-text-muted);
       text-decoration: none;
       font-size: 0.9rem;
       margin-bottom: 2rem;
@@ -33,14 +22,14 @@
     }
 
     .back-link:hover {
-      color: #F5A800;
+      color: var(--color-primary);
     }
 
     .hero-image {
       width: 100%;
       height: 400px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
     }
 
@@ -59,12 +48,13 @@
     .badge-event { background: #E4EEF8; color: #1A5B9A; }
     .badge-enterprise { background: #FBE9E0; color: #C45A2A; }
     .badge-portrait { background: #F0E8F8; color: #6A3A9A; }
+    .badge-rights { background: #FFF8E7; color: #E8920A; }
 
-    h1 {
-      font-family: 'Fraunces', serif;
+    .show-container h1 {
+      font-family: var(--font-display);
       font-size: 2.5rem;
       font-weight: 800;
-      color: #0F0E0A;
+      color: var(--color-dark);
       line-height: 1.2;
       margin-bottom: 1.5rem;
     }
@@ -74,11 +64,11 @@
       gap: 1.5rem;
       flex-wrap: wrap;
       padding: 1.5rem 0;
-      border-top: 1px solid #e0e0e0;
-      border-bottom: 1px solid #e0e0e0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
       margin-bottom: 2rem;
       font-size: 0.9rem;
-      color: #666;
+      color: var(--color-text-muted);
     }
 
     .meta-item {
@@ -96,57 +86,45 @@
 
     .contact-box {
       background: #FFF8E7;
-      border: 2px solid #F5A800;
-      border-radius: 12px;
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-md);
       padding: 1.5rem;
       margin-top: 2rem;
     }
 
     .contact-box h3 {
-      font-family: 'Fraunces', serif;
+      font-family: var(--font-display);
       font-size: 1.2rem;
       margin-bottom: 0.8rem;
-      color: #0F0E0A;
+      color: var(--color-dark);
     }
 
     .contact-box p {
       font-size: 0.95rem;
-      color: #666;
+      color: var(--color-text-muted);
       margin-bottom: 0.5rem;
     }
 
     .contact-info {
       font-size: 1.05rem;
-      color: #E8920A;
+      color: var(--color-primary-hover);
       font-weight: 600;
     }
-
-    footer {
-      background: #0F0E0A;
-      border-top: 3px solid #F5A800;
-      padding: 1.5rem;
-      text-align: center;
-      color: #666;
-      margin-top: 4rem;
-    }
   </style>
-</head>
-<body>
+<% end %>
 
-<%= render 'shared/navbar' %>
-
-<div class="container">
-  <a href="/" class="back-link"><%= t('contribution_show.back') %></a>
+<div class="show-container">
+  <a href="<%= root_path %>" class="back-link"><%= t('contribution_show.back') %></a>
 
   <% if @contribution.image_url.present? %>
-    <img src="<%= @contribution.image_url %>" alt="<%= @contribution.title %>" class="hero-image">
+    <img src="<%= @contribution.image_url %>" alt="<%= @contribution.translated_title %>" class="hero-image">
   <% end %>
 
   <span class="type-badge badge-<%= @contribution.contribution_type %>">
     <%= @contribution.type_emoji %> <%= Contribution.type_label(@contribution.contribution_type) %>
   </span>
 
-  <h1><%= @contribution.title %></h1>
+  <h1><%= @contribution.translated_title %></h1>
 
   <div class="meta">
     <div class="meta-item">
@@ -155,7 +133,7 @@
     </div>
     <div class="meta-item">
       <span><%= @contribution.author_flag %></span>
-      <span>Publié par <%= @contribution.author_name %></span>
+      <span><%= t('contribution_show.published_by') %> <%= @contribution.author_name %></span>
     </div>
     <div class="meta-item">
       <span>📅</span>
@@ -164,22 +142,14 @@
   </div>
 
   <div class="content">
-    <%= simple_format(@contribution.description) %>
+    <%= simple_format(@contribution.translated_description) %>
   </div>
 
   <% if @contribution.contact_info.present? %>
     <div class="contact-box">
-      <h3>📞 Contact</h3>
-      <p>Pour plus d'informations sur cette ressource :</p>
+      <h3><%= t('contribution_show.contact_title') %></h3>
+      <p><%= t('contribution_show.contact_desc') %></p>
       <div class="contact-info"><%= @contribution.contact_info %></div>
     </div>
   <% end %>
 </div>
-
-<footer>
-  <strong style="color: #F5A800; font-family: 'Fraunces', serif; font-size: 1.1rem;">🐝 la Ruche</strong>
-  <p style="margin-top: 0.5rem; font-size: 0.85rem;"><%= t('footer.tagline') %></p>
-</footer>
-
-</body>
-</html>
