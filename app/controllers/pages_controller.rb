@@ -12,4 +12,11 @@ class PagesController < ApplicationController
 
   def philosophie
   end
+
+  def mentions_legales
+  end
+
+  def politique_confidentialite
+  end
+
 end

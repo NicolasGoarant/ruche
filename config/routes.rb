@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     get "philosophie", to: "pages#philosophie"
     get "assistant-juridique", to: "legal#assistant"
     post "assistant-juridique/chat", to: "legal#chat"
+    get "mentions-legales", to: "pages#mentions_legales", as: :mentions_legales
+    get "confidentialite", to: "pages#politique_confidentialite", as: :politique_confidentialite
 
     resources :contributions, path: "partages", only: [:index, :new, :create, :show] do
       collection do

@@ -1,0 +1,114 @@
+<% content_for :title, 'Mentions légales — Les Tisserands' %>
+
+<% content_for :styles do %>
+  <style>
+    .legal-page {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 0 2rem 4rem;
+    }
+    .legal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .legal-back:hover { color: var(--color-primary); }
+    .legal-page h1 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--color-dark);
+      margin-bottom: 0.5rem;
+    }
+    .legal-page .updated {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      margin-bottom: 2.5rem;
+    }
+    .legal-page h2 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-top: 2.5rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--color-primary);
+      display: inline-block;
+    }
+    .legal-page p, .legal-page li {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 0.8rem;
+    }
+    .legal-page ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .legal-page a {
+      color: var(--color-primary-hover);
+      text-decoration: underline;
+    }
+    .legal-page a:hover { color: var(--color-primary); }
+  </style>
+<% end %>
+
+<div class="legal-page">
+  <a href="<%= root_path %>" class="legal-back">← Retour à l'accueil</a>
+
+  <h1>Mentions légales</h1>
+  <p class="updated">Dernière mise à jour : février 2026</p>
+
+  <h2>Éditeur du site</h2>
+  <p>
+    <strong>Les Tisserands</strong> est un projet citoyen à but non lucratif, porté par Nicolas Goarant.<br>
+    Adresse : Nancy, France<br>
+    Contact : <a href="mailto:contact@les-tisserands.fr">contact@les-tisserands.fr</a>
+  </p>
+
+  <h2>Directeur de la publication</h2>
+  <p>Nicolas Goarant</p>
+
+  <h2>Hébergement</h2>
+  <p>
+    Ce site est hébergé par <strong>Heroku</strong> (Salesforce, Inc.).<br>
+    Adresse : 415 Mission Street, Suite 300, San Francisco, CA 94105, États-Unis<br>
+    Site web : <a href="https://www.heroku.com" target="_blank" rel="noopener">www.heroku.com</a>
+  </p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>
+    L'ensemble du contenu de ce site (textes, images, graphismes, logo, icônes) est la propriété de Les Tisserands ou de ses contributeurs, sauf mention contraire. Toute reproduction, distribution ou utilisation sans autorisation préalable est interdite.
+  </p>
+  <p>
+    Le code source de la plateforme est disponible en open-source sur <a href="https://github.com/nicolasgoarant/ruche" target="_blank" rel="noopener">GitHub</a> sous licence MIT.
+  </p>
+
+  <h2>Contenus générés par l'IA</h2>
+  <p>
+    L'assistant juridique de Les Tisserands utilise l'intelligence artificielle (API Claude, Anthropic) pour fournir des informations générales sur le droit des étrangers en France. Ces réponses ne constituent en aucun cas un avis juridique personnalisé et ne remplacent pas la consultation d'un avocat ou d'une association spécialisée.
+  </p>
+
+  <h2>Contributions des utilisateurs</h2>
+  <p>
+    Les contenus publiés par les utilisateurs (partages, témoignages) sont soumis à modération avant publication. Les Tisserands se réserve le droit de supprimer tout contenu contraire aux valeurs du projet ou à la législation française.
+  </p>
+
+  <h2>Responsabilité</h2>
+  <p>
+    Les Tisserands s'efforce de fournir des informations fiables et à jour, mais ne peut garantir l'exactitude, l'exhaustivité ou l'actualité des informations publiées. L'utilisation des informations se fait sous la responsabilité de l'utilisateur.
+  </p>
+
+  <h2>Crédits</h2>
+  <p>
+    Typographies : <a href="https://fonts.google.com/specimen/Fraunces" target="_blank" rel="noopener">Fraunces</a> et <a href="https://fonts.google.com/specimen/DM+Sans" target="_blank" rel="noopener">DM Sans</a> (Google Fonts).<br>
+    Cartographie : <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a> via <a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>.<br>
+    Citation d'Abdennour Bidar, <em>Les Tisserands</em>, éditions Les Liens qui Libèrent, 2016.
+  </p>
+</div>

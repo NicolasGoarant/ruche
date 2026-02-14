@@ -1,0 +1,112 @@
+<% content_for :title, 'Politique de confidentialité — Les Tisserands' %>
+
+<% content_for :styles do %>
+  <style>
+    .legal-page {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 0 2rem 4rem;
+    }
+    .legal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .legal-back:hover { color: var(--color-primary); }
+    .legal-page h1 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--color-dark);
+      margin-bottom: 0.5rem;
+    }
+    .legal-page .updated {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      margin-bottom: 2.5rem;
+    }
+    .legal-page h2 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-top: 2.5rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--color-primary);
+      display: inline-block;
+    }
+    .legal-page p, .legal-page li {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 0.8rem;
+    }
+    .legal-page ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .legal-page a {
+      color: var(--color-primary-hover);
+      text-decoration: underline;
+    }
+    .legal-page a:hover { color: var(--color-primary); }
+    .legal-page strong { color: var(--color-dark); }
+  </style>
+<% end %>
+
+<div class="legal-page">
+  <a href="<%= root_path %>" class="legal-back">← Retour à l'accueil</a>
+
+  <h1>Politique de confidentialité</h1>
+  <p class="updated">Dernière mise à jour : février 2026</p>
+
+  <h2>Responsable du traitement</h2>
+  <p>
+    Le responsable du traitement des données personnelles est Nicolas Goarant, porteur du projet Les Tisserands.<br>
+    Contact : <a href="mailto:contact@les-tisserands.fr">contact@les-tisserands.fr</a>
+  </p>
+
+  <h2>Données collectées</h2>
+  <p>Les Tisserands collecte un minimum de données, dans le respect du principe de minimisation (RGPD, art. 5). Selon votre utilisation du site :</p>
+  <p>
+    <strong>Consultation du site</strong> — Aucune donnée personnelle n'est collectée. Aucun cookie de suivi, aucun outil d'analyse tiers (pas de Google Analytics).
+  </p>
+  <p>
+    <strong>Publication d'un partage (contribution)</strong> — Les données suivantes peuvent être collectées : nom ou pseudonyme (facultatif), adresse email ou téléphone (facultatif, si renseigné dans le formulaire), localisation de la ressource (adresse), photos (si ajoutées).
+  </p>
+  <p>
+    <strong>Utilisation de l'assistant juridique</strong> — Les questions posées à l'assistant sont envoyées à l'API Claude (Anthropic) pour générer une réponse. Ces échanges ne sont pas stockés de manière permanente par Les Tisserands. Nous vous recommandons de ne pas communiquer d'informations sensibles (numéro de dossier, données médicales, etc.) dans vos questions.
+  </p>
+
+  <h2>Finalités du traitement</h2>
+  <p>Les données collectées sont utilisées exclusivement pour le fonctionnement de la plateforme : afficher les contributions sur la carte et le site, permettre la mise en relation entre contributeurs, et améliorer le service.</p>
+
+  <h2>Base légale</h2>
+  <p>Le traitement des données repose sur le consentement de l'utilisateur (RGPD, art. 6.1.a) lors de la soumission volontaire d'un partage, et sur l'intérêt légitime (RGPD, art. 6.1.f) pour le fonctionnement technique du site.</p>
+
+  <h2>Durée de conservation</h2>
+  <p>Les données liées aux contributions sont conservées tant que la contribution est publiée sur le site. En cas de suppression d'une contribution, les données associées sont effacées dans un délai de 30 jours.</p>
+
+  <h2>Partage des données</h2>
+  <p>Les Tisserands ne vend, ne loue et ne partage aucune donnée personnelle avec des tiers à des fins commerciales. Les seuls sous-traitants techniques sont :</p>
+  <p>
+    <strong>Heroku</strong> (Salesforce) — hébergement de l'application et de la base de données.<br>
+    <strong>Anthropic</strong> — traitement des requêtes de l'assistant juridique via l'API Claude.
+  </p>
+
+  <h2>Vos droits</h2>
+  <p>Conformément au RGPD, vous disposez des droits suivants : accès à vos données, rectification, suppression, limitation du traitement, portabilité, et opposition. Pour exercer ces droits, contactez-nous à <a href="mailto:contact@les-tisserands.fr">contact@les-tisserands.fr</a>.</p>
+  <p>Vous pouvez également introduire une réclamation auprès de la <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a> (Commission Nationale de l'Informatique et des Libertés).</p>
+
+  <h2>Cookies</h2>
+  <p>Les Tisserands n'utilise aucun cookie publicitaire ou de suivi. Seuls des cookies techniques strictement nécessaires au fonctionnement du site (session Rails) peuvent être déposés. Ces cookies ne nécessitent pas de consentement préalable (RGPD, considérant 30 ; directive ePrivacy, art. 5.3).</p>
+
+  <h2>Sécurité</h2>
+  <p>Les Tisserands met en œuvre des mesures techniques appropriées pour protéger les données : connexion HTTPS, chiffrement des mots de passe, accès restreint à la base de données. Le code source est auditable sur <a href="https://github.com/nicolasgoarant/ruche" target="_blank" rel="noopener">GitHub</a>.</p>
+</div>

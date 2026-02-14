@@ -1,4 +1,34 @@
 <footer>
-  <strong><%= t('footer.brand', default: '🧵 Les Tisserands') %></strong>
-  <p><%= t('footer.tagline') %></p>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <strong><%= t('footer.brand', default: '🧵 Les Tisserands') %></strong>
+      <p class="footer-tagline"><%= t('footer.tagline', default: 'Plateforme citoyenne d\'impact social · Projet open-source') %></p>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4><%= t('footer.explore', default: 'Explorer') %></h4>
+        <a href="<%= contributions_path %>"><%= t('navbar.contributions', default: 'Partages') %></a>
+        <a href="<%= portraits_path %>"><%= t('navbar.testimonials', default: 'Trajectoires') %></a>
+        <a href="<%= assistant_juridique_path %>"><%= t('navbar.legal_assistant', default: 'Assistant juridique') %></a>
+      </div>
+
+      <div class="footer-col">
+        <h4><%= t('footer.project', default: 'Le projet') %></h4>
+        <a href="<%= philosophie_path %>"><%= t('navbar.principles', default: 'Nos principes') %></a>
+        <a href="https://github.com/nicolasgoarant/ruche" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:contact@les-tisserands.fr"><%= t('footer.contact', default: 'Contact') %></a>
+      </div>
+
+      <div class="footer-col">
+        <h4><%= t('footer.legal', default: 'Informations') %></h4>
+        <a href="<%= mentions_legales_path rescue '#' %>"><%= t('footer.mentions', default: 'Mentions légales') %></a>
+        <a href="<%= politique_confidentialite_path rescue '#' %>"><%= t('footer.privacy', default: 'Confidentialité') %></a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <%= Date.today.year %> Les Tisserands · <%= t('footer.made_with', default: 'Fait avec 🧡 à Nancy') %></p>
+    </div>
+  </div>
 </footer>
