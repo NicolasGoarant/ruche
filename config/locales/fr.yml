@@ -18,6 +18,8 @@ fr:
     subtitle: "Droits, apprentissage, entrepreneuriat, culture. Les Tisserands connecte les réfugiés et les citoyens — et donne à chacun la possibilité de partager."
     cta_map: "🗺 Explorer la carte"
     cta_contribute: "＋ Partager"
+    assistant_placeholder: "Posez votre question juridique ici..."
+    assistant_btn: "Poser ma question"
 
   map:
     title: "🗺 Explorer les ressources"
@@ -120,10 +122,6 @@ fr:
     cta_text: "Vous aussi, partagez votre parcours ou contribuez à Les Tisserands."
     cta_button: "＋ Contribuer"
 
-
-  portrait_show:
-    back: "← Retour aux trajectoires"
-
   contribution_form:
     page_title: "Nouveau partage — Les Tisserands"
     back: "← Retour"
@@ -159,9 +157,6 @@ fr:
 
   bidar_quote:
     text: "« Concentrez-vous par exemple sur l'eau qui coule. Le plus modeste ruisseau suffira. Voyez avec quelle ingéniosité et persévérance ce petit malin poursuit sa route sinueuse malgré tous les empêchements petits et grands. »"
-  hero:
-    assistant_placeholder: "Posez votre question juridique ici..."
-    assistant_btn: "Poser ma question"
   needs:
     title: "Je cherche à..."
     subtitle: "Accédez directement aux ressources dont vous avez besoin"

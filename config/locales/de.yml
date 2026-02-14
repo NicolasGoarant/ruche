@@ -18,6 +18,8 @@ de:
     subtitle: "Rechte, Bildung, Unternehmertum, Kultur. Les Tisserands verbindet Geflüchtete und Bürger — und gibt jedem die Möglichkeit zu teilen."
     cta_map: "🗺 Karte erkunden"
     cta_contribute: "＋ Teilen"
+    assistant_placeholder: "Stellen Sie hier Ihre Rechtsfrage..."
+    assistant_btn: "Frage stellen"
 
   map:
     title: "🗺 Ressourcen erkunden"
@@ -157,14 +159,8 @@ de:
     cta_text: "Auch Sie können Ihren Lebensweg teilen oder zum Gewebe beitragen."
     cta_button: "＋ Teilen"
 
-
-
-
   bidar_quote:
     text: "\"Konzentrieren Sie sich zum Beispiel auf das fließende Wasser. Der bescheidenste Bach genügt. Sehen Sie, mit welchem Einfallsreichtum und welcher Ausdauer dieser kleine Schlaukopf seinen gewundenen Weg trotz aller kleinen und großen Hindernisse fortsetzt.\""
-  hero:
-    assistant_placeholder: "Stellen Sie hier Ihre Rechtsfrage..."
-    assistant_btn: "Frage stellen"
   needs:
     title: "Ich suche..."
     subtitle: "Direkter Zugang zu den Ressourcen, die Sie brauchen"

@@ -18,6 +18,8 @@ en:
     subtitle: "Rights, learning, entrepreneurship, culture. Les Tisserands connects refugees and citizens — and gives everyone the opportunity to share."
     cta_map: "🗺 Explore the map"
     cta_contribute: "＋ Share"
+    assistant_placeholder: "Ask your legal question here..."
+    assistant_btn: "Ask my question"
 
   map:
     title: "🗺 Explore resources"
@@ -139,16 +141,8 @@ en:
     cta_text: "You too can share your journey or share on the Weave."
     cta_button: "＋ Share"
 
-
-  portrait_show:
-    back: "← Back to journeys"
-
-
   bidar_quote:
     text: "\"Focus for example on the flowing water. The most modest stream will do. See with what ingenuity and perseverance this little clever one pursues its winding path despite all obstacles large and small.\""
-  hero:
-    assistant_placeholder: "Ask your legal question here..."
-    assistant_btn: "Ask my question"
   needs:
     title: "I'm looking for..."
     subtitle: "Access the resources you need directly"

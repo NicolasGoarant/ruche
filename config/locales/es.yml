@@ -18,6 +18,8 @@ es:
     subtitle: "Derechos, aprendizaje, emprendimiento, cultura. Les Tisserands conecta a los refugiados y los ciudadanos — y da a todos la posibilidad de compartir."
     cta_map: "🗺 Explorar el mapa"
     cta_contribute: "＋ Compartir"
+    assistant_placeholder: "Haga su pregunta jurídica aquí..."
+    assistant_btn: "Hacer mi pregunta"
 
   map:
     title: "🗺 Explorar los recursos"
@@ -139,18 +141,8 @@ es:
     cta_text: "Tú también puedes compartir tu camino o compartir en el Tejido."
     cta_button: "＋ Compartir"
 
-
-  portrait_show:
-    back: "← Volver a las trayectorias"
-
-
-
-
   bidar_quote:
     text: "\"Concéntrense por ejemplo en el agua que fluye. El más modesto arroyo bastará. Vean con qué ingenio y perseverancia este pequeño astuto sigue su camino sinuoso a pesar de todos los obstáculos grandes y pequeños.\""
-  hero:
-    assistant_placeholder: "Haga su pregunta jurídica aquí..."
-    assistant_btn: "Hacer mi pregunta"
   needs:
     title: "Busco..."
     subtitle: "Acceda directamente a los recursos que necesita"
