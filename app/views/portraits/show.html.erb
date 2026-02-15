@@ -1,174 +1,112 @@
-<!DOCTYPE html>
-<html lang="<%= I18n.locale %>" dir="<%= %i[ar prs].include?(I18n.locale) ? 'rtl' : 'ltr' %>">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= @portrait.name %> — la Ruche</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<% # Portrait show — uses application layout (navbar + footer included) %>
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #FAFAF8;
-      color: #0F0E0A;
-      line-height: 1.6;
-    }
+<style>
+  .portrait-hero {
+    background: var(--color-dark);
+    padding: 4rem 2rem 3.5rem;
+    text-align: center;
+  }
 
-    .portrait-hero {
-      position: relative;
-      width: 100%;
-      height: 420px;
-      overflow: hidden;
-    }
+  .portrait-avatar {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 4px solid var(--color-primary);
+    box-shadow: 0 8px 32px rgba(245, 168, 0, 0.25);
+    margin-bottom: 1.5rem;
+  }
 
-    .portrait-hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  .portrait-hero-name {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.4rem;
+  }
 
-    .portrait-hero-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(transparent, rgba(15, 14, 10, 0.85));
-    }
+  .portrait-hero-origin {
+    font-size: 1rem;
+    color: #999;
+  }
 
-    .portrait-hero-info {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      color: white;
-      width: 90%;
-      max-width: 700px;
-    }
+  .portrait-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
 
-    .portrait-hero-name {
-      font-family: 'Fraunces', serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-    }
+  .back-link {
+    display: inline-block;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    transition: opacity 0.2s;
+  }
 
-    .portrait-hero-origin {
-      font-size: 1rem;
-      opacity: 0.8;
-    }
+  .back-link:hover { opacity: 0.7; }
 
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-    }
+  .portrait-quote-block {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border-left: 5px solid;
+    border-image: <%= @portrait.stripe_gradient || 'linear-gradient(180deg, #F5A800, #FFD166)' %> 1;
+  }
 
-    .back-link {
-      display: inline-block;
-      color: #F5A800;
-      text-decoration: none;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      font-size: 0.95rem;
-      transition: opacity 0.2s;
-    }
+  .portrait-quote-block::before {
+    content: '"';
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: var(--color-primary);
+    opacity: 0.2;
+    position: absolute;
+    top: 0.5rem;
+    left: 1.2rem;
+    line-height: 1;
+  }
 
-    .back-link:hover { opacity: 0.7; }
+  .portrait-quote-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: #333;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+  }
 
-    .portrait-quote-block {
-      position: relative;
-      background: white;
-      border-radius: 16px;
-      padding: 2.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-      border-left: 5px solid;
-      border-image: <%= @portrait.stripe_gradient || 'linear-gradient(180deg, #F5A800, #FFD166)' %> 1;
-    }
+  .portrait-stripe-bar {
+    height: 5px;
+    border-radius: 3px;
+    margin-bottom: 2rem;
+  }
 
-    .portrait-quote-block::before {
-      content: '"';
-      font-family: 'Fraunces', serif;
-      font-size: 5rem;
-      color: #F5A800;
-      opacity: 0.2;
-      position: absolute;
-      top: 0.5rem;
-      left: 1.2rem;
-      line-height: 1;
-    }
+  @media (max-width: 768px) {
+    .portrait-hero { padding: 3rem 1.5rem 2.5rem; }
+    .portrait-avatar { width: 180px; height: 180px; }
+    .portrait-hero-name { font-size: 1.8rem; }
+    .portrait-quote-text { font-size: 1.15rem; }
+    .portrait-quote-block { padding: 2rem 1.5rem; }
+  }
+</style>
 
-    .portrait-quote-text {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 1.35rem;
-      color: #333;
-      line-height: 1.8;
-      position: relative;
-      z-index: 1;
-    }
+<div class="portrait-hero">
+  <% if @portrait.photo_url.present? %>
+    <img src="<%= @portrait.photo_url %>" alt="<%= @portrait.name %>" class="portrait-avatar" loading="lazy">
+  <% end %>
+  <div class="portrait-hero-name"><%= @portrait.flag %> <%= @portrait.name %></div>
+  <div class="portrait-hero-origin"><%= @portrait.translated_origin %></div>
+</div>
 
-    .portrait-tags {
-      display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      background: #FFF8E7;
-      color: #F5A800;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: 1px solid rgba(245, 168, 0, 0.2);
-    }
-
-    .portrait-stripe-bar {
-      height: 5px;
-      border-radius: 3px;
-      margin-bottom: 2rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #0F0E0A;
-      color: white;
-      margin-top: 4rem;
-    }
-
-    @media (max-width: 768px) {
-      .portrait-hero { height: 300px; }
-      .portrait-hero-name { font-size: 1.8rem; }
-      .portrait-quote-text { font-size: 1.15rem; }
-      .portrait-quote-block { padding: 2rem 1.5rem; }
-    }
-  </style>
-</head>
-<body>
-
-<%= render 'shared/navbar', active: 'temoignages' %>
-
-<% if @portrait.photo_url.present? %>
-  <div class="portrait-hero">
-    <img src="<%= @portrait.photo_url %>" alt="<%= @portrait.name %>" loading="lazy">
-    <div class="portrait-hero-overlay"></div>
-    <div class="portrait-hero-info">
-      <div class="portrait-hero-name"><%= @portrait.flag %> <%= @portrait.name %></div>
-      <div class="portrait-hero-origin"><%= @portrait.translated_origin %></div>
-    </div>
-  </div>
-<% end %>
-
-<div class="container">
-  <a href="<%= root_path(anchor: 'temoignages') %>" class="back-link"><%= t('portrait_show.back') %></a>
+<div class="portrait-container">
+  <a href="<%= portraits_path %>" class="back-link"><%= t('portrait_show.back', default: '← Retour aux trajectoires') %></a>
 
   <div class="portrait-stripe-bar" style="background: <%= @portrait.stripe_gradient || 'linear-gradient(90deg, #F5A800, #FFD166)' %>;"></div>
 
@@ -184,11 +122,3 @@
     <% end %>
   </div>
 </div>
-
-<footer>
-  <strong style="color: #F5A800; font-family: 'Fraunces', serif; font-size: 1.1rem;">🐝 la Ruche</strong>
-  <p style="margin-top: 0.5rem; font-size: 0.85rem;"><%= t('footer.tagline') %></p>
-</footer>
-
-</body>
-</html>
