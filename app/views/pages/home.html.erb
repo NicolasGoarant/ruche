@@ -24,18 +24,35 @@
     .hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800; color: white; line-height: 1.25; margin-bottom: 1rem; }
     .hero em { color: var(--color-primary); font-style: italic; }
     .hero p { color: #999; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.6; }
+    .brand-translation {
+      color: var(--color-primary); font-family: var(--font-display);
+      font-size: 0.95rem; font-style: italic; font-weight: 400;
+      opacity: 0.8; margin: -0.5rem auto 1.5rem; letter-spacing: 0.03em;
+    }
     .hex-float { position: absolute; pointer-events: none; z-index: 0; }
     .hex-float svg { fill: none; stroke: var(--color-primary); }
-    .hex-1 { top: 8%; left: 5%; opacity: 0.35; animation: floatHex 8s ease-in-out infinite; }
-    .hex-2 { top: 15%; right: 8%; opacity: 0.25; animation: floatHex 10s ease-in-out infinite 1s; }
-    .hex-3 { bottom: 10%; left: 12%; opacity: 0.2; animation: floatHex 12s ease-in-out infinite 2s; }
-    .hex-4 { bottom: 15%; right: 5%; opacity: 0.3; animation: floatHex 9s ease-in-out infinite 0.5s; }
-    .hex-5 { top: 45%; left: 2%; opacity: 0.15; animation: floatHex 11s ease-in-out infinite 3s; }
-    .hex-6 { top: 30%; right: 2%; opacity: 0.22; animation: floatHex 7s ease-in-out infinite 1.5s; }
+    .hex-1 { top: 6%; left: 4%; opacity: 0.35; animation: floatHex 8s ease-in-out infinite; }
+    .hex-2 { top: 12%; right: 6%; opacity: 0.28; animation: floatHex 10s ease-in-out infinite 1s; }
+    .hex-3 { bottom: 8%; left: 10%; opacity: 0.2; animation: floatHex 12s ease-in-out infinite 2s; }
+    .hex-4 { bottom: 12%; right: 4%; opacity: 0.32; animation: floatHex 9s ease-in-out infinite 0.5s; }
+    .hex-5 { top: 42%; left: 1%; opacity: 0.18; animation: floatHex 11s ease-in-out infinite 3s; }
+    .hex-6 { top: 28%; right: 1%; opacity: 0.24; animation: floatHex 7s ease-in-out infinite 1.5s; }
+    .hex-7 { top: 55%; right: 12%; opacity: 0.15; animation: floatHex 13s ease-in-out infinite 2.5s; }
+    .hex-8 { top: 20%; left: 18%; opacity: 0.12; animation: floatHex 14s ease-in-out infinite 4s; }
+    .hex-9 { bottom: 25%; left: 3%; opacity: 0.2; animation: floatHex 9s ease-in-out infinite 1.8s; }
+    .hex-10 { top: 65%; right: 3%; opacity: 0.16; animation: floatHex 11s ease-in-out infinite 3.5s; }
+    /* Hexagons in needs-section */
+    .needs-hex { position: absolute; pointer-events: none; z-index: 0; }
+    .needs-hex svg { fill: none; stroke: var(--color-primary); opacity: 0.12; }
+    .needs-hex-1 { top: 10%; left: 3%; animation: floatHex 10s ease-in-out infinite 0.5s; }
+    .needs-hex-2 { bottom: 8%; right: 5%; animation: floatHex 12s ease-in-out infinite 2s; }
+    .needs-hex-3 { top: 50%; right: 2%; animation: floatHex 8s ease-in-out infinite 3.5s; }
+    .needs-hex-4 { bottom: 20%; left: 8%; animation: floatHex 14s ease-in-out infinite 1s; }
     @keyframes floatHex {
       0%, 100% { transform: translateY(0) rotate(0deg); }
-      33% { transform: translateY(-8px) rotate(3deg); }
-      66% { transform: translateY(5px) rotate(-2deg); }
+      25% { transform: translateY(-10px) rotate(2deg); }
+      50% { transform: translateY(3px) rotate(-1deg); }
+      75% { transform: translateY(-6px) rotate(3deg); }
     }
 
     /* HERO ASSISTANT BAR */
@@ -87,11 +104,11 @@
     .needs-section .container { position: relative; z-index: 1; }
     .needs-section .section-header h2 { color: white; }
     .needs-section .section-header p { color: #999; }
-    .needs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; max-width: 1100px; margin: 0 auto; }
+    .needs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
     .need-card {
       display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 0.8rem;
-      padding: 2rem 1.2rem; background: rgba(255,255,255,0.06);
+      text-align: center; gap: 1rem;
+      padding: 2.5rem 1.5rem; background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--radius-md);
       text-decoration: none; color: white;
@@ -102,7 +119,7 @@
       transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
     .need-icon {
-      font-size: 2.2rem; width: 64px; height: 64px;
+      font-size: 2.8rem; width: 76px; height: 76px;
       display: flex; align-items: center; justify-content: center;
       border-radius: 50%; flex-shrink: 0; transition: transform 0.3s ease;
     }
@@ -111,8 +128,8 @@
     .need-icon--rights { background: rgba(196,90,42,0.2); }
     .need-icon--entrep { background: rgba(245,168,0,0.2); }
     .need-icon--community { background: rgba(26,91,154,0.2); }
-    .need-label { font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
-    .need-sub { font-size: 0.82rem; color: #999; line-height: 1.4; }
+    .need-label { font-weight: 700; font-size: 1.15rem; line-height: 1.3; }
+    .need-sub { font-size: 0.88rem; color: #999; line-height: 1.4; }
 
     /* MAP */
     .map-section { background: white; padding: 3rem 0; }
@@ -131,7 +148,7 @@
     .map-controls-mobile { display: none; gap: 0.7rem; justify-content: center; margin-bottom: 1.5rem; }
     .map-controls-mobile select { flex: 1; padding: 0.7rem 1rem; border-radius: var(--radius-md); border: 2px solid var(--color-border); background: white; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; color: var(--color-text); appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='2' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
     .map-controls-mobile select:focus { outline: none; border-color: var(--color-primary); }
-    #map { height: 380px; width: 100%; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    #map { height: 480px; width: 100%; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
 
     /* CITATION BIDAR */
     .bidar-section {
@@ -170,8 +187,25 @@
     .see-all-btn:hover { background: var(--color-primary-hover); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(245,168,0,0.3); }
 
     /* SCROLL REVEAL */
-    .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* CTA pulse glow */
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 168, 0, 0.4); }
+      50% { box-shadow: 0 0 20px 4px rgba(245, 168, 0, 0.15); }
+    }
+    .see-all-btn { animation: pulseGlow 3s ease-in-out infinite; }
+    .see-all-btn:hover { animation: none; }
+
+    /* Bidar quote special reveal */
+    .bidar-section blockquote { opacity: 0; transform: translateY(20px) scale(0.97); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .bidar-section.visible blockquote { opacity: 1; transform: translateY(0) scale(1); }
+    .bidar-section cite { opacity: 0; transition: opacity 0.8s ease-out 0.6s; }
+    .bidar-section.visible cite { opacity: 1; }
+
+    /* Section borders */
+    html { scroll-behavior: smooth; }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -205,10 +239,17 @@
   <div class="hex-float hex-4"><svg width="50" height="58" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="2"/></svg></div>
   <div class="hex-float hex-5"><svg width="120" height="138" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="2"/></svg></div>
   <div class="hex-float hex-6"><svg width="70" height="81" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="2"/></svg></div>
+  <div class="hex-float hex-7"><svg width="45" height="52" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="2"/></svg></div>
+  <div class="hex-float hex-8"><svg width="90" height="104" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="1.5"/></svg></div>
+  <div class="hex-float hex-9"><svg width="55" height="63" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="2"/></svg></div>
+  <div class="hex-float hex-10"><svg width="75" height="86" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="1.5"/></svg></div>
 
   <div class="hero-content">
     <h1><%= t('hero.title_html', default: "La plateforme d'<em>aide aux réfugiés</em> en France.").html_safe %></h1>
-    <p><%= t('hero.subtitle', default: "Droits, apprentissage, entrepreneuriat, culture. Les Tisserands connecte les réfugiés et les citoyens — et donne à chacun la possibilité de partager.") %></p>
+    <% if I18n.locale != :fr %>
+      <p class="brand-translation">🧵 Les Tisserands — <%= t('hero.brand_translation', default: 'The Weavers') %></p>
+    <% end %>
+    <p><%= t('hero.subtitle', default: "Droits, apprentissage, entrepreneuriat, culture. Les Tisserands connectent les réfugiés et les citoyens — et donnent à chacun la possibilité de partager.") %></p>
 
     <div class="hero-assistant-bar" id="assistant-bar">
       <input type="text" id="assistant-input" placeholder="<%= t('hero.assistant_placeholder', default: 'Posez votre question juridique ici...') %>">
@@ -221,11 +262,15 @@
 
 <!-- JE CHERCHE... -->
 <section class="needs-section reveal">
+  <div class="needs-hex needs-hex-1"><svg width="90" height="104" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="1.5"/></svg></div>
+  <div class="needs-hex needs-hex-2"><svg width="65" height="75" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="1.5"/></svg></div>
+  <div class="needs-hex needs-hex-3"><svg width="50" height="58" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="2"/></svg></div>
+  <div class="needs-hex needs-hex-4"><svg width="110" height="127" viewBox="0 0 80 92"><polygon points="40,1 79,24 79,68 40,91 1,68 1,24" stroke-width="1"/></svg></div>
   <div class="container">
     <div class="section-header">
       <h2>🧵 <%= t('needs.title', default: 'Je cherche à...') %></h2>
     </div>
-    <div class="needs-grid">
+    <div class="needs-grid reveal">
       <a href="<%= contributions_path(type: 'fle') %>" class="need-card">
         <div class="need-icon need-icon--fle">📚</div>
         <div class="need-label"><%= t('needs.fle', default: 'apprendre le français') %></div>
@@ -345,7 +390,7 @@
 </section>
 
 <!-- CITATION BIDAR — mot de fin -->
-<section class="bidar-section reveal">
+<section class="bidar-section">
   <blockquote><%= t('bidar_quote.text', default: "« Concentrez-vous par exemple sur l'eau qui coule. Le plus modeste ruisseau suffira. Voyez avec quelle ingéniosité et persévérance ce petit malin poursuit sa route sinueuse malgré tous les empêchements petits et grands. »") %></blockquote>
   <cite>— Abdennour Bidar</cite>
 </section>
@@ -353,14 +398,33 @@
 <% content_for :scripts do %>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // Scroll reveal
-    var revealEls = document.querySelectorAll('.reveal');
-    var revealObs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObs.unobserve(entry.target); }
+    // Scroll reveal — Turbo-compatible
+    function initReveals() {
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        if (!el.dataset.observed) {
+          el.dataset.observed = 'true';
+          var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
+            });
+          }, { threshold: 0.08 });
+          obs.observe(el);
+        }
       });
-    }, { threshold: 0.15 });
-    revealEls.forEach(function(el) { revealObs.observe(el); });
+      document.querySelectorAll('.bidar-section').forEach(function(el) {
+        if (!el.dataset.observed) {
+          el.dataset.observed = 'true';
+          var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
+            });
+          }, { threshold: 0.08 });
+          obs.observe(el);
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', initReveals);
+    document.addEventListener('turbo:load', initReveals);
 
     // Assistant bar
     var assistantPath = '<%= assistant_juridique_path %>';
