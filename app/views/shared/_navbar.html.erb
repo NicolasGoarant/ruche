@@ -4,7 +4,7 @@
 <nav class="navbar">
   <a href="<%= root_path %>" class="logo">
     <span style="font-size: 1.8rem;">🧵</span>
-    <div class="logo-text">Les Tisserands</div>
+    <div class="logo-text">Les Tisserands<% if I18n.locale != :fr %> <span class="logo-translation">(<%= t('hero.brand_translation', default: 'The Weavers') %>)</span><% end %></div>
   </a>
 
   <div class="nav-links nav-desktop">

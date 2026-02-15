@@ -1,7 +1,7 @@
 <footer>
   <div class="footer-content">
     <div class="footer-brand">
-      <strong><%= t('footer.brand', default: '🧵 Les Tisserands') %></strong>
+      <strong><%= t('footer.brand', default: '🧵 Les Tisserands') %><% if I18n.locale != :fr %> (<%= t('hero.brand_translation', default: 'The Weavers') %>)<% end %></strong>
       <p class="footer-tagline"><%= t('footer.tagline', default: 'Plateforme citoyenne d\'impact social · Projet open-source') %></p>
     </div>
 
@@ -28,7 +28,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; <%= Date.today.year %> Les Tisserands · <%= t('footer.made_with', default: 'Fait avec 🧡 à Nancy') %></p>
+      <p>&copy; <%= Date.today.year %> Les Tisserands<% if I18n.locale != :fr %> (<%= t('hero.brand_translation', default: 'The Weavers') %>)<% end %> · <%= t('footer.made_with', default: 'Fait avec 🧡 à Nancy') %></p>
     </div>
   </div>
 </footer>

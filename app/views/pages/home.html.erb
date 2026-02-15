@@ -26,8 +26,8 @@
     .hero p { color: #999; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.6; }
     .brand-translation {
       color: var(--color-primary); font-family: var(--font-display);
-      font-size: 0.95rem; font-style: italic; font-weight: 400;
-      opacity: 0.8; margin: -0.5rem auto 1.5rem; letter-spacing: 0.03em;
+      font-size: 1.2rem; font-style: italic; font-weight: 500;
+      opacity: 1; margin: 0.3rem auto 1.8rem; letter-spacing: 0.03em;
     }
     .hex-float { position: absolute; pointer-events: none; z-index: 0; }
     .hex-float svg { fill: none; stroke: var(--color-primary); }
@@ -270,7 +270,7 @@
     <div class="section-header">
       <h2>🧵 <%= t('needs.title', default: 'Je cherche à...') %></h2>
     </div>
-    <div class="needs-grid reveal">
+    <div class="needs-grid">
       <a href="<%= contributions_path(type: 'fle') %>" class="need-card">
         <div class="need-icon need-icon--fle">📚</div>
         <div class="need-label"><%= t('needs.fle', default: 'apprendre le français') %></div>
@@ -328,7 +328,7 @@
       <h2><%= t('contributions_section.title') %></h2>
       <p><%= t('contributions_section.subtitle') %></p>
     </div>
-    <div class="cards reveal">
+    <div class="cards">
       <% @contributions.each do |c| %>
         <a href="<%= contribution_path(c) %>" style="text-decoration: none; color: inherit;">
           <div class="card" style="border-left-color: <%= c.type_color %>">
@@ -357,7 +357,7 @@
       <h2><%= t('portraits.title') %></h2>
       <p><%= t('portraits.subtitle') %></p>
     </div>
-    <div class="portraits-grid reveal">
+    <div class="portraits-grid">
       <% @portraits.each do |p| %>
         <a href="<%= portrait_path(p) %>" style="text-decoration: none; color: inherit;">
           <div class="portrait-card">
